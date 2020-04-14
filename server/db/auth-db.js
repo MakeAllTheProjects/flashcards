@@ -10,7 +10,7 @@ const pool = mysql.createPool({
 	password: process.env.DB_PASSWORD,
 	user: process.env.DB_USERNAME,
 	database: process.env.DB_DATABASE,
-	host: process.env.DB_HOST,
+	host: process.env.DB_HOST_PUBLIC,
 	port: process.env.DB_PORT
 })
 
@@ -27,9 +27,10 @@ authDB.validateByUsername = (user) => {
 		[ user.username ],
 		(err, results) => {
 			if (err) {
+				console.log(err)
 				return reject(err)
 			}
-			return resolve(results)
+			return results.length > 0 ? resolve(true) : resolve(false)
 		}
 	)})
 }
@@ -41,14 +42,15 @@ authDB.validateByEmail = (user) => {
 				users.email
 			FROM users
 			WHERE users.email = ?;
-		`),
-		[user.email],
+		`,
+		[ user.email ],
 		(err, results) => {
 			if (err) {
+				console.log(err)
 				return reject(err)
 			}
-			return resolve(results)
-		}
+			return results.length > 0 ? resolve(true) : resolve(false)
+		})
 	})
 }
 
@@ -67,7 +69,7 @@ authDB.createSignUp = (user) => {
 				`,
 				[
 					user.username.toLowerCase(),
-					hashedPassword,
+					hash,
 					user.email,
 					user.firstname,
 					user.lastname

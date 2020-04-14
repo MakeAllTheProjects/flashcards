@@ -31,4 +31,4 @@ app.get('/', (req, res) => res.json({
 	success: true
 }))
 
-app.listen(process.env.SERVER_PORT || 3000, () => console.log(`Listening on port ${process.env.SERVER_PORT}`))
+app.listen(process.env.SERVER_PORT || 4000, () => console.log(`Listening on port ${process.env.SERVER_PORT}`))

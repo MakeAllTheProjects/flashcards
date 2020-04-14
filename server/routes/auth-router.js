@@ -7,49 +7,42 @@ const authRouter = express.Router()
 
 authRouter.post('/signup', async (req, res, next) => {
 	try {
-		console.log("testing")
-		console.log(req.body)
-		const checkUsernameAvailability = await authDB.validateByUsername({
-			username: req.body.username
-		})
-
-		if (checkUsernameAvailability.length > 0) {
-			res.json({
-				message: "That username is already in use",
-				user: {},
-				token: null
+		const isUser = await authDB.validateByUsername({username: req.body.username})
+		
+		if (isUser === true) {		
+			res.send({
+				success: true,
+				errMessage: "This username is already in use."
 			})
 		} else {
-			const checkEmailAvailability = await authDB.validateByEmail({
-				email: req.body.email
-			})
+			const isEmail = await authDB.validateByEmail({email: req.body.email})
 
-			if (checkEmailAvailability.length > 0) {
-				res.json({
-					message: "That email is already in use",
-					user: {},
-					token: null
+			if (isEmail === true) {
+				res.send({
+					success: true,
+					errMessage: "This email is already in use."
 				})
 			} else {
 				const createNewUser = await authDB.createSignUp({
 					username: req.body.username,
-					firstname: req.body.firstname,
-					lastname: req.body.lastname,
+					password: req.body.password,
 					email: req.body.email,
-					password: req.body.password
+					firstname: req.body.firstname,
+					lastname: req.body.lastname
 				})
 
-				const userWithoutPassword = {
+				console.log(createNewUser)
+
+				const token = jwt.sign({
 					id: createNewUser.id,
 					username: createNewUser.username,
 					firstname: createNewUser.firstname
-				}
+				}, process.env.SECRET)
 
-				const token = jwt.sign(userWithoutPassword, process.env.SECRET)
-
-				res.json({
-					message: 'User account successfully created',
-					user: userWithoutPassword,
+				res.send({
+					success: true,
+					errMessage: null,
+					user: createNewUser,
 					token: token
 				})
 			}
@@ -57,7 +50,7 @@ authRouter.post('/signup', async (req, res, next) => {
 	} catch (e) {
 		console.log(e)
 		res.sendStatus(500).json({
-			success: false,
+			sucess: false,
 			errMessage: e
 		})
 	}
