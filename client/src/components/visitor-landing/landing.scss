@@ -1,0 +1,6 @@
+@import '../../variables.scss';
+
+.landing {
+  @include fullscreen;
+  @include centered-v;
+}
