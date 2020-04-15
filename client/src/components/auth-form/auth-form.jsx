@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { navigate } from '@reach/router'
+import { navigate, Link } from '@reach/router'
 
 import { storeAuth } from '../../utils/context/auth-context'
 
@@ -43,13 +43,8 @@ export default function AuthForm () {
           },
           token: response.data.token
         }})
-        
-        while (state.token === null) {
-          console.log("wait for it")
-          if (state.token !== null) {
-            navigate('/home')
-          }
-        }
+
+        navigate('/home')
       }
     }).catch(error => {
       console.log(error)
@@ -59,6 +54,9 @@ export default function AuthForm () {
 
   return (
     <form className="auth-form">
+      {state.token && (
+        <Link to='/home'>Go to Dashboard</Link>
+      )}
       <h2>
         {
           isNewUser 
