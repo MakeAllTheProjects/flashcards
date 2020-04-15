@@ -4,7 +4,6 @@ import './auth-form.scss'
 
 axios.defaults.timeout = 30000
 const authAxios = axios.create()
-const baseUrl = process.env.API_BASEURL
 
 export default function AuthForm () {
   const [isNewUser, setIsNewUser] = useState(false)
