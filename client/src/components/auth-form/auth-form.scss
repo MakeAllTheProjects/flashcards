@@ -2,7 +2,7 @@
 
 .auth-form {
   @include centered-v;
-  height: calc(30vw);
+  min-height: calc(30vw);
   width: 50vw;
   margin: 2vh 0 0 0;
   border: black 3px solid;

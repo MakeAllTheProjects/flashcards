@@ -1,5 +1,10 @@
-import React, {useState} from 'react'
+import axios from 'axios'
+import React, { useState, useReducer } from 'react'
 import './auth-form.scss'
+
+axios.defaults.timeout = 30000
+const authAxios = axios.create()
+const baseUrl = process.env.API_BASEURL
 
 export default function AuthForm () {
   const [isNewUser, setIsNewUser] = useState(false)
@@ -10,18 +15,41 @@ export default function AuthForm () {
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
   const [errMessage, setErrorMessage] = useState("")
+  const [user, setUser] = useState({})
+
+  console.log(user)
 
   function handleSignUp (e) {
     e.preventDefault()
-    setErrorMessage("Sign Up")
+    return authAxios.post(`/auth/signup`, {
+      username,
+      password,
+      email,
+      firstname,
+      lastname
+    }).then(response => {
+      if (response.data.errMessage) {
+        setErrorMessage(response.data.errMessage)
+      }
+      if (response.data.token) {
+        setUser({
+          id: response.data.user.id,
+          username: response.data.user.username,
+          firstname: response.data.user.firstname,
+          token: response.data.token
+        })
+        setErrorMessage("Successfully signed up")
+      }
+    }).catch(error => {
+      console.log(error)
+      setErrorMessage("Server error. Please try again later.")
+    })
   }
 
   function handleLogin (e) {
     e.preventDefault()
     setErrorMessage("Login")
   }
-
-  console.log(isNewUser)
 
   return (
     <form className="auth-form">
