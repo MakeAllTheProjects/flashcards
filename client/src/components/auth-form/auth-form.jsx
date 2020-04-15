@@ -1,7 +1,10 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import './auth-form.scss'
+import { navigate } from '@reach/router'
+
 import { storeAuth } from '../../utils/context/auth-context'
+
+import './auth-form.scss'
 
 axios.defaults.timeout = 30000
 const authAxios = axios.create()
@@ -17,7 +20,7 @@ export default function AuthForm () {
   const [errMessage, setErrorMessage] = useState("")
 
   const userState = React.useContext(storeAuth)
-  const { dispatch } = userState
+  const { dispatch, state } = userState
 
   function handleAuth (e) {
     e.preventDefault()
@@ -40,6 +43,13 @@ export default function AuthForm () {
           },
           token: response.data.token
         }})
+        
+        while (state.token === null) {
+          console.log("wait for it")
+          if (state.token !== null) {
+            navigate('/home')
+          }
+        }
       }
     }).catch(error => {
       console.log(error)

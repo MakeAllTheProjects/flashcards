@@ -1,0 +1,6 @@
+@import '../../variables.scss';
+
+.user-dashboard {
+	@include centered-v;
+	@include fullscreen;
+}
