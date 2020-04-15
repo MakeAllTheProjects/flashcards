@@ -10,4 +10,3 @@ export const authContext = React.createContext({
 })
 
 export const { Provider, Consumer } = authContext
-

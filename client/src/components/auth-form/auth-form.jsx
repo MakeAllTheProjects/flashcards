@@ -17,11 +17,9 @@ export default function AuthForm () {
   const [errMessage, setErrorMessage] = useState("")
   const [user, setUser] = useState({})
 
-  console.log(user)
-
-  function handleSignUp (e) {
+  function handleAuth (e) {
     e.preventDefault()
-    return authAxios.post(`/auth/signup`, {
+    return authAxios.post(`/auth/${isNewUser ? 'signup' : 'login'}`, {
       username,
       password,
       email,
@@ -38,17 +36,11 @@ export default function AuthForm () {
           firstname: response.data.user.firstname,
           token: response.data.token
         })
-        setErrorMessage("Successfully signed up")
       }
     }).catch(error => {
       console.log(error)
       setErrorMessage("Server error. Please try again later.")
     })
-  }
-
-  function handleLogin (e) {
-    e.preventDefault()
-    setErrorMessage("Login")
   }
 
   return (
@@ -133,11 +125,7 @@ export default function AuthForm () {
       
       <button 
         className="auth-button"
-        onClick={
-          isNewUser
-            ? (e) => handleSignUp(e)
-            : (e) => handleLogin(e)
-        }
+        onClick={(e) => handleAuth(e)}
       >
         {
           isNewUser

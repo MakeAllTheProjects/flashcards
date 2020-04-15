@@ -31,8 +31,6 @@ authRouter.post('/signup', async (req, res, next) => {
 					lastname: req.body.lastname
 				})
 
-				console.log(createNewUser)
-
 				const token = jwt.sign({
 					id: createNewUser.id,
 					username: createNewUser.username,
@@ -62,14 +60,10 @@ authRouter.post('/login', async (req, res, next) => {
 			username: req.body.username
 		})
 
-		if (validateIsUser.errMessage) {
-			console.log(validateIsUser.errMessage)
+		if (validateIsUser === false) {
 			res.json({
-				message: "Server error"
-			})
-		} else if (validateIsUser.length < 1) {
-			res.json({
-				message: 'Sorry, this username does not seem to be registered'
+				success: true,
+				errMessage: 'Sorry, this username does not seem to be registered'
 			})
 		} else {
 			const loginUser = await authDB.createLogin({
@@ -77,13 +71,23 @@ authRouter.post('/login', async (req, res, next) => {
 				password: req.body.password
 			})
 
-			const token = jwt.sign(loginUser, process.env.SECRET)
+			if (loginUser === false) {
+				res.json({
+					success: true,
+					errMessage: 'Sorry, this username and password do not seem to match',
+					token: null
+				})
+			} else {
 
-			res.json({
-				message: 'User has successfully been logged in.',
-				user: loginUser,
-				token: token
-			})
+				const token = jwt.sign(loginUser, process.env.SECRET)
+
+				res.json({
+					success: true,
+					errMessage: 'User has successfully been logged in.',
+					user: loginUser,
+					token: token
+				})
+			}
 		}
 	} catch (e) {
 		console.log(e)

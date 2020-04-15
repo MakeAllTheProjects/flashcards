@@ -112,7 +112,7 @@ authDB.createLogin = (user) => {
 	return new Promise((resolve, reject) => {
 		pool.query(`
 			SELECT
-				users.password AS passwordHash
+				users.password
 			FROM users
 			WHERE users.username = ?;
 		`,
@@ -128,10 +128,10 @@ authDB.createLogin = (user) => {
 
 			const match = await bcrypt.compare(
 				user.password, 
-				results[0].passwordHash
+				results[0].password
 			)
 
-			if (match) {
+			if (match === true) {
 				pool.query(`
 					SELECT
 						users.id,
@@ -153,6 +153,8 @@ authDB.createLogin = (user) => {
 						firstname: results[0].firstname
 					})
 				})
+			} else {
+				return resolve(false)
 			}
 		})
 	})
