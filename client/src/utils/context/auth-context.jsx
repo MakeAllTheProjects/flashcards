@@ -1,5 +1,4 @@
 import React from 'react'
-import { useReducerAsync } from 'use-reducer-async'
 
 const initialAuthState = {
 	user: {
