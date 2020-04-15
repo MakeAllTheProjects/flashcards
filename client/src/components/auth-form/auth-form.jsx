@@ -1,6 +1,7 @@
 import axios from 'axios'
-import React, { useState, useReducer } from 'react'
+import React, { useState } from 'react'
 import './auth-form.scss'
+import { storeAuth } from '../../utils/context/auth-context'
 
 axios.defaults.timeout = 30000
 const authAxios = axios.create()
@@ -14,7 +15,9 @@ export default function AuthForm () {
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
   const [errMessage, setErrorMessage] = useState("")
-  const [user, setUser] = useState({})
+
+  const userState = React.useContext(storeAuth)
+  const { dispatch } = userState
 
   function handleAuth (e) {
     e.preventDefault()
@@ -29,12 +32,14 @@ export default function AuthForm () {
         setErrorMessage(response.data.errMessage)
       }
       if (response.data.token) {
-        setUser({
-          id: response.data.user.id,
-          username: response.data.user.username,
-          firstname: response.data.user.firstname,
+        dispatch({type: 'authorized user', payload: {
+          user: {
+            id: response.data.user.id,
+            username: response.data.user.username,
+            firstname: response.data.user.firstname
+          },
           token: response.data.token
-        })
+        }})
       }
     }).catch(error => {
       console.log(error)
