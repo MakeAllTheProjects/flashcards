@@ -1,4 +1,5 @@
 import React from 'react'
+import { useCookies } from 'react-cookie'
 
 const initialAuthState = {
 	user: {
@@ -14,6 +15,7 @@ const storeAuth = React.createContext(initialAuthState)
 const { Provider } = storeAuth
 
 const AuthProvider = ({ children }) => {
+	const [cookies, setCookies] = useCookies(['authToken'])
 	const [state, dispatch] = React.useReducer((state, action) => {
 		switch(action.type) {
 			case 'authorized user':
@@ -30,6 +32,19 @@ const AuthProvider = ({ children }) => {
 				throw new Error()
 		}
 	}, initialAuthState)
+
+	React.useEffect(() => {
+		dispatch({
+			type: 'authorized user', payload: {
+				user: {
+					id: cookies.authToken.user.id,
+					username: cookies.authToken.user.username,
+					firstname: cookies.authToken.user.firstname
+				},
+				token: cookies.authToken.token
+			}
+		})
+	}, [])
 
 	return <Provider value={{ state, dispatch }}>{children}</Provider>
 }

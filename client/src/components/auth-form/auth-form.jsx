@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { navigate, Link } from '@reach/router'
+import { useCookies } from 'react-cookie'
 
 import { storeAuth } from '../../utils/context/auth-context'
 
@@ -18,6 +19,8 @@ export default function AuthForm () {
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
   const [errMessage, setErrorMessage] = useState("")
+
+  const [cookies, setCookie] = useCookies(['authToken'])
 
   const userState = React.useContext(storeAuth)
   const { dispatch, state } = userState
@@ -43,6 +46,19 @@ export default function AuthForm () {
           },
           token: response.data.token
         }})
+
+        setCookie(
+          'authToken', 
+          {
+            user: {
+              id: response.data.user.id,
+              username: response.data.user.username,
+              firstname: response.data.user.firstname
+            },
+            token: response.data.token
+          },
+          { path: '/' }
+        )
 
         navigate('/home')
       }
