@@ -2,13 +2,13 @@ import React from 'react'
 
 import './landing.scss'
 
-import AuthForm from '../auth-form/auth-form'
+import AuthForm from './auth-form/auth-form'
 
 export default function Landing () {
   return (
-    <div className="landing">
+    <main className="landing">
       <h1>Welcome!</h1>
       <AuthForm/>
-    </div>
+    </main>
   )
 }

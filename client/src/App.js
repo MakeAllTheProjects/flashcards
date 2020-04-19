@@ -11,6 +11,7 @@ import { useCookies } from 'react-cookie'
 import { storeAuth } from './utils/context/auth-context'
 
 import Landing from './components/visitor-landing/landing'
+import NotFound from './components/not-found/not-found'
 import UserDashboard from './components/user-dashboard/user-dashboard'
 
 export default function App() {
@@ -20,7 +21,6 @@ export default function App() {
 
   React.useEffect(() => {
 		if (cookies.authToken) {
-      console.log(cookies.authToken)
 			dispatch({
 				type: 'authorized user', payload: {
 					user: {
@@ -33,17 +33,20 @@ export default function App() {
       })
     }
   }, [])
-  
-  console.log(state)
-  console.log(cookies.authToken)
 
   return (
     <div className="App">
       <Router>
-        {state.token
-          ? <UserDashboard path='/'/>
-          : <Landing path='/'/>
-        }
+        <NotFound default/>
+        {!state.token ? (
+          <>
+            <Landing path='/'/>
+          </>
+        ) : (
+          <>
+            <UserDashboard path='/'/>
+          </>
+        )}
       </Router>
     </div>
   )

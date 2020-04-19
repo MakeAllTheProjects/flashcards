@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { navigate, Link } from '@reach/router'
 import { useCookies } from 'react-cookie'
 
-import { storeAuth } from '../../utils/context/auth-context'
+import { storeAuth } from '../../../utils/context/auth-context'
 
 import './auth-form.scss'
 
