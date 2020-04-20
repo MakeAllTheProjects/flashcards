@@ -5,18 +5,11 @@ const cardRouter = express.Router()
 
 cardRouter.get('/', async (req, res, next) => {
 	try {
-		const cards = await cardDB.getCards(req.body.userId)
-
-		if (cards.length === 0) {
-			res.send({
-				success: true,
-				cards: []
-			})
-		}
+		const cards = await cardDB.getCards(req.user.id)
 
 		res.send({
 			success: true,
-			cards: [...cards]
+			cards: cards
 		})
 	} catch (e) {
 		console.log(e)
