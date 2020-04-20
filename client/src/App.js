@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie'
 
 import './App.scss'
 
-import { storeAuth } from './utils/context/auth-context'
+import { storeUser } from './utils/context/user-context'
 
 import Landing from './components/visitor-landing/landing'
 import NotFound from './components/not-found/not-found'
@@ -16,7 +16,7 @@ import UserDashboard from './components/user-dashboard/user-dashboard'
 
 export default function App() {
   const [ cookies, setCookies ] = useCookies(['authToken'])
-  const authContext = React.useContext(storeAuth)
+  const authContext = React.useContext(storeUser)
   const { state, dispatch } = authContext
 
   React.useEffect(() => {

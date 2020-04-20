@@ -2,14 +2,14 @@ import React from 'react'
 import { useCookies } from 'react-cookie'
 import { navigate } from '@reach/router'
 
-import { storeAuth } from '../../utils/context/auth-context'
+import { storeUser } from '../../utils/context/user-context'
 
 import './header.scss'
 
 export default function Header () {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
-  const authState = React.useContext(storeAuth)
-  const { state, dispatch } = authState
+  const userState = React.useContext(storeUser)
+  const { state, dispatch } = userState
   const [ cookies, removeCookie ] = useCookies(['authToken'])
 
   function handleLogOut () {

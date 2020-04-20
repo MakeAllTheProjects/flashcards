@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { navigate, Link } from '@reach/router'
 import { useCookies } from 'react-cookie'
 
-import { storeAuth } from '../../../utils/context/auth-context'
+import { storeUser } from '../../../utils/context/user-context'
 
 import './auth-form.scss'
 
@@ -22,7 +22,7 @@ export default function AuthForm () {
 
   const [cookies, setCookie] = useCookies(['authToken'])
 
-  const userState = React.useContext(storeAuth)
+  const userState = React.useContext(storeUser)
   const { dispatch, state } = userState
 
   function handleAuth (e) {

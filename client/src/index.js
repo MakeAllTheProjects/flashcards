@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom'
 import { CookiesProvider } from 'react-cookie'
 
 import App from './App'
-import { AuthProvider } from './utils/context/auth-context'
+import { UserProvider } from './utils/context/user-context'
 
 ReactDOM.render(
   <CookiesProvider>
-    <AuthProvider>
+    <UserProvider>
       <App />
-    </AuthProvider>
+    </UserProvider>
   </CookiesProvider>,
   document.getElementById('root')
 )
