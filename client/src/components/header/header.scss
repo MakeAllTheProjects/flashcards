@@ -1,18 +1,86 @@
 @import '../../variables.scss';
 
-.menu-button {
-  @include centered-v;
-  margin: calc(3vw) 0 calc(3vw) 0;
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 54px;
+  background-color: rgb(75, 0, 100);
 
-  .menu-bar {
-    width: 20px;
-    height: 3px;
-    background-color: white;
-    border-radius: 15px;
-    margin: 0 0 4px 0;
+  .header-top-bar {
+    position: fixed;
+    top: 16px;
+    left: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: calc(100vw);
+
+    .menu-button-container {
+      @include centered-v;
+      transition: 0.5s all ease;
+      z-index: 10;
+
+      .menu-bar {
+        height: 3.5px;
+        width: 28px;
+        margin: 0 0 6px 0;
+        background-color: rgb(250, 255, 250);
+        border-radius: 15px;
+        transition: 0.5s all ease;
+      }
+
+      .menu-bar:last-child {
+        margin: 0;
+      }
+
+      .menu-bar.open:first-child {
+        transform: rotate(45deg);
+        margin: 0 0 -13px -0px;
+        width: 30px;
+      }
+
+      .menu-bar.open:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-bar.open:last-child {
+        transform: rotate(-45deg);
+        margin: 0 0 0 0;
+        width: 30px;
+      }
+    }
+
+    .menu-button-container.open {
+      margin: 7.5px 0 0 -3px;
+    }
   }
 
-  .menu-bar:last-child {
-    margin: 0;
+  .drop-down-nav {
+    position: fixed;
+    top: 17px;
+    right: -100%;
+    color: rgb(250, 255, 250);
+    transition: 5s right ease-out;
+    
+    ul {
+      list-style: none;
+
+      li {
+        padding: 0 16px 0 16px;
+        border-left: 1px rgb(250, 255, 250) solid;
+        cursor: pointer;
+      }
+
+      li:first-child {
+        border: none;
+      }
+    }
+  }
+
+  .drop-down-nav.open {
+    right: 6px;
   }
 }
+

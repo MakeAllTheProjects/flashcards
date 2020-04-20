@@ -26,6 +26,16 @@ const AuthProvider = ({ children }) => {
 					},
 					token: action.payload.token
 				}
+			case 'logout user':
+				return {
+					...state,
+					user: {
+						id: null,
+						username: null,
+						firstname: null
+					},
+					token: null
+				}
 			default: 
 				throw new Error()
 		}

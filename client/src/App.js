@@ -4,9 +4,9 @@ import {
   Router, 
   navigate
 } from '@reach/router'
+import { useCookies } from 'react-cookie'
 
 import './App.scss'
-import { useCookies } from 'react-cookie'
 
 import { storeAuth } from './utils/context/auth-context'
 
@@ -38,7 +38,7 @@ export default function App() {
     <div className="App">
       <Router>
         <NotFound default/>
-        {!state.token ? (
+        {state.token === null ? (
           <>
             <Landing path='/'/>
           </>
