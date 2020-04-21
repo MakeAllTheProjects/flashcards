@@ -1,7 +1,4 @@
-import axios from 'axios'
 import React from 'react'
-
-axios.defaults.timeout = 30000
 
 const initialAuthState = {
 	user: {
@@ -9,14 +6,8 @@ const initialAuthState = {
 		username: null,
 		firstname: null
 	},
-	cards: [],
 	token: null,
-	userAxios: async () => {
-		await axios.create({
-			Authorization: 'Bearer ' + this.token
-		})
-	},
-	errorMessage: ''
+	cards: []
 }
 
 const storeUser = React.createContext(initialAuthState)
@@ -44,24 +35,14 @@ const UserProvider = ({ children }) => {
 						username: null,
 						firstname: null
 					},
-					token: null
+					token: null,
+					cards: []
 				}
-			case `fetch all users' cards`:
-				state.userAxios('/api/cards')
-					.then(response => {
-						console.log(response.data.cards)
-						return {
-							...state,
-							cards: [...response.data.cards]
-						}
-					})
-					.catch(err => {
-						console.log(err)
-						return {
-							...state,
-							errorMessage: err
-						}
-					})
+			case 'store cards':
+				return {
+					...state,
+					cards: [...action.payload.cards]
+				}
 			default: 
 				throw new Error()
 		}
