@@ -60,7 +60,7 @@ export default function AuthForm () {
           { path: '/' }
         )
 
-        navigate('/')
+        setTimeout(() => navigate('/'), 300)
       }
     }).catch(error => {
       console.log(error)

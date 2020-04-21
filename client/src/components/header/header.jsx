@@ -17,7 +17,7 @@ export default function Header () {
       type: 'logout user'
     })
     removeCookie('authToken')
-    navigate('/')
+    setTimeout(() => navigate('/'), 300)
   }
 
   return (

@@ -17,7 +17,7 @@ export default function UserDashboard () {
   axios.defaults.timeout = 30000
   const cardsAxios = axios.create({
     headers: {
-      Authorization: 'Bearer ' + cookies.authToken.token
+      Authorization: `Bearer ${cookies.authToken.token || state.token}`
     }
   })
 
@@ -31,7 +31,7 @@ export default function UserDashboard () {
           }
         })
       })
-  }, [])
+  }, [400])
 
   console.log(state)
 
