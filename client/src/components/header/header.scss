@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   right: 0;
-  min-height: 54px;
+  min-height: 60px;
   background-color: rgb(75, 0, 100);
 
   .header-top-bar {
@@ -16,6 +16,14 @@
     align-items: center;
     justify-content: flex-start;
     width: calc(100vw);
+
+    .header-title {
+      color: rgb(250, 255, 250);
+      font-size: 20px;
+      font-weight: 300;
+      margin: 3px 0 0 32px;
+      line-height: 20px;
+    }
 
     .menu-button-container {
       @include centered-v;

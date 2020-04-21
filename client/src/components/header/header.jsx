@@ -6,7 +6,7 @@ import { storeUser } from '../../utils/context/user-context'
 
 import './header.scss'
 
-export default function Header () {
+export default function Header (props) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
   const userState = React.useContext(storeUser)
   const { state, dispatch } = userState
@@ -31,6 +31,7 @@ export default function Header () {
           <div className={isMenuOpen ? 'menu-bar open' : 'menu-bar'} />
           <div className={isMenuOpen ? 'menu-bar open' : 'menu-bar'} />
         </div>
+        <h1 className='header-title'>{props.title}</h1>
       </div>
       {isMenuOpen && (
         <nav className={isMenuOpen ? 'drop-down-nav open' : 'drop-down-nav'}>
