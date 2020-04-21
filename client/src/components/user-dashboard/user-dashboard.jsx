@@ -33,8 +33,6 @@ export default function UserDashboard () {
       })
   }, [400])
 
-  console.log(state)
-
   return (
     <>
       <Header/>
