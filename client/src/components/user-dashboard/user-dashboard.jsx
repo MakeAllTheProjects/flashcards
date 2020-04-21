@@ -6,6 +6,7 @@ import { storeUser } from '../../utils/context/user-context'
 
 import './user-dashboard.scss'
 import Header from '../header/header'
+import CardsList from '../cards-list/cards-list'
 
 export default function UserDashboard () {
   const [errMessage, setErrorMessage] = React.useState('') 
@@ -38,10 +39,7 @@ export default function UserDashboard () {
       <Header title={`Welcome, ${state.user.firstname ? state.user.firstname : "learner"}!`}/>
       <main className="user-dashboard">
         <p className='errMessage'>{errMessage}</p>
-        { state.cards.length > 0 
-          ? (<p>You have {state.cards.length} cards!</p>)
-          : (<p>You have no cards!</p>)
-        }
+        <CardsList/>
       </main>
     </>
   )

@@ -1,1 +1,5 @@
 @import '../../variables.scss';
+
+.cards-list-container {
+  @include centered-v;
+}
