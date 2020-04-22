@@ -27,6 +27,7 @@ export default function AuthForm () {
 
   function handleAuth (e) {
     e.preventDefault()
+
     return authAxios.post(`/auth/${isNewUser ? 'signup' : 'login'}`, {
       username,
       password,
@@ -37,7 +38,7 @@ export default function AuthForm () {
       if (response.data.errMessage) {
         setErrorMessage(response.data.errMessage)
       }
-      if (response.data.token) {
+      if (response.data.user && response.data.token) {
         dispatch({type: 'authorized user', payload: {
           user: {
             id: response.data.user.id,
@@ -59,8 +60,7 @@ export default function AuthForm () {
           },
           { path: '/' }
         )
-
-        setTimeout(() => navigate('/'), 300)
+        setTimeout(() => navigate('/'), 500)
       }
     }).catch(error => {
       console.log(error)

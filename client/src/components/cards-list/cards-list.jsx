@@ -4,8 +4,6 @@ import './cards-list.scss'
 import Card from './card'
 import { storeUser } from '../../utils/context/user-context'
 
-
-
 export default function CardsList (props) {
   const [cardsList, setCardsList] = React.useState([])
   const userProvider = React.useContext(storeUser)

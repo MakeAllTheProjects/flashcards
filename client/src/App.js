@@ -21,16 +21,18 @@ export default function App() {
 
   React.useEffect(() => {
 		if (cookies.authToken) {
-			dispatch({
-				type: 'authorized user', payload: {
-					user: {
-						id: cookies.authToken.user.id,
-						username: cookies.authToken.user.username,
-						firstname: cookies.authToken.user.firstname
-					},
-					token: cookies.authToken.token
-				}
-      })
+      if (cookies.authToken.token) {
+        dispatch({
+          type: 'authorized user', payload: {
+            user: {
+              id: cookies.authToken.user.id,
+              username: cookies.authToken.user.username,
+              firstname: cookies.authToken.user.firstname
+            },
+            token: cookies.authToken.token
+          }
+        })
+      }
     }
   }, [])
 
