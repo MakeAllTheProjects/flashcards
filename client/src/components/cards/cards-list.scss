@@ -1,0 +1,10 @@
+@import '../../variables.scss';
+
+.cards-list-container {
+  @include centered-v;
+
+  .cards-list {
+    @include centered-h;
+    flex-wrap: wrap;
+  }
+}
