@@ -5,6 +5,10 @@
   @include font;
 }
 
+body {
+  background-color: $secondary-color;
+}
+
 .app {
   @include fullscreen;
   @include centered;

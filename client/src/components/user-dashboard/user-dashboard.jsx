@@ -8,6 +8,7 @@ import cardsReducer from '../../utils/reducers/cards-reducer'
 import userReducer from '../../utils/reducers/user-reducer'
 
 import './user-dashboard.scss'
+import CardList from '../cards/cards-list'
 import Header from '../header/header'
 
 export default function UserDashboard () {
@@ -59,7 +60,7 @@ export default function UserDashboard () {
           .then(response => {
             cardsDispatch({
               type: 'FETCH_USER_CARDS',
-              cards: [response.data.cards]
+              cards: [...response.data.cards]
             })
           })
           .catch(err => {
@@ -86,7 +87,7 @@ export default function UserDashboard () {
       <Header title={`Welcome, ${userState.firstname ? userState.firstname : 'learner'}!`}/>
       <main className="user-dashboard">
         <p className='errMessage'>{errMessage}</p>
-        <p className='cards-count'>You have {cardsState.cards.length > 0 ? cardsState.cards.length : 'no'} card{cardsState.cards.length === 1 ? '' : 's'}</p>
+        <CardList cards={[...cardsState.cards]}/>
       </main>
     </>
     )
