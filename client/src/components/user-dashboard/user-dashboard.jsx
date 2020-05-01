@@ -1,58 +1,62 @@
-import axios from 'axios'
+
 import React from 'react'
 import { useCookies } from 'react-cookie'
+import { navigate } from '@reach/router'
 
-import { storeUser } from '../../utils/context/user-context'
+import userReducer from '../../utils/reducers/user-reducer'
 
 import './user-dashboard.scss'
 import Header from '../header/header'
-import CardsList from '../cards-list/cards-list'
 
 export default function UserDashboard () {
-  const [errMessage, setErrorMessage] = React.useState('')
-  const userProvider = React.useContext(storeUser)
-  const { state, dispatch } = userProvider
-
-  const [cookies, setCookie] = useCookies(['authToken'])
-
-  axios.defaults.timeout = 30000
-  let cardsAxios
-
+  const [ cookies ] = useCookies(['authToken'])
+  const [ errMessage, setErrorMessage ] = React.useState('')
+  const [ userState, userDispatch ] = React.useReducer(userReducer, {
+    id: null,
+    username: '',
+    firstname: '',
+    token: ''
+  })  
+  const { firstname } = userState
+  
   React.useEffect(() => {
-    if (cookies.authToken && cookies.authToken.token) {
-      cardsAxios = axios.create({
-          headers: {
-            Authorization: `Bearer ${cookies.authToken.token || state.token}`
-          }
+    try {
+      console.log(cookies)
+      if (cookies.authToken && cookies.authToken.token) {
+        userDispatch({
+          type: 'LOGIN',
+          id: cookies.authToken.user.id,
+          username: cookies.authToken.user.username,
+          firstname: cookies.authToken.user.firstname,
+          token: cookies.authToken.token
         })
+      } else {
+        userDispatch({
+          type: 'LOGOUT'
+        })
+        setTimeout(navigate('/'))
+      }
+    } catch {
+      console.log('ERROR')
     }
   }, [cookies])
 
-  React.useEffect(() => {
-    if (cookies.authToken.token && typeof cardsAxios === 'function') {
-      cardsAxios('/api/cards')
-        .then(async response => {
-          await dispatch({
-            type: 'store cards',
-            payload: {
-              cards: [...response.data.cards]
-            }
-          })
-        })
-        .catch(err => {
-          console.log(err)
-          setErrorMessage(err)
-        })
-    }
-  }, [cardsAxios])
+  console.log(userState)
 
-  return (
-    <>
-      <Header title={`Welcome, ${state.user.firstname ? state.user.firstname : "learner"}!`}/>
+  if (userState && userState.firstname === undefined) {
+    return (
+      <main className='loading'>
+        <h1>Loading, please wait...</h1>
+      </main>
+    )
+  } else {
+    return (
+      <>
+      <Header title={`Welcome, ${userState.firstname ? userState.firstname : 'learner'}!`}/>
       <main className="user-dashboard">
         <p className='errMessage'>{errMessage}</p>
-        {state.cards.length > 0 && <CardsList />}
       </main>
     </>
-  )
+    )
+  }
 }

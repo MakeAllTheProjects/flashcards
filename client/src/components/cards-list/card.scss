@@ -1,9 +1,0 @@
-@import '../../variables.scss';
-
-.card-container {
-  @include centered-v;
-  padding: 20px;
-  border: 2px solid black;
-  border-radius: 15px;
-  margin: 10px;
-}

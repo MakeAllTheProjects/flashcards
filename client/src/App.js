@@ -1,54 +1,51 @@
 import React from 'react'
 import { 
-  Redirect, 
-  Router, 
-  navigate
+  Router,
+  navigate,
+  Redirect
 } from '@reach/router'
 import { useCookies } from 'react-cookie'
 
-import './App.scss'
+import userReducer from './utils/reducers/user-reducer'
 
-import { storeUser } from './utils/context/user-context'
+import './App.scss'
 
 import Landing from './components/visitor-landing/landing'
 import NotFound from './components/not-found/not-found'
 import UserDashboard from './components/user-dashboard/user-dashboard'
 
-export default function App() {
-  const [ cookies, setCookies ] = useCookies(['authToken'])
-  const authContext = React.useContext(storeUser)
-  const { state, dispatch } = authContext
+export default function App () {
+  const [cookies] = useCookies(['auth-token'])
+  const [userState, userDispatch] = React.useReducer(userReducer, {
+    id: null,
+    username: '',
+    firstname: '',
+    token: ''
+  })
 
   React.useEffect(() => {
-		if (cookies.authToken) {
-      if (cookies.authToken.token) {
-        dispatch({
-          type: 'authorized user', payload: {
-            user: {
-              id: cookies.authToken.user.id,
-              username: cookies.authToken.user.username,
-              firstname: cookies.authToken.user.firstname
-            },
-            token: cookies.authToken.token
-          }
+    try {
+      if (cookies.authToken && cookies.authToken.token) {
+        userDispatch({
+          type: 'LOGIN',
+          id: cookies.authToken.user.id,
+          username: cookies.authToken.user.username,
+          firstname: cookies.authToken.user.firstname,
+          token: cookies.authToken.token
         })
+        setTimeout(navigate('/home'), 500)
       }
+    } catch {
+      console.log("ERROR")
     }
   }, [])
 
   return (
-    <div className="App">
+    <div className='App'>
       <Router>
-        <NotFound default/>
-        {state.token === null ? (
-          <>
-            <Landing path='/'/>
-          </>
-        ) : (
-          <>
-            <UserDashboard path='/'/>
-          </>
-        )}
+        <NotFound path='*'/>
+        <Landing path="/"/>
+        <UserDashboard path='/home'/>
       </Router>
     </div>
   )

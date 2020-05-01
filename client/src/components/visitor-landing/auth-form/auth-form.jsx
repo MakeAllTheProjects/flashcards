@@ -1,9 +1,9 @@
 import axios from 'axios'
-import React, { useState } from 'react'
-import { navigate, Link } from '@reach/router'
+import React, { useState, useReducer } from 'react'
+import { navigate } from '@reach/router'
 import { useCookies } from 'react-cookie'
 
-import { storeUser } from '../../../utils/context/user-context'
+import userReducer from '../../../utils/reducers/user-reducer'
 
 import './auth-form.scss'
 
@@ -19,36 +19,34 @@ export default function AuthForm () {
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
   const [errMessage, setErrorMessage] = useState("")
-
   const [cookies, setCookie] = useCookies(['authToken'])
+  const [state, dispatch] = useReducer(userReducer)
+  console.log(state)
+  console.log(cookies)
 
-  const userState = React.useContext(storeUser)
-  const { dispatch, state } = userState
-
-  function handleAuth (e) {
+  async function handleAuth (e) {
     e.preventDefault()
 
-    return authAxios.post(`/auth/${isNewUser ? 'signup' : 'login'}`, {
+    return await authAxios.post(`/auth/${isNewUser ? 'signup' : 'login'}`, {
       username,
       password,
       email,
       firstname,
       lastname
-    }).then(response => {
+    }).then(async response => {
       if (response.data.errMessage) {
-        setErrorMessage(response.data.errMessage)
+        await setErrorMessage(response.data.errMessage)
       }
       if (response.data.user && response.data.token) {
-        dispatch({type: 'authorized user', payload: {
-          user: {
-            id: response.data.user.id,
-            username: response.data.user.username,
-            firstname: response.data.user.firstname
-          },
+        await dispatch({
+          type: 'LOGIN',
+          id: response.data.user.id,
+          username: response.data.user.username,
+          firstname: response.data.user.firstname,
           token: response.data.token
-        }})
+        })
 
-        setCookie(
+        await setCookie(
           'authToken', 
           {
             user: {
@@ -60,19 +58,17 @@ export default function AuthForm () {
           },
           { path: '/' }
         )
-        setTimeout(() => navigate('/'), 500)
+
+        setTimeout(navigate('/home'), 500)
       }
-    }).catch(error => {
+    }).catch(async error => {
       console.log(error)
-      setErrorMessage("Server error. Please try again later.")
+      await setErrorMessage("Server error. Please try again later.")
     })
   }
 
   return (
     <form className="auth-form">
-      {state.token && (
-        <Link to='/home'>Go to Dashboard</Link>
-      )}
       <h2>
         {
           isNewUser 

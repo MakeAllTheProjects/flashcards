@@ -2,22 +2,21 @@ import React from 'react'
 import { useCookies } from 'react-cookie'
 import { navigate } from '@reach/router'
 
-import { storeUser } from '../../utils/context/user-context'
+import userReducer from '../../utils/reducers/user-reducer'
 
 import './header.scss'
 
 export default function Header (props) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
-  const userState = React.useContext(storeUser)
-  const { state, dispatch } = userState
   const [ cookies, removeCookie ] = useCookies(['authToken'])
+  const [ userState, userDispatch ] = React.useReducer(userReducer)
 
   function handleLogOut () {
-    dispatch({
-      type: 'logout user'
+    userDispatch({
+      type: 'LOGOUT'
     })
     removeCookie('authToken')
-    setTimeout(() => navigate('/'), 300)
+    setTimeout(navigate('/'), 500)
   }
 
   return (
