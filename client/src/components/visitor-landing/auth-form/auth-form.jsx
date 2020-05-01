@@ -21,8 +21,6 @@ export default function AuthForm () {
   const [errMessage, setErrorMessage] = useState("")
   const [cookies, setCookie] = useCookies(['authToken'])
   const [state, dispatch] = useReducer(userReducer)
-  console.log(state)
-  console.log(cookies)
 
   async function handleAuth (e) {
     e.preventDefault()

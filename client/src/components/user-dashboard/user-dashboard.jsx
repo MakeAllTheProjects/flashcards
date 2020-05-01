@@ -1,8 +1,10 @@
 
+import axios from 'axios'
 import React from 'react'
 import { useCookies } from 'react-cookie'
 import { navigate } from '@reach/router'
 
+import cardsReducer from '../../utils/reducers/cards-reducer'
 import userReducer from '../../utils/reducers/user-reducer'
 
 import './user-dashboard.scss'
@@ -16,12 +18,15 @@ export default function UserDashboard () {
     username: '',
     firstname: '',
     token: ''
-  })  
-  const { firstname } = userState
+  }) 
+  const [ cardsState, cardsDispatch ] = React.useReducer(cardsReducer, {
+    cards: []
+  })
+
+  axios.defaults.timeout = 3000
   
   React.useEffect(() => {
     try {
-      console.log(cookies)
       if (cookies.authToken && cookies.authToken.token) {
         userDispatch({
           type: 'LOGIN',
@@ -41,7 +46,33 @@ export default function UserDashboard () {
     }
   }, [cookies])
 
-  console.log(userState)
+  React.useEffect(() => {
+    if (userState && userState.token) {
+      try {
+        const cardsAxios = axios.create({
+          headers: {
+            Authorization: `Bearer ${userState.token}`
+          }
+        })
+
+        cardsAxios('/api/cards')
+          .then(response => {
+            cardsDispatch({
+              type: 'FETCH_USER_CARDS',
+              cards: [response.data.cards]
+            })
+          })
+          .catch(err => {
+            console.log(err)
+            setErrorMessage(err)
+          })
+      } catch {
+        console.log('ERROR')
+      }
+    } else {
+      cardsDispatch({type: 'CLEAR_CARDS'})
+    }
+  }, [userState])
 
   if (userState && userState.firstname === undefined) {
     return (
@@ -55,6 +86,7 @@ export default function UserDashboard () {
       <Header title={`Welcome, ${userState.firstname ? userState.firstname : 'learner'}!`}/>
       <main className="user-dashboard">
         <p className='errMessage'>{errMessage}</p>
+        <p className='cards-count'>You have {cardsState.cards.length > 0 ? cardsState.cards.length : 'no'} card{cardsState.cards.length === 1 ? '' : 's'}</p>
       </main>
     </>
     )

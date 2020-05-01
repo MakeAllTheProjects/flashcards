@@ -4,13 +4,11 @@
 	@include centered-v;
 	@include fullscreen;
 
-	.icons-container {
-		@include centered-h;
-		flex-wrap: wrap;
+	.error-message {
+		color: red
+	}
 
-		.dashboard-icon {
-			height: calc(25vw);
-
-		}
+	.cards-count {
+		color: blue
 	}
 }

@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie'
 import { navigate } from '@reach/router'
 
 import userReducer from '../../utils/reducers/user-reducer'
+import cardsReducer from '../../utils/reducers/cards-reducer'
 
 import './header.scss'
 
@@ -10,10 +11,14 @@ export default function Header (props) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
   const [ cookies, removeCookie ] = useCookies(['authToken'])
   const [ userState, userDispatch ] = React.useReducer(userReducer)
+  const [ cardsState, cardsDispatch ] = React.useReducer(cardsReducer)
 
   function handleLogOut () {
     userDispatch({
       type: 'LOGOUT'
+    })
+    cardsDispatch({
+      type: 'CLEAR_CARDS'
     })
     removeCookie('authToken')
     setTimeout(navigate('/'), 500)
