@@ -2,6 +2,7 @@
 
 .cards-list-container {
   @include centered-v;
+  padding: 105px 0 45px 0;
 
   .cards-list {
     @include centered-h;

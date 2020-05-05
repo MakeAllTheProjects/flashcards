@@ -7,9 +7,6 @@ import userReducer from '../../../utils/reducers/user-reducer'
 
 import './auth-form.scss'
 
-axios.defaults.timeout = 30000
-const authAxios = axios.create()
-
 export default function AuthForm () {
   const [isNewUser, setIsNewUser] = useState(false)
   const [username, setUsername] = useState("")
@@ -21,6 +18,9 @@ export default function AuthForm () {
   const [errMessage, setErrorMessage] = useState("")
   const [cookies, setCookie] = useCookies(['authToken'])
   const [state, dispatch] = useReducer(userReducer)
+
+  axios.defaults.timeout = 30000
+  const authAxios = axios.create()
 
   async function handleAuth (e) {
     e.preventDefault()

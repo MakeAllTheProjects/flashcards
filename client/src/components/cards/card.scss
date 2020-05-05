@@ -2,10 +2,11 @@
 
 .card {
   @include centered-v;
-  height: 30vh;
-  width: calc(60vh);
+  height: calc(18vw);
+  width: 30vw;
   padding: 15px;
   margin: 10px;
+  font-size: 28px;
   background-color: rgb(255, 255, 240);
   box-shadow: rgba(50, 50, 50, 0.15) 1px 1px 1px,
               inset rgba(75, 75, 75, 0.06) 1px 1px 1px;

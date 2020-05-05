@@ -87,7 +87,7 @@ export default function UserDashboard () {
       <Header title={`Welcome, ${userState.firstname ? userState.firstname : 'learner'}!`}/>
       <main className="user-dashboard">
         <p className='errMessage'>{errMessage}</p>
-        <CardList cards={[...cardsState.cards]}/>
+          <CardList cards={[...cardsState.cards]} cardsDispatch={cardsDispatch}/>
       </main>
     </>
     )
