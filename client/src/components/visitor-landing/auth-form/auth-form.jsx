@@ -59,8 +59,8 @@ export default function AuthForm () {
 
         setTimeout(navigate('/home'), 500)
       }
-    }).catch(async error => {
-      console.log(error)
+    }).catch(async err => {
+      console.error(err)
       await setErrorMessage("Server error. Please try again later.")
     })
   }

@@ -16,7 +16,7 @@ app.use('/api/cards', require('./routes/card-router'))
 
 app.use((err, req, res, next) => {
 	if (err) {
-		console.log(err)
+		console.error(err)
 		if (err.name === 'UnathorizedError') {
 			res.status(err.status)
 		}

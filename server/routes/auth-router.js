@@ -45,11 +45,11 @@ authRouter.post('/signup', async (req, res, next) => {
 				})
 			}
 		}
-	} catch (e) {
-		console.log(e)
+	} catch (err) {
+		console.error(err)
 		res.sendStatus(500).json({
 			sucess: false,
-			errMessage: e
+			errMessage: err
 		})
 	}
 })
@@ -89,11 +89,11 @@ authRouter.post('/login', async (req, res, next) => {
 				})
 			}
 		}
-	} catch (e) {
-		console.log(e)
+	} catch (err) {
+		console.error(err)
 		res.sendStatus(500).json({
 			sucess: false,
-			errMessage: e
+			errMessage: err
 		})
 	}
 })
@@ -101,11 +101,11 @@ authRouter.post('/login', async (req, res, next) => {
 authRouter.get('/', (req, res, next) => {
 	try {
 		res.json({success: true})
-	} catch (e) {
-		console.log(e)
+	} catch (err) {
+		console.error(err)
 		res.sendStatus(500).json({
 			sucess: false,
-			errMessage: e
+			errMessage: err
 		})
 	}
 })

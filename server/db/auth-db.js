@@ -27,7 +27,7 @@ authDB.validateByUsername = (user) => {
 		[ user.username ],
 		(err, results) => {
 			if (err) {
-				console.log(err)
+				console.error(err)
 				return reject(err)
 			}
 			return results.length > 0 ? resolve(true) : resolve(false)
@@ -46,7 +46,7 @@ authDB.validateByEmail = (user) => {
 		[ user.email ],
 		(err, results) => {
 			if (err) {
-				console.log(err)
+				console.error(err)
 				return reject(err)
 			}
 			return results.length > 0 ? resolve(true) : resolve(false)
@@ -76,7 +76,7 @@ authDB.createSignUp = (user) => {
 				],
 				(err, results) => {
 					if (err) {
-						console.log(err)
+						console.error(err)
 						return reject(err)
 					}
 
@@ -119,7 +119,7 @@ authDB.createLogin = (user) => {
 		[ user.username ],
 		async (err, results) => {
 			if (err) {
-				console.log(err)
+				console.error(err)
 				return reject({
 					err,
 					errMessage: "ERROR"
@@ -143,7 +143,7 @@ authDB.createLogin = (user) => {
 				[ user.username ],
 				(err, results) => {
 					if (err) {
-						console.log(err)
+						console.error(err)
 						return reject(err)
 					}
 

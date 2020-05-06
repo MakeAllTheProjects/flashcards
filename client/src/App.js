@@ -35,8 +35,8 @@ export default function App () {
         })
         setTimeout(navigate('/home'), 500)
       }
-    } catch {
-      console.log("ERROR")
+    } catch (err) {
+      console.error(err)
     }
   }, [])
 

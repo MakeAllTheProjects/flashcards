@@ -33,7 +33,7 @@ export default function CreateCard({ cards, cardsDispatch }) {
 				}
 			})
 			.catch(err => {
-				console.log(err)
+				console.error(err)
 			})
 	}
 

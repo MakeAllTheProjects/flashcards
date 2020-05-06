@@ -42,8 +42,8 @@ export default function UserDashboard () {
         })
         setTimeout(navigate('/'))
       }
-    } catch {
-      console.log('ERROR')
+    } catch (err) {
+      console.error(err)
     }
   }, [cookies])
 
@@ -64,11 +64,11 @@ export default function UserDashboard () {
             })
           })
           .catch(err => {
-            console.log(err)
+            console.error(err)
             setErrorMessage(err)
           })
-      } catch {
-        console.log('ERROR')
+      } catch (err) {
+        console.error(err)
       }
     } else {
       cardsDispatch({type: 'CLEAR_CARDS'})
