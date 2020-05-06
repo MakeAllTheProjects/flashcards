@@ -4,10 +4,11 @@ import { useCookies } from 'react-cookie'
 
 import './card-form.scss'
 
-export default function CardForm ({ cards, cardsDispatch, canEdit, setCanEdit }) {
+export default function CardForm ({ cards, cardsDispatch, canEdit, setCanEdit, cardId }) {
 	const [cookies] = useCookies(['authToken'])
 	const [answer, setAnswer] = React.useState('')
 	const [question, setQuestion] = React.useState('')
+	const [errorMessage, setErrorMessage] = React.useState('')
 
 	axios.defaults.timeout = 3000
 
@@ -39,9 +40,25 @@ export default function CardForm ({ cards, cardsDispatch, canEdit, setCanEdit })
 
 	function handleEditCardSubmit (e) {
 		e.preventDefault()
-		console.log('edit the card')
-		console.log(question)
-		console.log(answer)
+
+		if (cardId) {
+			cardsAxios.put(`/api/cards/${cardId}`, {
+				question: question,
+				answer: answer
+			})
+				.then (response => {
+					if (response.data.cards.length === cards.length) {
+						cardsDispatch({
+							type: 'FETCH_USER_CARDS',
+							cards: [...response.data.cards]
+						})
+						setCanEdit(false)
+					}
+				})
+				.catch(err => {
+					console.error(err)
+				})
+		}
 	}
 
 	return (

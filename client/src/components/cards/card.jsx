@@ -50,6 +50,7 @@ export default function Card ({
         cardsDispatch={cardsDispatch}
         canEdit={canEdit}
         setCanEdit={setCanEdit}
+        cardId={cardId}
       />
     )
   } else {

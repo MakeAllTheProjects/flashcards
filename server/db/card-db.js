@@ -74,4 +74,27 @@ cardDB.deleteCard = (cardId) => {
 	})
 }
 
+cardDB.updateCard = (cardId, question, answer) => {
+	return new Promise((resolve, reject) => {
+		pool.query(`
+			UPDATE cards
+			SET
+				cards.question = ?,
+				cards.answer = ?
+			WHERE cards.id = ?;
+		`, [
+			question,
+			answer,
+			cardId
+		],
+		(err, results) => {
+			if (err) {
+				console.error(err)
+				return reject(err)
+			}
+			return resolve(results)
+		})
+	})
+}
+
 module.exports = cardDB
