@@ -9,6 +9,10 @@ body {
   background-color: $secondary-color;
 }
 
+button {
+  outline: none;
+}
+
 .app {
   @include fullscreen;
   @include centered;

@@ -3,15 +3,18 @@ import React from 'react'
 import { useCookies } from 'react-cookie'
 
 import './card.scss'
+import CardForm from './card-form'
 
 export default function Card ({
   question,
   answer,
   cardId,
   cardsDispatch,
-  numberOfCards
+  numberOfCards,
+  cards,
 }) {
   const [cookies] = useCookies(['authToken'])
+  const [canEdit, setCanEdit] = React.useState(false)
 
   axios.defaults.timeout = 3000
 
@@ -40,19 +43,35 @@ export default function Card ({
     }
   }
   
-  return (
-    <article className='card'>
-      <p><b>QUESTION:</b> {question}</p>
-      <p><b>ANSWER:</b> {answer}</p>
-      <div className='card-actions-container'>
-        <button
-          className='delete-card-button'
-          onClick={() => handleDeleteCard(cardId)}
-        >
-          Delete Card
-        </button>
-        <span>Card # {cardId}</span>
-      </div>
-    </article>
-  )
+  if (canEdit) {
+    return (
+      <CardForm
+        cards={cards}
+        cardsDispatch={cardsDispatch}
+        canEdit={canEdit}
+        setCanEdit={setCanEdit}
+      />
+    )
+  } else {
+    return (
+      <article className='card'>
+        <p><b>QUESTION:</b> {question}</p>
+        <p><b>ANSWER:</b> {answer}</p>
+        <div className='card-actions-container'>
+          <button
+            className='edit-card-button'
+            onClick={() => setCanEdit(true)}
+          >
+            Edit Card
+          </button>
+          <button
+            className='delete-card-button'
+            onClick={() => handleDeleteCard(cardId)}
+          >
+            Delete Card
+          </button>
+        </div>
+      </article>
+    )
+  }
 }

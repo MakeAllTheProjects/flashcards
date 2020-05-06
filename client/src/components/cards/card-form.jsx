@@ -2,9 +2,9 @@ import axios from 'axios'
 import React from 'react'
 import { useCookies } from 'react-cookie'
 
-import './create-card.scss'
+import './card-form.scss'
 
-export default function CreateCard({ cards, cardsDispatch }) {
+export default function CardForm ({ cards, cardsDispatch, canEdit, setCanEdit }) {
 	const [cookies] = useCookies(['authToken'])
 	const [answer, setAnswer] = React.useState('')
 	const [question, setQuestion] = React.useState('')
@@ -37,10 +37,17 @@ export default function CreateCard({ cards, cardsDispatch }) {
 			})
 	}
 
+	function handleEditCardSubmit (e) {
+		e.preventDefault()
+		console.log('edit the card')
+		console.log(question)
+		console.log(answer)
+	}
+
 	return (
 		<form
 			className='create-card-form'
-			onSubmit={e => handleCreateCardSubmit(e)}
+			onSubmit={canEdit ? e => handleEditCardSubmit(e) : e => handleCreateCardSubmit(e)}
 		>
 			<input
 				name='question'
@@ -59,8 +66,16 @@ export default function CreateCard({ cards, cardsDispatch }) {
 			<input
 				className='submit-button'
 				type='submit'
-				value='Create New Card'
+				value={`${canEdit ? 'Edit' : 'Create New'} Card`}
 			/>
+			{canEdit && (
+				<button
+					className='cancel-edit-button'
+					onClick={e => setCanEdit(false)}
+				>
+					Cancel
+				</button>
+			)}
 		</form>
 	)
 }

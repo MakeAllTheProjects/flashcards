@@ -2,7 +2,7 @@ import React from 'react'
 
 import './cards-list.scss'
 import Card from './card'
-import CreateCard from './create-card'
+import CardForm from './card-form'
 
 export default function CardsList({ cards, cardsDispatch}) {
   return (
@@ -18,11 +18,15 @@ export default function CardsList({ cards, cardsDispatch}) {
               cardId={card.id}
               cardsDispatch={cardsDispatch}
               numberOfCards={cards.length}
+              cards={cards}
             />
           )
         })}
       </div>
-      <CreateCard cards={cards} cardsDispatch={cardsDispatch}/>
+      <CardForm
+        cards={cards}
+        cardsDispatch={cardsDispatch}
+      />
     </section>
   )
 }
