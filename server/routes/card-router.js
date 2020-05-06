@@ -7,7 +7,7 @@ cardRouter.get('/', async (req, res, next) => {
 	try {
 		const cards = await cardDB.getCards(req.user.id)
 
-		res.sendStatus(200).json({
+		res.send({
 			success: true,
 			cards: cards
 		})
@@ -26,7 +26,7 @@ cardRouter.post('/create-card', async (req, res, next) => {
 		
 		const cards = await cardDB.getCards(req.user.id)
 		
-		res.sendStatus(200).json({ 
+		res.send({ 
 			success: true,
 			cards: [...cards],
 			newCardId: newCard.id
@@ -46,7 +46,7 @@ cardRouter.delete('/delete-card', async (req, res, next) => {
 		
 		const cards = await cardsDB.getCards(req.user.id)
 
-		res.sendStatus(200).json({
+		res.send({
 			success: true,
 			cards: [...cards]
 		})
