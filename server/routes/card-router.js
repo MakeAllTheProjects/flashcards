@@ -9,13 +9,14 @@ cardRouter.get('/', async (req, res, next) => {
 
 		res.send({
 			success: true,
-			cards: cards
+			cards: cards || []
 		})
 	} catch (err) {
 		console.error(err)
 		res.sendStatus(500).json({
 			success: false,
-			errMessage: err
+			errMessage: err,
+			cards: []
 		})
 	}
 })

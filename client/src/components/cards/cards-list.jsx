@@ -15,6 +15,7 @@ export default function CardsList({ cards, cardsDispatch}) {
               key={`card-${card.id}`}
               question={card.question}
               answer={card.answer}
+              tags={JSON.parse(card.tags)}
               cardId={card.id}
               cardsDispatch={cardsDispatch}
               numberOfCards={cards.length}

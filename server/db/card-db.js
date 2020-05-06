@@ -18,9 +18,20 @@ cardDB.getCards = (userId) => {
 			SELECT 
 				cards.id,
 				cards.question,
-				cards.answer
-			FROM cards
-			WHERE cards.userId = ?;
+				cards.answer,
+				JSON_ARRAYAGG(
+					JSON_OBJECT(
+						'tagId', tags.id,
+						'tagName', tags.tagName
+						)
+				) AS 'tags'
+			FROM cards 
+			INNER JOIN cardTags 
+				ON cardTags.cardID = cards.id 
+			INNER JOIN tags 
+				ON tags.id = cardTags.tagId
+			WHERE cards.userId = ?
+			GROUP BY cards.id;
 		`,
 		[ userId ],
 		(err, results) => {

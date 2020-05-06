@@ -65,7 +65,7 @@ export default function UserDashboard () {
           })
           .catch(err => {
             console.error(err)
-            setErrorMessage(err)
+            setErrorMessage('A server error has occured')
           })
       } catch (err) {
         console.error(err)
@@ -87,8 +87,8 @@ export default function UserDashboard () {
       <Header title={`Welcome, ${userState.firstname ? userState.firstname : 'learner'}!`}/>
       <main className="user-dashboard">
         <p className='errMessage'>{errMessage}</p>
-          {cardsState.cards && cardsState.cards.length > 0  && (
-            <CardList cards={[...cardsState.cards]} cardsDispatch={cardsDispatch}/>
+          {cardsState.cards && (
+            <CardList cards={[...cardsState.cards] || []} cardsDispatch={cardsDispatch}/>
           )}
       </main>
     </>

@@ -8,6 +8,7 @@ import CardForm from './card-form'
 export default function Card ({
   question,
   answer,
+  tags,
   cardId,
   cardsDispatch,
   numberOfCards,
@@ -56,8 +57,6 @@ export default function Card ({
   } else {
     return (
       <article className='card'>
-        <p><b>QUESTION:</b> {question}</p>
-        <p><b>ANSWER:</b> {answer}</p>
         <div className='card-actions-container'>
           <button
             className='edit-card-button'
@@ -71,6 +70,22 @@ export default function Card ({
           >
             Delete Card
           </button>
+        </div>
+        <hr/>
+        <p><b>QUESTION:</b> {question}</p>
+        <p><b>ANSWER:</b> {answer}</p>
+        <hr/>
+        <div className='card-tags-container'>
+          {tags.length > 0 && tags.map(tag => {
+            return (
+              <span
+                className='card-tag'
+                key={`card-${cardId}-${tag.tagId}`}
+              >
+                {tag.tagName}
+              </span>
+            )
+          })}
         </div>
       </article>
     )

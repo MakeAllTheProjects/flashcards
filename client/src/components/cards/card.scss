@@ -12,10 +12,21 @@
   background-color: rgb(255, 255, 240);
   box-shadow: rgba(50, 50, 50, 0.15) 1px 1px 1px,
               inset rgba(75, 75, 75, 0.06) 1px 1px 1px;
+  
+  hr {
+    margin: 3vh 0 3vh 0;
+    width: 80%;
+    border: solid 1px black;
+  }
+
+  p {
+    margin: 1vh 0 1vh 0;
+  }
 
   .card-actions-container {
     @include center-spaced-h;
-    width: 100%;
+    justify-content: space-between;
+    width: 80%;
 
     .delete-card-button {
       margin: 16px 0 0 0;
@@ -33,6 +44,21 @@
       border-radius: 15px;
       font-size: 2vw;
       cursor: pointer;
+    }
+  }
+
+  .card-tags-container {
+    @include centered-h;
+    justify-content: flex-end;
+    width: 80%;
+
+    .card-tag {
+      background-color: rgb(150, 150, 255);
+      color: white;
+      padding: 5px 15px 5px 15px;
+      margin: 0 10px 0 10px;
+      border-radius: 10px;
+      font-size: 1.5vw;
     }
   }
 }
