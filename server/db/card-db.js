@@ -25,7 +25,7 @@ cardDB.getCards = (userId) => {
 		[ userId ],
 		(err, results) => {
 			if (err) {
-				console.log(err)
+				console.error(err)
 				return reject(err)
 			}
 			return resolve(results)
@@ -49,7 +49,24 @@ cardDB.createCard = (userId, question, answer) => {
 		],
 		(err, results) => {
 			if (err) {
-				console.log(err)
+				console.error(err)
+				return reject(err)
+			}
+			return resolve(results)
+		})
+	})
+}
+
+cardDB.deleteCard = (cardId) => {
+	return new Promise((resolve, reject) => {
+		pool.query(`
+			DELETE FROM cards
+			WHERE cards.id = ?;
+		`,
+		[ cardId ],
+		(err, results) => {
+			if (err) {
+				console.error(err)
 				return reject(err)
 			}
 			return resolve(results)
