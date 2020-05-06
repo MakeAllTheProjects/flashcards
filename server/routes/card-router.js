@@ -40,18 +40,23 @@ cardRouter.post('/create-card', async (req, res, next) => {
 	}
 })
 
-cardRouter.delete('/delete-card', async (req, res, next) => {
+cardRouter.delete('/:id', async (req, res, next) => {
 	try {
-		await cardDB.deleteCard(req.body.cardId)
+		await cardDB.deleteCard(req.params.id)
 		
-		const cards = await cardsDB.getCards(req.user.id)
+		const cards = await cardDB.getCards(req.user.id)
 
 		res.send({
 			success: true,
-			cards: [...cards]
+			cards: [...cards],
+			deletedCardId: req.body.cardId
 		})
 	} catch (err) {
 		console.error(err)
+		res.sendStatus(500).json({
+			success: false,
+			errMessage: err
+		})
 	}
 })
 

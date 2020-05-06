@@ -24,6 +24,20 @@
   flex-direction: column;
 }
 
+@mixin center-spaced-h {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+@mixin center-spaced-v {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
 @mixin fullscreen {
   width: 100vw;
   min-height: 100vh;

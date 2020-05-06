@@ -3,11 +3,26 @@
 .card {
   @include centered-v;
   height: calc(18vw);
+  min-height: 100px;
   width: 30vw;
+  min-width: 250px;
   padding: 15px;
-  margin: 10px;
-  font-size: 28px;
+  margin: 1vh 3vw 1vh 1vw;
+  font-size: 2.5vw;
   background-color: rgb(255, 255, 240);
   box-shadow: rgba(50, 50, 50, 0.15) 1px 1px 1px,
               inset rgba(75, 75, 75, 0.06) 1px 1px 1px;
+
+  .card-actions-container {
+    @include center-spaced-h;
+
+    .delete-card-button {
+      margin: 16px 0 0 0;
+      background-color: rgb(255, 150, 150);
+      color: rgb(100, 0, 0);
+      border-radius: 15px;
+      font-size: 2vw;
+      cursor: pointer;
+    }
+  }
 }

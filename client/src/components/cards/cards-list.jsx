@@ -15,6 +15,9 @@ export default function CardsList({ cards, cardsDispatch}) {
               key={`card-${card.id}`}
               question={card.question}
               answer={card.answer}
+              cardId={card.id}
+              cardsDispatch={cardsDispatch}
+              numberOfCards={cards.length}
             />
           )
         })}
