@@ -12,7 +12,7 @@
 							
 	input {
 		width: 70%;
-		font-size: 2.5vw;
+		font-size: 16px;
 		padding: 1vh 3vw 1vh 3vw;
 		margin: 1vh 0 1vh 0;
 	}
@@ -21,8 +21,10 @@
 		text-align: center;
 		background-color: $primary-color;
 		color: white;
-		font-weight: 900;
+		font-weight: 600;
 		text-transform: uppercase;
+		font-size: 14px;
+		border-radius: 15px;
 		cursor: pointer;
 	}
 
