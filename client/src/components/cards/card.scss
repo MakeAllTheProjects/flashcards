@@ -2,10 +2,6 @@
 
 .card {
   @include centered-v;
-  height: calc(15vw);
-  width: 30vw;
-  min-height: 100px;
-  min-width: 250px;
   padding: 15px;
   margin: 1vh 3vw 1vh 3vw;
   font-size: 15px;
@@ -29,7 +25,8 @@
     width: 80%;
 
     .delete-card-button {
-      margin: 16px 0 0 0;
+      width: 145px;
+      margin: 16px 15px 0 15px;
       background-color: rgb(255, 150, 150);
       color: rgb(100, 0, 0);
       border-radius: 15px;
@@ -38,7 +35,8 @@
     }
 
     .edit-card-button {
-      margin: 16px 0 0 0;
+      margin: 16px 15px 0 15px;
+      width: 145px;
       background-color: rgb(150, 255, 150);
       color: rgb(0, 100, 0);
       border-radius: 15px;

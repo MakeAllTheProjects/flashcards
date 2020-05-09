@@ -75,6 +75,30 @@ export default function UserDashboard () {
     }
   }, [userState])
 
+  function handleRefresh () {
+    try {
+      const cardsAxios = axios.create({
+        headers: {
+          Authorization: `Bearer ${userState.token}`
+        }
+      })
+
+      cardsAxios('/api/cards')
+        .then(response => {
+          cardsDispatch({
+            type: 'FETCH_USER_CARDS',
+            cards: [...response.data.cards]
+          })
+        })
+        .catch(err => {
+          console.error(err)
+          setErrorMessage('A server error has occured')
+        })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   if (userState && userState.firstname === undefined) {
     return (
       <main className='loading'>
@@ -86,6 +110,7 @@ export default function UserDashboard () {
       <>
       <Header title={`Welcome, ${userState.firstname ? userState.firstname : 'learner'}!`}/>
       <main className="user-dashboard">
+        <span onClick={() => handleRefresh()}>REFRESH CARDS</span>
         <p className='errMessage'>{errMessage}</p>
           {cardsState.cards && (
             <CardList cards={[...cardsState.cards] || []} cardsDispatch={cardsDispatch}/>

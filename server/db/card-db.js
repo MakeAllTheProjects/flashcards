@@ -15,20 +15,20 @@ let cardDB = {}
 cardDB.getCards = (userId) => {
 	return new Promise((resolve, reject) => {
 		pool.query(`
-			SELECT 
+			SELECT
 				cards.id,
 				cards.question,
-				cards.answer,
-				JSON_ARRAYAGG(
-					JSON_OBJECT(
-						'tagId', tags.id,
-						'tagName', tags.tagName
-						)
-				) AS 'tags'
-			FROM cards 
-			INNER JOIN cardTags 
-				ON cardTags.cardID = cards.id 
-			INNER JOIN tags 
+			cards.answer,
+			JSON_ARRAYAGG (
+				JSON_OBJECT (
+					'tagId', tags.id,
+					'tagName', tags.tagName
+				)
+			) AS 'tags'
+			FROM cards
+			LEFT JOIN cardTags
+				ON cardTags.cardId = cards.id
+			LEFT JOIN tags
 				ON tags.id = cardTags.tagId
 			WHERE cards.userId = ?
 			GROUP BY cards.id;
