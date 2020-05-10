@@ -1,5 +1,5 @@
 const express = require('express')
-const cardDB = require('../db/card-db')
+const {cardDB, tagDB} = require('../db/card-db')
 
 const cardRouter = express.Router()
 
@@ -79,6 +79,18 @@ cardRouter.put('/:id', async (req, res, next) => {
 				updatedCardId: null
 			})
 		}			
+	} catch (err) {
+		console.error(err)
+		res.sendStatus(500).json({
+			success: false,
+			errMessage: err
+		})
+	}
+})
+
+cardRouter.get('/tags', async (req, res, next) => {
+	try {
+
 	} catch (err) {
 		console.error(err)
 		res.sendStatus(500).json({

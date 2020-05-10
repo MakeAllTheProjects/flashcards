@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import _ from 'lodash'
+import React, {
+	useState,
+	useEffect
+} from 'react'
 
-import './App.scss'
-import AppBackground from './components/app-background'
+export const ThemeContext = React.createContext({
+	lineCount: 33,
+	windowRatio: 0.7727
+})
 
-export default function App () {
+export function ThemeProvider ({children}) {
+	const defaultPaperRatio = 0.7727
+	const [lineCount, setLineCount] = useState(33)
+	const [windowRatio, setWindowRatio] = useState(defaultPaperRatio)
 	const [windowHeight, setWindowHeight] = useState(window.innerHeight)
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-	const [windowRatio, setWindowRatio] = useState(window.innerWidth / window.innerHeight)
 	const [paperHeight, setPaperHeight] = useState(window.innerHeight)
 	const [paperWidth, setPaperWidth] = useState(window.innerWidth)
-	const [lineCount, setLineCount] = useState(33)
-	const [lines, setLines] = useState([])
-
-	const defaultPaperRatio = 0.7727
 
 	const updateWindowSize = () => {
 		setWindowHeight(window.innerHeight)
 		setWindowWidth(window.innerWidth)
-		setWindowRatio(window.innerWidth/window.innerHeight)
+		setWindowRatio(window.innerWidth / window.innerHeight)
 	}
 
-	function updatePaperSize () {
+	function updatePaperSize() {
 		if (windowRatio > defaultPaperRatio) {
 			setPaperHeight(windowWidth * 1.294117647058824)
 			setPaperWidth(windowWidth)
@@ -31,9 +33,9 @@ export default function App () {
 		}
 	}
 
-	function updateLineCount () {
+	function updateLineCount() {
 		if (windowRatio > defaultPaperRatio) {
-			setLineCount(Math.round(33/windowRatio))
+			setLineCount(Math.round(33 / windowRatio))
 		}
 	}
 
@@ -52,20 +54,14 @@ export default function App () {
 		}
 	}, [windowRatio])
 
-	useEffect(() => {
-		const newLines = []
-		_.times(lineCount, (i) => {
-			newLines.push(<div className='blue-line' key={`blue-line-${i+1}`} />)
-		})
-		setLines(newLines)
-	}, [lineCount])
-
 	return (
-		<AppBackground>
-			<div className='app-grid'>
-				<header className='app-header'>This is a header</header>
-				<main className='app-main'>This is the main</main>
-			</div>
-		</AppBackground>
+		<ThemeContext.Provider
+			value={{
+				lineCount: lineCount,
+				windowRatio: windowRatio
+			}}
+		>
+			{children}
+		</ThemeContext.Provider>
 	)
 }

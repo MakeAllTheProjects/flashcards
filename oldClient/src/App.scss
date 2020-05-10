@@ -1,0 +1,19 @@
+@import './variables.scss';
+
+* {
+  margin: 0;
+  @include font;
+}
+
+body {
+  background-color: $secondary-color;
+}
+
+button {
+  outline: none;
+}
+
+.app {
+  @include fullscreen;
+  @include centered;
+}

@@ -11,6 +11,7 @@ const pool = mysql.createPool({
 })
 
 let cardDB = {}
+let tagDB = {}
 
 cardDB.getCards = (userId) => {
 	return new Promise((resolve, reject) => {
@@ -108,4 +109,24 @@ cardDB.updateCard = (cardId, question, answer) => {
 	})
 }
 
-module.exports = cardDB
+tagDB.getTags = (userId) => {
+	return new Promise((resolve, reject) => {
+		pool.query(`
+			SELECT
+				tags.id,
+				tags.tagName
+			FROM tags
+			WHERE userId = ?;
+		`,
+			[userId],
+			(err, results) => {
+				if (err) {
+					console.error(err)
+					return reject(err)
+				}
+				return resolve(results)
+			})
+	})
+}
+
+module.exports = {cardDB, tagDB}

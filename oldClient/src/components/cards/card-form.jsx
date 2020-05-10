@@ -8,6 +8,7 @@ export default function CardForm ({ cards, cardsDispatch, canEdit, setCanEdit, c
 	const [cookies] = useCookies(['authToken'])
 	const [answer, setAnswer] = React.useState('')
 	const [question, setQuestion] = React.useState('')
+	const [selectedTags, setSelectedTags] = React.useState('')
 	const [errorMessage, setErrorMessage] = React.useState('')
 
 	axios.defaults.timeout = 3000
