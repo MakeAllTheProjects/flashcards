@@ -5,6 +5,8 @@ import React, {
 	useContext
 } from 'react'
 
+import './app-background.scss'
+
 export default function AppBackground ({children}) {
 	const defaultPaperRatio = 0.7727
 	const [lineCount, setLineCount] = useState(33)
