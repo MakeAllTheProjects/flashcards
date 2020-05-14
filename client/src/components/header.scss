@@ -1,0 +1,17 @@
+@import '../variables.scss';
+
+.app-header {
+  @include header-placement;
+
+  .icon-container {
+    grid-column: 1;
+    @include centered-h;
+    width: 100%;
+  }
+
+  .header-main {
+    grid-column: 2;
+    @include centered-h;
+    width: 100%;
+  }
+}

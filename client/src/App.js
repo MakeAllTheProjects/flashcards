@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import _ from 'lodash'
+import {Router} from '@reach/router'
 
 import './App.scss'
 import AppBackground from './components/app-background'
+import Landing from './components/landing/landing'
 
 export default function App () {
 	return (
 		<AppBackground>
 			<div className='app-grid'>
-				<header className='app-header'>This is a header</header>
-				<main className='app-main'>This is the main</main>
+				<Router>
+					<Landing path='/'/>
+				</Router>
 			</div>
 		</AppBackground>
 	)
