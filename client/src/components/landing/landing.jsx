@@ -6,7 +6,7 @@ import AuthForm from './auth-form'
 export default function Landing () {
   return (
     <div className='landing-page'>
-      <Header title="Learn the things!"/>
+      <Header title="Learn the things!" cornerIcon={false}/>
       <main className='landing-container'>
         <AuthForm/>
       </main>

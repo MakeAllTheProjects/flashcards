@@ -1,0 +1,13 @@
+@import '../../variables.scss';
+
+.user-dashboard-page {
+  @include app-grid;
+
+  .user-dashboard-container {
+    @include main-placement;
+
+    h2 {
+      font-size: 5rem;
+    }
+  }
+}
