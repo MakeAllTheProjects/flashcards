@@ -5,6 +5,8 @@ export default function AuthForm () {
   return (
     <form className='auth-form'>
       This is the auth form.
+      <input />
+      <input />
     </form>
   )
 }

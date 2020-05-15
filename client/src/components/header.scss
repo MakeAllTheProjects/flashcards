@@ -7,11 +7,23 @@
     grid-column: 1;
     @include centered-h;
     width: 100%;
+
+    .header-logo {
+      width: calc(6.5vh);
+      transform: rotate(-5deg);
+      margin: 1.5vh 0 0 0;
+    }
   }
 
   .header-main {
     grid-column: 2;
     @include centered-h;
     width: 100%;
+
+    h1 {
+      @include font-marker;
+      font-size: 5rem;
+      color: $pencil-dark;
+    }
   }
 }

@@ -1,1 +1,9 @@
 @import './variables.scss';
+
+* {
+	margin: 0;
+	font-size: 10px;
+	@include font-shadow-into-light;
+	font-size: 900;
+	color: $pencil-medium;
+}
