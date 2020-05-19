@@ -3,7 +3,6 @@ import './header.scss'
 import DefaultLogo from '../assets/logo.png'
 
 export default function Header ({title, cornerIcon}) {
-  console.log(cornerIcon)
   return (
     <header className='app-header'>
       <div className='icon-container'>

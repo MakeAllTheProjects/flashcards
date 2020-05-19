@@ -37,10 +37,7 @@ export default function App () {
 			<div className='app-grid'>
 				<Router>
 					<Landing path='/'/>
-					{cookies.authToken && cookies.authToken.user
-						? <UserDashboard path='/home' />
-						: <Redirect from='/home' to='/' />
-					}
+					<UserDashboard path='/home' />
 				</Router>
 			</div>
 		</AppBackground>

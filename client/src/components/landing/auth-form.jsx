@@ -56,14 +56,14 @@ export default function AuthForm () {
           {path: '/'}
         )
 
-        setTimeout(navigate('/home', 500))
+        setTimeout(navigate('/home'), 500)
       }
     }).catch(async err => {
       console.error(err)
       await setErrorMessage('Server error. Please try again later.')
     })
   }
-
+  
   return (
     <form className='auth-form' autoComplete='off'>
       <h2>{ isNewUser ? 'Sign up to start learning...' : 'Login to get back to learning...'}</h2>
