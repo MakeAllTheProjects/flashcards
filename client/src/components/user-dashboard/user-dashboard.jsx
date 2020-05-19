@@ -10,7 +10,6 @@ export default function UserDashboard () {
   const [cookies, setCookie] = useCookies(['authToken'])
 
   React.useEffect(() => {
-    console.log(cookies)
     if (!cookies.authToken) {
       navigate('/')
     }

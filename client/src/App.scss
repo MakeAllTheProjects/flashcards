@@ -5,6 +5,7 @@
 	font-size: 10px;
 	@include font-shadow-into-light;
 	color: $pencil-medium;
+	box-sizing: border-box;
 }
 
 button {

@@ -25,5 +25,47 @@
       font-size: 5rem;
       color: $pencil-dark;
     }
+
+    .menu-button-container {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      @include centered-v;
+      transition: 0.5s all ease;
+      z-index: 10;
+
+      .menu-bar {
+        height: 3.5px;
+        width: 22px;
+        margin: 0 0 4px 0;
+        background-color: $pencil-dark;
+        border-radius: 15px;
+        transition: 0.5s all ease;
+      }
+
+      .menu-bar:last-child {
+        margin: 0;
+      }
+
+      .menu-bar.open:first-child {
+        transform: rotate(45deg);
+        margin: 0 0 -11px 0;
+        width: 24px;
+      }
+
+      .menu-bar.open:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-bar.open:last-child {
+        transform: rotate(-45deg);
+        margin: 0 0 0 0;
+        width: 24px;
+      }
+    }
+
+    .menu-button-container.open {
+      margin: 7.5px 0 0 -3px;
+    }
   }
 }
