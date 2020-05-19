@@ -1,9 +1,13 @@
 import React from 'react'
 import './header.scss'
 import DefaultLogo from '../assets/logo.png'
+import navReducer from '../utils/nav-reducer'
 
 export default function Header ({title, cornerIcon}) {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+  const [ isMenuOpen, setIsMenuOpen ] = React.useState(false)
+  const [ navState, navDispatch ] = React.useReducer(navReducer)
+
+  console.log(navState) //undefined?
   
   return (
     <header className='app-header'>

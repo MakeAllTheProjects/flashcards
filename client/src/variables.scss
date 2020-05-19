@@ -19,6 +19,11 @@ $pen-red: rgba(255, 50, 75, 0.85);
 $pencil-light: rgba(50, 50, 50, 0.65);
 $pencil-medium: rgba(50, 50, 50, 0.85);
 $pencil-dark: rgba(50, 50, 50, 0.95);
+$stickynote-yellow: rgb(235, 245, 0);
+
+@mixin level-one {
+  z-index: 1;
+}
 
 @mixin centered {
   display: flex;

@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from 'react'
 import { Router, navigate, Redirect } from '@reach/router'
 import { useCookies } from 'react-cookie'
 
+import navReducer from './utils/nav-reducer'
 import userReducer from './utils/user-reducer'
 
 import UserDashboard from './components/user-dashboard/user-dashboard'
@@ -13,7 +14,8 @@ import AppBackground from './components/app-background'
 
 export default function App () {
 	const [cookies] = useCookies(['auth-token'])	
-	const [userState, userDispatch] = useReducer(userReducer)
+  const [userState, userDispatch] = useReducer(userReducer)
+  const [ navState, navDispatch ] = React.useReducer(navReducer, {navOpen: false})
 
 	useEffect(() => {
     try {
@@ -30,7 +32,7 @@ export default function App () {
     } catch (err) {
       console.error(err)
     }
-	}, [])
+  }, [])
 	
 	return (
 		<AppBackground>

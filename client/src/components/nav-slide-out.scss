@@ -1,5 +1,27 @@
 @import '../variables.scss';
 
 .nav-slide-out-container {
-  
+  grid-column: 1/3;
+  grid-row: 1/3;
+  @include level-one;
+
+  .nav-slide-out {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    @include centered-v;
+    height: 150px;
+    width: 150px;
+    background-color: $stickynote-yellow;
+    box-shadow: rgba(0, 0,0, 0.2) 5px 5px 5px;
+    transform: rotate(-15deg);
+
+    p {
+      font-size: 1.75rem;
+    }
+  }
+
+  .nav-slide-out.open {
+    right: -20px;
+  }
 }

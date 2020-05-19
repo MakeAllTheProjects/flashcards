@@ -17,7 +17,7 @@ export default function AuthForm () {
   const [lastname, setLastname] = useState("")
   const [errMessage, setErrorMessage] = useState("")
   const [cookies, setCookie] = useCookies(['authToken'])
-  const [state, dispatch] = useReducer(userReducer)
+  const [userState, userDispatch] = useReducer(userReducer)
 
   axios.defaults.timeout = 30000
   const authAxios = axios.create()
@@ -37,7 +37,7 @@ export default function AuthForm () {
       }
 
       if (response.data.user && response.data.token) {
-        await dispatch({
+        await userDispatch({
           type: 'LOGIN',
           id: response.data.user.id,
           username: response.data.user.username,
