@@ -1,7 +1,6 @@
 import React from 'react'
 import './header.scss'
 import DefaultLogo from '../assets/logo.png'
-import NavSlideOutContainer from './nav-slide-out'
 
 export default function Header ({title, cornerIcon}) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
@@ -22,7 +21,6 @@ export default function Header ({title, cornerIcon}) {
           <div className={isMenuOpen ? 'menu-bar open' : 'menu-bar'} />
         </div>
       </div>
-      <NavSlideOutContainer isMenuOpen={isMenuOpen}/>
     </header>
   )
 }
