@@ -1,47 +1,20 @@
-import React, { useEffect, useReducer } from 'react'
-import { Router, navigate, Redirect } from '@reach/router'
-import { useCookies } from 'react-cookie'
+import React from 'react'
+import { Router } from '@reach/router'
 
-import navReducer from './utils/nav-reducer'
-import userReducer from './utils/user-reducer'
-
-import UserDashboard from './components/user-dashboard/user-dashboard'
 import Landing from './components/landing/landing'
+import NotFound from './components/not-found'
+import UserDashboard from './components/user-dashboard/user-dashboard'
 
 import './App.scss'
 import AppBackground from './components/app-background'
 
-
-export default function App () {
-	const [cookies] = useCookies(['auth-token'])	
-  const [userState, userDispatch] = useReducer(userReducer)
-  const [ navState, navDispatch ] = React.useReducer(navReducer)
-
-	useEffect(() => {
-    try {
-      if (cookies.authToken && cookies.authToken.token) {
-        userDispatch({
-          type: 'LOGIN',
-          id: cookies.authToken.user.id,
-          username: cookies.authToken.user.username,
-          firstname: cookies.authToken.user.firstname,
-          token: cookies.authToken.token
-        })
-        navDispatch({
-          type: 'CLOSE'
-        })
-        setTimeout(navigate('/home'), 500)
-      }
-    } catch (err) {
-      console.error(err)
-    }
-  }, [])
-	
+export default function App () {	
 	return (
 		<AppBackground>
 			<div className='app-grid'>
 				<Router>
-					<Landing path='/'/>
+          <NotFound path='/not-found' />
+					<Landing path='/' />
 					<UserDashboard path='/home' />
 				</Router>
 			</div>

@@ -1,0 +1,30 @@
+@import '../variables.scss';
+
+.not-found-page {
+  @include app-grid;
+
+  .not-found-container {
+    @include main-placement;
+    @include centered-v;
+
+    h2 {
+      font-size: 20rem;
+      @include font-shadow-into-light;
+      text-align: center;
+      line-height: 100%;
+    }
+
+    h3 {
+      font-size: 6rem;
+      @include font-shadow-into-light;
+      text-align: center;
+      text-transform: uppercase;
+      line-height: 100%;
+    }
+
+    .exclaimation-icon {
+      height: 20vh;
+      margin: 0 -15px 20px -15px;
+    }
+  }
+}
