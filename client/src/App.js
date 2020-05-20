@@ -13,7 +13,7 @@ export default function App () {
 		<AppBackground>
 			<div className='app-grid'>
 				<Router>
-          <NotFound path='/not-found' />
+          <NotFound path='*' />
 					<Landing path='/' />
 					<UserDashboard path='/home' />
 				</Router>
