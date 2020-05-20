@@ -1,10 +1,7 @@
 @import '../variables.scss';
 
-.not-found-page {
-  @include app-grid;
-
-  .not-found-container {
-    @include main-placement;
+.page.not-found {
+  .main.not-found {
     @include centered-v;
 
     h2 {

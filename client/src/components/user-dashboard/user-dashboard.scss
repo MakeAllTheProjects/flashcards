@@ -1,11 +1,9 @@
 @import '../../variables.scss';
 
 .user-dashboard-page {
-  @include app-grid;
-
   .user-dashboard-container {
-    @include main-placement;
     @include centered-v;
+    padding: 0 6vw 0 0;
 
     .nav-icons-container {
       @include centered-h;
@@ -17,11 +15,14 @@
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
-        margin: 3vh 5vw 3vh 5vw;
-        height: 15vh;
-        width: calc(15vh);        
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        height: 10vh;
+        width: calc(10vh);        
         cursor: pointer;
         text-decoration: none;
+        margin: 50px;
 
         .icon-image {
           grid-column: 1;
@@ -32,6 +33,10 @@
 
         .icon-text {
           visibility: hidden;
+          text-shadow:  -2px -2px $pencil-dark,
+                        2px -2px $pencil-dark,
+                        -2px 2px $pencil-dark,
+                        2px 2px $pencil-dark;
         }
       }
 
@@ -47,10 +52,12 @@
           height: 100%;
           width: 100%;
           z-index: 1;
-          font-size: calc(3vh);
-          filter: drop-shadow(rgb(0, 0, 0) 1px 1px 1px);
-          transform: rotate(-45deg);
+          font-size: calc(4vh);
+          filter: drop-shadow(rgb(0, 0, 0) 1px 1px 1px)
+                  drop-shadow(rgba(0, 0, 0, 1) 1px 1px 10px);
           color: white;
+          text-align: center;
+          line-height: 110%;
         }
       }
     }    

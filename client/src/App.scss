@@ -11,3 +11,10 @@
 button {
 	outline: none;
 }
+
+.page {
+	@include app-grid;
+	.main {
+		@include main-placement;
+	}
+}

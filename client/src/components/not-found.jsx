@@ -16,7 +16,7 @@ export default function NotFound () {
   }, [])
 
   return (
-    <div className='not-found-page'>
+    <div className='page not-found-page'>
       <NavSlideOut
         navState={navState}
         navDispatch={navDispatch}
@@ -27,7 +27,7 @@ export default function NotFound () {
         navDispatch={navDispatch}
         title="Oh No!"
       />
-      <main className='not-found-container'>
+      <main className='main not-found-container'>
         <h2>404</h2>
         <div className='img-wrapper'>
           <img
