@@ -68,7 +68,7 @@ $stickynote-yellow: rgb(235, 245, 0);
   bottom: 0px;
   display: grid;
   grid-template-columns: calc(10vh) 1fr;
-  grid-template-rows: 12vh 1fr;
+  grid-template-rows: 13.5vh 1fr;
 }
 @mixin header-placement {
   grid-column: 1/3;

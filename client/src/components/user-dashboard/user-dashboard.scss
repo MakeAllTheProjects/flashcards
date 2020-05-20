@@ -5,9 +5,54 @@
 
   .user-dashboard-container {
     @include main-placement;
+    @include centered-v;
 
-    h2 {
-      font-size: 5rem;
-    }
+    .nav-icons-container {
+      @include centered-h;
+      flex-wrap: wrap;
+      height: 80%;
+      width: 90%;
+      
+      .user-dashboard-nav-icon {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        margin: 3vh 5vw 3vh 5vw;
+        height: 15vh;
+        width: calc(15vh);        
+        cursor: pointer;
+        text-decoration: none;
+
+        .icon-image {
+          grid-column: 1;
+          grid-row: 1;
+          z-index: 0;
+          height: 15vh;
+        }
+
+        .icon-text {
+          visibility: hidden;
+        }
+      }
+
+      .user-dashboard-nav-icon:hover {
+        filter: drop-shadow($highlighter-yellow 3px 3px 10px);
+        transform: all 1s ease;
+
+        .icon-text {
+          visibility: visible;
+          @include centered-v;
+          grid-column: 1;
+          grid-row: 1;
+          height: 100%;
+          width: 100%;
+          z-index: 1;
+          font-size: 2rem;
+          filter: drop-shadow(rgb(0, 0, 0) 1px 1px 1px);
+          transform: rotate(-45deg);
+          color: white;
+        }
+      }
+    }    
   }
 }
