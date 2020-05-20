@@ -12,7 +12,7 @@ export default function navReducer (state, action) {
       }
     case 'TOGGLE':
       return {
-        navOpen: !this.navOpen
+        navOpen: action.navOpen
       }
     default:
       return state

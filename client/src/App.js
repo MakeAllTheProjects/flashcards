@@ -15,7 +15,7 @@ import AppBackground from './components/app-background'
 export default function App () {
 	const [cookies] = useCookies(['auth-token'])	
   const [userState, userDispatch] = useReducer(userReducer)
-  const [ navState, navDispatch ] = React.useReducer(navReducer, {navOpen: false})
+  const [ navState, navDispatch ] = React.useReducer(navReducer)
 
 	useEffect(() => {
     try {
@@ -26,6 +26,9 @@ export default function App () {
           username: cookies.authToken.user.username,
           firstname: cookies.authToken.user.firstname,
           token: cookies.authToken.token
+        })
+        navDispatch({
+          type: 'CLOSE'
         })
         setTimeout(navigate('/home'), 500)
       }

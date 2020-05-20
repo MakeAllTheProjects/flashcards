@@ -1,14 +1,31 @@
 import React from 'react'
-import './nav-slide-out.scss'
-import navReducer from '../utils/nav-reducer'
+import { useCookies } from 'react-cookie'
 
-export default function NavSlideOut () {
-  const [ navState, navDispatch ] = React.useReducer(navReducer)
+import userReducer from '../utils/user-reducer'
+
+import './nav-slide-out.scss'
+
+export default function NavSlideOut ({navState, navDispatch}) {
+  const [cookies, setCookie, removeCookie] = useCookies(['authToken'])
+  const [userState, userDispatch] = React.useReducer(userReducer)
+
+  const handleLogout = () => {
+    const expiredDate = new Date()
+    expiredDate.setDate(expiredDate.getDate() - 1)
+    userDispatch({ type: 'LOGOUT' })
+    removeCookie('authToken', { expires: expiredDate})
+  }
 
   return (
-    <div className={navState && navState.navOpen ? 'nav-slide-out-container open' : 'nav-slide-out-container'} onClick={() => navDispatch({type: 'CLOSE'})}>
-      <nav className={navState && navState.navOpen ? 'nav-slide-out open' : 'nav-slide-out'}>
-        <p>LOGOUT</p>
+    <div
+      className='nav-slide-out-container'
+      style={{right: navState && navState.navOpen ? '0' : '-100%'}}
+    >
+      <nav
+        className='nav-slide-out'
+        style={{ transform: navState && navState.navOpen ? 'rotate(-17.5deg) skew(0)' : 'rotate(0) skew(25deg, -25deg)'}}
+      >
+        <p onClick={() => handleLogout()}>LOGOUT</p>
       </nav>
     </div>
   )
