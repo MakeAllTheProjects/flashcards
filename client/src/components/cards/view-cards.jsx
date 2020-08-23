@@ -38,7 +38,18 @@ export default function ViewCards () {
         title={"Card Library"}
       />
       <main className='main view-cards-container'>
-        <Card/>
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
       </main>
     </div>
   )

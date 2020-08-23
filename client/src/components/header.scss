@@ -1,10 +1,17 @@
 @import '../variables.scss';
 
 .app-header {
-  @include header-placement;
+  grid-column: 1/3;
+  grid-row: 1;
+  @include center-spaced-h;
+  display: grid;
+  grid-template-columns: $header-height 1fr auto;
+  grid-template-rows: 50% 50%;
+  margin: 0 0.75rem 0 0;
 
   .icon-container {
     grid-column: 1;
+    grid-row: 1/3;
     @include centered-h;
     width: 100%;
 
@@ -17,6 +24,7 @@
 
   .header-main {
     grid-column: 2;
+    grid-row: 1/3;
     @include centered-h;
     width: 100%;
 
@@ -25,47 +33,57 @@
       font-size: 5rem;
       color: $pencil-dark;
     }
+  }
 
-    .menu-button-container {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      @include centered-v;
+  .menu-button-container {
+    grid-column: 3;
+    grid-row: 1;
+    @include centered-v;
+    transition: 0.5s all ease;
+    z-index: 10;
+
+    .menu-bar {
+      height: 0.35rem;
+      width: 2.2rem;
+      margin: 0 0 0.4rem 0;
+      background-color: $pencil-dark;
+      border-radius: 1.5rem;
       transition: 0.5s all ease;
-      z-index: 10;
-
-      .menu-bar {
-        height: 0.35rem;
-        width: 2.2rem;
-        margin: 0 0 0.4rem 0;
-        background-color: $pencil-dark;
-        border-radius: 1.5rem;
-        transition: 0.5s all ease;
-      }
-
-      .menu-bar:last-child {
-        margin: 0;
-      }
-
-      .menu-bar.open:first-child {
-        transform: rotate(45deg);
-        margin: 0 0 -11px 0;
-        width: 2.4rem;
-      }
-
-      .menu-bar.open:nth-child(2) {
-        opacity: 0;
-      }
-
-      .menu-bar.open:last-child {
-        transform: rotate(-45deg);
-        margin: 0 0 0 0;
-        width: 2.4rem;
-      }
     }
 
-    .menu-button-container.open {
-      margin: 0.75rem 0 0 -0.3rem;
+    .menu-bar:last-child {
+      margin: 0;
     }
+
+    .menu-bar.open:first-child {
+      transform: rotate(45deg);
+      margin: 0 0 -11px 0;
+      width: 2.4rem;
+    }
+
+    .menu-bar.open:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-bar.open:last-child {
+      transform: rotate(-45deg);
+      margin: 0 0 0 0;
+      width: 2.4rem;
+    }
+  }
+
+  .menu-button-container.open {
+    margin: 0.75rem 0 0 -0.3rem;
+  }
+
+  .home-button {
+    grid-column: 3;
+    grid-row: 2;
+    height: 2.25rem;
+  }
+
+  .menu-button-container:hover,
+  .home-button:hover {
+    filter: drop-shadow($pencil-light 0.3rem 0.3rem 0.1rem);
   }
 }

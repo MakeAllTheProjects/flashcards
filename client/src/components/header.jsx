@@ -1,6 +1,9 @@
 import React from 'react'
+
 import './header.scss'
+
 import DefaultLogo from '../assets/logo.png'
+import HomeButton from './home-button'
 
 export default function Header ({title, cornerIcon, navState, navDispatch}) {
   return (
@@ -10,17 +13,20 @@ export default function Header ({title, cornerIcon, navState, navDispatch}) {
       </div>
       <div className='header-main'>
         <h1 className='header-title'>{title}</h1>
-        {window.location.pathname !== '/' &&
-          <div
-            className={navState && navState.navOpen ? 'menu-button-container open' : 'menu-button-container'}
-            onClick={() => navDispatch({type: 'TOGGLE', navOpen: !navState.navOpen})}
-          >
-            <div className={navState && navState.navOpen ? 'menu-bar open' :'menu-bar'}/>
-            <div className={navState && navState.navOpen ? 'menu-bar open' : 'menu-bar'} />
-            <div className={navState && navState.navOpen ? 'menu-bar open' : 'menu-bar'} />
-          </div>
-        }
       </div>
+      {window.location.pathname !== '/' &&
+        <div
+          className={navState && navState.navOpen ? 'menu-button-container open' : 'menu-button-container'}
+          onClick={() => navDispatch({ type: 'TOGGLE', navOpen: !navState.navOpen })}
+        >
+          <div className={navState && navState.navOpen ? 'menu-bar open' : 'menu-bar'} />
+          <div className={navState && navState.navOpen ? 'menu-bar open' : 'menu-bar'} />
+          <div className={navState && navState.navOpen ? 'menu-bar open' : 'menu-bar'} />
+        </div>
+      }
+      {window.location.pathname !== '/' &&
+        <HomeButton />
+      }
     </header>
   )
 }

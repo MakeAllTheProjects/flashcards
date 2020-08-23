@@ -1,5 +1,37 @@
 @import '../../variables.scss';
 
 .card-container {
-	
+	height: 50vh;
+	width: calc(50vh);
+	min-height: 25rem;
+	min-width: 25rem;
+	margin: 1.5rem;
+	padding: 1.5rem;
+	font-size: 2rem;
+	font-weight: 900;
+	box-shadow: $pencil-light 0.2rem 0.2rem 0.5rem;
+}
+
+.card-container:nth-child(1n) {
+	background-color: $pink-stickynote;
+}
+
+.card-container:nth-child(2n) {
+	background-color: $green-stickynote;
+}
+
+.card-container:nth-child(3n) {
+	background-color: $orange-stickynote;
+}
+
+.card-container:nth-child(4n) {
+	background-color: $blue-stickynote;
+}
+
+.card-container:nth-child(5n) {
+	background-color: $yellow-stickynote;
+}
+
+.card-container:hover {
+	filter: drop-shadow($pencil-extra-light 0.3rem 0.3rem 0.1rem);
 }

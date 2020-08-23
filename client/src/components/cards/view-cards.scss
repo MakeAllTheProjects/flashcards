@@ -1,1 +1,12 @@
 @import '../../variables.scss';
+
+.page.view-cards-page {
+	.main.view-cards-container {
+		@include centered-h;
+		flex-wrap: wrap;
+		margin: 1.5rem 0.5rem 0.5rem 0;
+		padding: 0 0 5rem 0;
+		overflow: auto;
+		@include thin-scroll-bar();
+	}
+}
