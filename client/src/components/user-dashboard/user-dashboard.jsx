@@ -21,6 +21,7 @@ import WriteNotesIcon from '../../assets/svg/sketch-style/022-interface-2.svg'
 export default function UserDashboard () {
   const [cookies] = useCookies(['authToken'])
   const [navState, navDispatch] = React.useReducer(navReducer)
+  const [isCookie, setIsCookie] = React.useState(false)
 
   const navIcons = [
     {
@@ -63,42 +64,51 @@ export default function UserDashboard () {
   }, [])
 
   React.useEffect(() => {
+    setIsCookie(cookies.authToken ? true : false)
     if (!cookies.authToken) {
       navigate('/')
     }
   }, [cookies])
-  
-  return (
-    <div className='page user-dashboard-page'>
-      <NavSlideOut
-        navState={navState}
-        navDispatch={navDispatch}
-      />
-      <Header
-        cornerIcon={BrainIcon}
-        navState={navState}
-        navDispatch={navDispatch}
-        title={"Welcome!"}
-      />
-      <main className='main user-dashboard-container'>
-        <div className='nav-icons-container'>
-          {navIcons.length > 0 && navIcons.map(navIcon => (
-            <Link
-              key={navIcon.pathName}
-              to={`/${navIcon.pathName}`}
-              className='user-dashboard-nav-icon'
-            >
-              <img
-                alt={navIcon.name}
-                className='icon-image'
-                title={navIcon.name}
-                src={navIcon.icon}
-              />
-              <p className='icon-text'>{navIcon.name}</p>
-            </Link>
-          ))}
-        </div>
-      </main>
-    </div>
-  )
+
+  if (isCookie) {  
+    return (
+      <div className='page user-dashboard-page'>
+        <NavSlideOut
+          navState={navState}
+          navDispatch={navDispatch}
+        />
+        <Header
+          cornerIcon={BrainIcon}
+          navState={navState}
+          navDispatch={navDispatch}
+          title={"Welcome!"}
+        />
+        <main className='main user-dashboard-container'>
+          <div className='nav-icons-container'>
+            {navIcons.length > 0 && navIcons.map(navIcon => (
+              <Link
+                key={navIcon.pathName}
+                to={`/${navIcon.pathName}`}
+                className='user-dashboard-nav-icon'
+              >
+                <img
+                  alt={navIcon.name}
+                  className='icon-image'
+                  title={navIcon.name}
+                  src={navIcon.icon}
+                />
+                <p className='icon-text'>{navIcon.name}</p>
+              </Link>
+            ))}
+          </div>
+        </main>
+      </div>
+    )
+  } else {
+    return (
+      < div className = 'page user-dashboard-page' >
+        <h2>Loading, please wait...</h2>
+      </div>
+    )
+  }
 }

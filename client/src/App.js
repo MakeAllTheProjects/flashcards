@@ -11,12 +11,13 @@ import './App.scss'
 import AppBackground from './components/app-background'
 
 export default function App () {	
+
 	return (
 		<AppBackground>
 			<div className='app-grid'>
 				<Router>
           <NotFound path='*' />
-					<Landing path='/' />
+					<Landing path='/'/>
 					<UserDashboard path='/home' />
 					<ViewCards path='/view-cards' />
 					<NotAvailable path='/view-decks'/>
