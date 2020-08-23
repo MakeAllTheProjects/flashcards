@@ -1,8 +1,7 @@
 import _ from 'lodash'
 import React, {
 	useState,
-	useEffect,
-	useContext
+	useEffect
 } from 'react'
 
 import './app-background.scss'
@@ -13,7 +12,9 @@ export default function AppBackground ({children}) {
 	const [windowRatio, setWindowRatio] = useState(defaultPaperRatio)
 	const [windowHeight, setWindowHeight] = useState(window.innerHeight)
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+	// eslint-disable-next-line
 	const [paperHeight, setPaperHeight] = useState(window.innerHeight)
+	// eslint-disable-next-line
 	const [paperWidth, setPaperWidth] = useState(window.innerWidth)
 	const [lines, setLines] = useState([])
 
@@ -42,7 +43,7 @@ export default function AppBackground ({children}) {
 	useEffect(() => {
 		window.addEventListener("resize", updateWindowSize)
 		return () => window.removeEventListener("resize", updateWindowSize)
-	})
+	}, [windowHeight, windowWidth])
 
 	useEffect(() => {
 		updatePaperSize()
@@ -52,6 +53,7 @@ export default function AppBackground ({children}) {
 			setPaperWidth(windowWidth)
 			setLineCount(33)
 		}
+	// eslint-disable-next-line
 	}, [windowRatio])
 
 	useEffect(() => {

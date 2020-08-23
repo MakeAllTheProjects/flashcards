@@ -16,7 +16,9 @@ export default function AuthForm () {
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
   const [errMessage, setErrorMessage] = useState("")
+  // eslint-disable-next-line
   const [cookies, setCookie] = useCookies(['authToken'])
+  // eslint-disable-next-line
   const [userState, userDispatch] = useReducer(userReducer)
 
   axios.defaults.timeout = 30000

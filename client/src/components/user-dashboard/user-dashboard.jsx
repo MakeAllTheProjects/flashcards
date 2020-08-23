@@ -19,7 +19,7 @@ import WriteCardIcon from '../../assets/svg/sketch-style/005-draw.svg'
 import WriteNotesIcon from '../../assets/svg/sketch-style/022-interface-2.svg'
 
 export default function UserDashboard () {
-  const [cookies, setCookie] = useCookies(['authToken'])
+  const [cookies] = useCookies(['authToken'])
   const [navState, navDispatch] = React.useReducer(navReducer)
 
   const navIcons = [
@@ -89,6 +89,7 @@ export default function UserDashboard () {
               className='user-dashboard-nav-icon'
             >
               <img
+                alt={navIcon.name}
                 className='icon-image'
                 title={navIcon.name}
                 src={navIcon.icon}

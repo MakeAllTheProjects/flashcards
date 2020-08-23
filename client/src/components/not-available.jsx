@@ -10,15 +10,15 @@ import NavSlideOut from '../components/nav-slide-out'
 import ComingSoonIcon from '../assets/svg/sticker-style/043-idea.svg'
 
 export default function NotAvailable () {
-  const [cookies, setCookie] = useCookies(['authToken'])
-  const [navState, navDispatch] = React.useReducer(navReducer)
+  const [ cookies ] = useCookies( [ 'authToken' ] )
+  const  [navState, navDispatch ] = React.useReducer( navReducer )
 
   React.useEffect(() => {
     navDispatch({ type: 'CLOSE' })
   }, [])
 
   React.useEffect(() => {
-    if (!cookies.authToken) {
+    if ( !cookies.authToken ) {
       navigate('/')
     }
   }, [cookies])

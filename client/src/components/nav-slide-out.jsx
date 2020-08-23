@@ -6,7 +6,9 @@ import userReducer from '../utils/user-reducer'
 import './nav-slide-out.scss'
 
 export default function NavSlideOut ({navState, navDispatch}) {
+  // eslint-disable-next-line
   const [cookies, setCookie, removeCookie] = useCookies(['authToken'])
+  // eslint-disable-next-line
   const [userState, userDispatch] = React.useReducer(userReducer)
 
   const handleLogout = () => {

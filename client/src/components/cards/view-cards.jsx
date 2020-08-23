@@ -12,7 +12,7 @@ import NavSlideOut from '../nav-slide-out'
 import ViewCardsIcon from '../../assets/svg/sketch-style/018-layers.svg'
 
 export default function ViewCards () {
-  const [cookies, setCookie] = useCookies(['authToken'])
+  const [cookies] = useCookies(['authToken'])
   const [navState, navDispatch] = React.useReducer(navReducer)
 
   React.useEffect(() => {
