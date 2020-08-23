@@ -11,12 +11,12 @@
   .nav-slide-out {
     position: absolute;
     top: 0;
-    right: -20px;
+    right: -2rem;
     @include centered-v;
-    height: 150px;
-    width: 150px;
+    height: 15rem;
+    width: 15rem;
     background-color: $stickynote-yellow;
-    box-shadow: rgba(0, 0,0, 0.2) 5px 5px 5px;
+    box-shadow: rgba(0, 0,0, 0.2) 0.5rem 0.5rem 0.5rem;
     transition: transform 0.4s ease 0.05s;
 
     p {

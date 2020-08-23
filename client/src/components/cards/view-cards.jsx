@@ -35,7 +35,7 @@ export default function ViewCards () {
         cornerIcon={ViewCardsIcon}
         navState={navState}
         navDispatch={navDispatch}
-        title={"You have x cards"}
+        title={"Card Library"}
       />
       <main className='main view-cards-container'>
         <Card/>

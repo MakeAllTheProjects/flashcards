@@ -28,18 +28,18 @@
 
     .menu-button-container {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 1rem;
+      right: 1rem;
       @include centered-v;
       transition: 0.5s all ease;
       z-index: 10;
 
       .menu-bar {
-        height: 3.5px;
-        width: 22px;
-        margin: 0 0 4px 0;
+        height: 0.35rem;
+        width: 2.2rem;
+        margin: 0 0 0.4rem 0;
         background-color: $pencil-dark;
-        border-radius: 15px;
+        border-radius: 1.5rem;
         transition: 0.5s all ease;
       }
 
@@ -50,7 +50,7 @@
       .menu-bar.open:first-child {
         transform: rotate(45deg);
         margin: 0 0 -11px 0;
-        width: 24px;
+        width: 2.4rem;
       }
 
       .menu-bar.open:nth-child(2) {
@@ -60,12 +60,12 @@
       .menu-bar.open:last-child {
         transform: rotate(-45deg);
         margin: 0 0 0 0;
-        width: 24px;
+        width: 2.4rem;
       }
     }
 
     .menu-button-container.open {
-      margin: 7.5px 0 0 -3px;
+      margin: 0.75rem 0 0 -0.3rem;
     }
   }
 }

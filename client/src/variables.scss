@@ -62,10 +62,10 @@ $stickynote-yellow: rgb(235, 245, 0);
 @mixin app-grid {
   z-index: 1;
   position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: grid;
   grid-template-columns: calc(10vh) 1fr;
   grid-template-rows: 13.5vh 1fr;

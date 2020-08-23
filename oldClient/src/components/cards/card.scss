@@ -2,17 +2,17 @@
 
 .card {
   @include centered-v;
-  padding: 15px;
+  padding: 1.5rem;
   margin: 1vh 3vw 1vh 3vw;
-  font-size: 15px;
+  font-size: 1.5rem;
   background-color: rgb(255, 255, 240);
-  box-shadow: rgba(50, 50, 50, 0.15) 1px 1px 1px,
-              inset rgba(75, 75, 75, 0.06) 1px 1px 1px;
+  box-shadow: rgba(50, 50, 50, 0.15) 0.1rem 0.1rem 0.1rem,
+              inset rgba(75, 75, 75, 0.06) 0.1rem 0.1rem 0.1rem;
   
   hr {
     margin: 3vh 0 3vh 0;
     width: 80%;
-    border: solid 1px black;
+    border: solid 0.1rem black;
   }
 
   p {
@@ -25,22 +25,22 @@
     width: 80%;
 
     .delete-card-button {
-      width: 145px;
-      margin: 16px 15px 0 15px;
+      width: 14.5rem;
+      margin: 1.6rem 1.5rem 0 1.5rem;
       background-color: rgb(255, 150, 150);
       color: rgb(100, 0, 0);
-      border-radius: 15px;
-      font-size: 14px;
+      border-radius: 1.5rem;
+      font-size: 1.4rem;
       cursor: pointer;
     }
 
     .edit-card-button {
-      margin: 16px 15px 0 15px;
-      width: 145px;
+      margin: 1.6rem 1.5rem 0 1.5rem;
+      width: 140.5rem;
       background-color: rgb(150, 255, 150);
       color: rgb(0, 100, 0);
-      border-radius: 15px;
-      font-size: 14px;
+      border-radius: 1.5rem;
+      font-size: 1.4rem;
       cursor: pointer;
     }
   }
@@ -53,10 +53,10 @@
     .card-tag {
       background-color: rgb(150, 150, 255);
       color: white;
-      padding: 5px 15px 5px 15px;
-      margin: 0 10px 0 10px;
-      border-radius: 10px;
-      font-size: 12px;
+      padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+      margin: 0 1rem 0 1rem;
+      border-radius: 1rem;
+      font-size: 1.2rem;
     }
   }
 }

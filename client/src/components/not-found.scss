@@ -1,7 +1,7 @@
 @import '../variables.scss';
 
-.page.not-found {
-  .main.not-found {
+.page.not-found-page {
+  .main.not-found-container {
     @include centered-v;
 
     h2 {
@@ -21,7 +21,7 @@
 
     .exclaimation-icon {
       height: 20vh;
-      margin: 0 -15px 20px -15px;
+      margin: 0 -1.5rem 2rem -1.5rem;
     }
   }
 }
