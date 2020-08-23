@@ -3,13 +3,36 @@ const {cardDB, tagDB} = require('../db/card-db')
 
 const cardRouter = express.Router()
 
-cardRouter.get('/', async (req, res, next) => {
+cardRouter.get('/user/:id', async (req, res, next) => {
 	try {
-		const cards = await cardDB.getCards(req.user.id)
+		const cardsData = await cardDB.getCards(req.user.id)
+
+		let cards = []
+
+		if (cardsData.length > 0) {
+			cards = cardsData.map(card => {
+				const cardTagsData = JSON.parse(card.tags)
+				let cardTags = []
+				if (cardTagsData.length > 0) {
+					cardTags = cardTagsData.map(tag => {
+						return {
+							id: tag.tagId,
+							name: tag.tagName
+						}
+					})
+				}
+				return {
+					id: card.id,
+					answer: card.answer,
+					question: card.question,
+					tags: cardTags
+				}
+			})
+		}
 
 		res.send({
 			success: true,
-			cards: cards || []
+			cards: cards
 		})
 	} catch (err) {
 		console.error(err)
