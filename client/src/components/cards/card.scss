@@ -1,37 +1,70 @@
 @import '../../variables.scss';
 
-.card-container {
-	height: 50vh;
-	width: calc(50vh);
-	min-height: 25rem;
-	min-width: 25rem;
-	margin: 1.5rem;
-	padding: 1.5rem;
-	font-size: 2rem;
-	font-weight: 900;
-	box-shadow: $pencil-light 0.2rem 0.2rem 0.5rem;
+.card {
+	perspective: 50rem;
+	margin: 0 0 0 0;
+
+	.card-content {
+		transition: transform 1s;
+		transform-style: preserve-3d;
+
+		.card-front,
+		.card-back {
+			@include centered-h;
+			width: calc(30vh);
+			height: 30vh;
+			font-size: 2rem;
+			font-weight: 900;
+			box-shadow: $pencil-extra-light 0.3rem 0.3rem 0.3rem;
+			backface-visibility: hidden;
+			transition: all 1s ease;
+		}
+
+		.card-back {
+			transform: rotateY(180deg);
+			margin: -100% 0 0 0;
+		}
+
+		.card-front:nth-child(1n),
+		.card-back:nth-child(1n),
+		.card-front:nth-child(2n),
+		.card-back:nth-child(2n) {
+			background-color: $yellow-stickynote;
+		}
+
+		.card-front:nth-child(3n),
+		.card-back:nth-child(3n),
+		.card-front:nth-child(4n),
+		.card-back:nth-child(4n) {
+			background-color: $green-stickynote;
+		}
+
+		.card-front:nth-child(5n),
+		.card-back:nth-child(5n),
+		.card-front:nth-child(6n),
+		.card-back:nth-child(6n) {
+			background-color: $orange-stickynote;
+		}
+
+		.card-front:nth-child(7n),
+		.card-back:nth-child(7n),
+		.card-front:nth-child(8n),
+		.card-back:nth-child(8n) {
+			background-color: $blue-stickynote;
+		}
+
+		.card-front:nth-child(9n),
+		.card-back:nth-child(9n),
+		.card-front:nth-child(10n),
+		.card-back:nth-child(10n) {
+			background-color: $pink-stickynote;
+		}
+	}
 }
 
-.card-container:nth-child(1n) {
-	background-color: $pink-stickynote;
-}
-
-.card-container:nth-child(2n) {
-	background-color: $green-stickynote;
-}
-
-.card-container:nth-child(3n) {
-	background-color: $orange-stickynote;
-}
-
-.card-container:nth-child(4n) {
-	background-color: $blue-stickynote;
-}
-
-.card-container:nth-child(5n) {
-	background-color: $yellow-stickynote;
-}
-
-.card-container:hover {
-	filter: drop-shadow($pencil-extra-light 0.3rem 0.3rem 0.1rem);
+.card.flipped {
+	.card-content {
+		transform: rotateY(-180deg);
+		transition: transform 0.5s;
+	}
 }
