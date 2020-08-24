@@ -29,21 +29,21 @@ export default function UserDashboard () {
       name: 'View Cards',
       pathName: 'view-cards'
     },{
-      icon: ViewDecksIcon,
-      name: 'View Decks',
-      pathName: 'view-decks'
-    },{
-      icon: ReadNotesIcon,
-      name: 'Read Notes',
-      pathName: 'read-notes'
-    },{
       icon: WriteCardIcon,
       name: 'Write Card',
       pathName: 'write-card'
     },{
+      icon: ViewDecksIcon,
+      name: 'View Decks',
+      pathName: 'view-decks'
+    },{
       icon: CreateDecksIcon,
       name: 'Create Deck',
       pathName: 'create-deck'
+    },{
+      icon: ReadNotesIcon,
+      name: 'Read Notes',
+      pathName: 'read-notes'
     },{
       icon: WriteNotesIcon,
       name: 'Write Note',
@@ -84,7 +84,12 @@ export default function UserDashboard () {
           title={"Welcome!"}
         />
         <main className='main user-dashboard-container'>
-          <div className='nav-icons-container'>
+          <div
+            className='nav-icons-container'
+            style={{
+              width: `calc(${(navIcons.length / 2) * 25}vh)`
+            }}
+          >
             {navIcons.length > 0 && navIcons.map(navIcon => (
               <Link
                 key={navIcon.pathName}

@@ -8,8 +8,8 @@
     .nav-icons-container {
       @include centered-h;
       flex-wrap: wrap;
-      height: 80%;
-      width: 90%;
+      max-height: 80%;
+      max-width: 90%;
       
       .user-dashboard-nav-icon {
         display: grid;
