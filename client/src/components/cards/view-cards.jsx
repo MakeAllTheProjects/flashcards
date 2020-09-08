@@ -9,6 +9,7 @@ import './view-cards.scss'
 import Card from './card'
 import Header from '../header'
 import MenuSlideOut from '../menu-slide-out'
+import NavBar from '../nav-bar'
 
 import CreateCardIcon from '../../assets/svg/sketch-style/089-pen.svg'
 import FilterIcon from '../../assets/svg/sketch-style/066-filter.svg'
@@ -52,6 +53,7 @@ export default function ViewCards () {
         navState={navState}
         navDispatch={navDispatch}
       />
+      <NavBar/>
       <Header
         cornerIcon={ViewCardsIcon}
         navState={navState}
