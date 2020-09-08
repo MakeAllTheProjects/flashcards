@@ -37,10 +37,10 @@ export default function NotAvailable () {
         cornerIcon={ComingSoonIcon}
         navState={navState}
         navDispatch={navDispatch}
-        title={"This feature isn't available yet..."}
+        title={"Wait for it..."}
       />
       <main className='main not-available-container'>
-        Please check back at a later dated
+        This feature is not available yet. Please check back at a later date.
       </main>
     </div>
   )

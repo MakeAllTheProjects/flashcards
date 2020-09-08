@@ -1,6 +1,7 @@
 import React from 'react'
 import { Router } from '@reach/router'
 
+import CreateCardForm from './components/cards/create-card-form'
 import Landing from './components/landing/landing'
 import NotAvailable from './components/not-available'
 import NotFound from './components/not-found'
@@ -22,8 +23,8 @@ export default function App () {
 					<ViewCards path='/view-cards' />
 					<NotAvailable path='/view-decks'/>
 					<NotAvailable path='/read-notes'/>
-					<NotAvailable path='/write-card'/>
-					<NotAvailable path='/create-decks'/>
+					<CreateCardForm path='/write-card'/>
+					<NotAvailable path='/create-deck'/>
 					<NotAvailable path='/write-note'/>
 					<NotAvailable path='/study'/>
 					<NotAvailable path='/study-stats'/>

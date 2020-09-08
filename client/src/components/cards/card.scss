@@ -15,50 +15,22 @@
 			backface-visibility: hidden;
 			cursor: pointer;
 			margin: 2rem;
+			padding: 2rem;
+			text-align: center;
 
 			@include phone-only {
 				@include card-style(calc(35vh));
 			}
 		}
 
+		.card-front {
+			border-radius: 3rem 0 3rem 0;
+		}
+
 		.card-back {
 			transform: rotateY(180deg);
 			margin: calc(-100% + 2rem) 0 0 2rem;
-		}
-
-		.card-front:nth-child(1n),
-		.card-back:nth-child(1n),
-		.card-front:nth-child(2n),
-		.card-back:nth-child(2n) {
-			background-color: $yellow-stickynote;
-		}
-
-		.card-front:nth-child(3n),
-		.card-back:nth-child(3n),
-		.card-front:nth-child(4n),
-		.card-back:nth-child(4n) {
-			background-color: $green-stickynote;
-		}
-
-		.card-front:nth-child(5n),
-		.card-back:nth-child(5n),
-		.card-front:nth-child(6n),
-		.card-back:nth-child(6n) {
-			background-color: $orange-stickynote;
-		}
-
-		.card-front:nth-child(7n),
-		.card-back:nth-child(7n),
-		.card-front:nth-child(8n),
-		.card-back:nth-child(8n) {
-			background-color: $blue-stickynote;
-		}
-
-		.card-front:nth-child(9n),
-		.card-back:nth-child(9n),
-		.card-front:nth-child(10n),
-		.card-back:nth-child(10n) {
-			background-color: $pink-stickynote;
+			border-radius: 0 3rem 0 3rem;
 		}
 	}
 }
@@ -67,5 +39,40 @@
 	.card-content {
 		transform: rotateY(-180deg);
 		transition: transform 0.5s;
+	}
+}
+
+.card:nth-child(1n) {
+	.card-back,
+	.card-front {
+		background-color: $blue-stickynote;
+	}
+}
+
+.card:nth-child(2n) {
+	.card-back,
+	.card-front {
+		background-color: $green-stickynote;
+	}
+}
+
+.card:nth-child(3n) {
+	.card-back,
+	.card-front {
+		background-color: $yellow-stickynote;
+	}
+}
+
+.card:nth-child(4n) {
+	.card-back,
+	.card-front {
+		background-color: $orange-stickynote;
+	}
+}
+
+.card:nth-child(5n) {
+	.card-back,
+	.card-front {
+		background-color: $pink-stickynote;
 	}
 }

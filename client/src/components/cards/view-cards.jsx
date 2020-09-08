@@ -6,14 +6,12 @@ import { useCookies } from 'react-cookie'
 import navReducer from '../../utils/nav-reducer'
 
 import './view-cards.scss'
+
 import Card from './card'
-import CreateCardForm from './create-card-form'
 import Header from '../header'
 import MenuSlideOut from '../menu-slide-out'
 import NavBar from '../nav-bar'
 
-import CreateCardIcon from '../../assets/svg/sketch-style/089-pen.svg'
-import FilterIcon from '../../assets/svg/sketch-style/066-filter.svg'
 import ViewCardsIcon from '../../assets/svg/sketch-style/018-layers.svg'
 
 export default function ViewCards () {
@@ -64,24 +62,6 @@ export default function ViewCards () {
         title={"Card Library"}
       />
       <main className='main view-cards-container'>
-        {!createCard && cards.length > 0 && (
-          <div className="card-list-controls">
-            {/* <img
-              alt="filter"
-              className="control-icon"
-              title="filter cards"
-              src={FilterIcon}
-            /> */}
-            <img
-              alt="create"
-              className="control-icon"
-              title="create card"
-              src={CreateCardIcon}
-              onClick={() => setCreateCard(!createCard)}
-            />
-          </div>
-        )}
-
         {!createCard && (
           cards.length > 0
             ? (
@@ -98,15 +78,6 @@ export default function ViewCards () {
             )
           )
         }
-
-        {createCard && (
-          <CreateCardForm 
-            createCard={createCard}
-            setCreateCard={setCreateCard}
-            cardsAxios={cardsAxios}
-            setCards={setCards}
-          />
-        )}
       </main>
     </div>
   )
