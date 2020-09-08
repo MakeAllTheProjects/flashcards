@@ -2,64 +2,6 @@
 
 .user-dashboard-page {
   .user-dashboard-container {
-    @include centered-v;
-    padding: 0 6vw 0 0;
-
-    .nav-icons-container {
-      @include centered-h;
-      flex-wrap: wrap;
-      max-height: 80%;
-      max-width: 90%;
-      
-      .user-dashboard-nav-icon {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        height: 10vh;
-        width: calc(10vh);        
-        cursor: pointer;
-        text-decoration: none;
-        margin: 5rem;
-
-        .icon-image {
-          grid-column: 1;
-          grid-row: 1;
-          z-index: 0;
-          height: 15vh;
-        }
-
-        .icon-text {
-          visibility: hidden;
-          text-shadow:  -2px -2px $pencil-dark,
-                        2px -2px $pencil-dark,
-                        -2px 2px $pencil-dark,
-                        2px 2px $pencil-dark;
-        }
-      }
-
-      .user-dashboard-nav-icon:hover {
-        filter: drop-shadow($highlighter-yellow 3px 3px 10px);
-        transform: all 1s ease;
-
-        .icon-text {
-          visibility: visible;
-          @include centered-v;
-          grid-column: 1;
-          grid-row: 1;
-          height: 100%;
-          width: 100%;
-          z-index: 1;
-          font-size: calc(4vh);
-          filter: drop-shadow(rgb(0, 0, 0) 1px 1px 1px)
-                  drop-shadow(rgba(0, 0, 0, 1) 1px 1px 10px);
-          color: white;
-          text-align: center;
-          line-height: 110%;
-        }
-      }
-    }    
+    margin: 0.75rem 3rem 0 0;
   }
 }

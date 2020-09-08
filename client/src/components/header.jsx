@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from '@reach/router'
 
 import './header.scss'
 
@@ -15,18 +16,18 @@ export default function Header ({title, cornerIcon, navState, navDispatch}) {
         <h1 className='header-title'>{title}</h1>
       </div>
       {window.location.pathname !== '/' &&
-          <div
-            className={navState && navState.navOpen ? 'menu-button-container open' : 'menu-button-container'}
-            onClick={() => navDispatch({type: 'TOGGLE', navOpen: !navState.navOpen})}
-          >
-            <div className={navState && navState.navOpen ? 'menu-bar open' :'menu-bar'}/>
-            <div className={navState && navState.navOpen ? 'menu-bar open' : 'menu-bar'} />
-            <div className={navState && navState.navOpen ? 'menu-bar open' : 'menu-bar'} />
-          </div>
-        }
+        <div
+          className={navState && navState.navOpen ? 'menu-button-container open' : 'menu-button-container'}
+          onClick={() => navDispatch({type: 'TOGGLE', navOpen: !navState.navOpen})}
+        >
+          <div className={navState && navState.navOpen ? 'menu-bar open' :'menu-bar'}/>
+          <div className={navState && navState.navOpen ? 'menu-bar open' : 'menu-bar'} />
+          <div className={navState && navState.navOpen ? 'menu-bar open' : 'menu-bar'} />
+        </div>
+      }
       {window.location.pathname !== '/' && window.location.pathname !== '/home' &&
-          <HomeButton/>
-        }
+        <HomeButton/>
+      }
     </header>
   )
 }

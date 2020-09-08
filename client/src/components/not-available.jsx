@@ -6,7 +6,7 @@ import navReducer from '../utils/nav-reducer'
 
 import './not-available.scss'
 import Header from '../components/header'
-import NavSlideOut from '../components/nav-slide-out'
+import NavSlideOut from '../components/menu-slide-out'
 import ComingSoonIcon from '../assets/svg/sticker-style/043-idea.svg'
 
 export default function NotAvailable () {

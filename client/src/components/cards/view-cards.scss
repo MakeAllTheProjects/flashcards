@@ -2,11 +2,30 @@
 
 .page.view-cards-page {
 	.main.view-cards-container {
+		position: relative;
 		@include centered-h;
 		flex-wrap: wrap;
 		margin: 1.5rem 0.5rem 0.5rem 0;
 		padding: 0 0 5rem 0;
 		overflow: auto;
 		@include thin-scroll-bar();
+
+		.card-list-controls {
+			position: absolute;
+			top: 0.5rem;
+			left: 0.5rem;
+			right: 0.5rem;
+			@include centered-h;
+
+			.control-icon {
+				height: 8vh;
+				filter: opacity(55%);
+				transition: all ease 0.25s;
+			}
+
+			.control-icon:hover {
+				filter: opacity(75%);
+			}
+		}
 	}
 }

@@ -1,0 +1,71 @@
+@import '../variables.scss';
+
+.nav-bar {
+	position: fixed;
+	top: 0.5rem;
+	right: 7.5rem;
+	bottom: auto;
+	left: auto;
+	@include centered-h;
+	justify-content: space-between;
+	height: 1vh;
+	width: calc(8vh + 32rem);
+
+	@include tablet-landscape-down {
+		top: 92vh;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		height: 8vh;
+		width: 100%;
+		padding: 0 10rem 2rem 10rem;
+		background-color: $highlighter-blue;
+	}
+
+	.nav-icon {
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: auto;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		height: 1vh;
+		width: calc(1vh);        
+		cursor: pointer;
+		text-decoration: none;
+
+		.icon-image {
+			grid-column: 1;
+			grid-row: 1;
+			z-index: 0;
+			height: 5vh;
+		}
+
+		.icon-text {
+			visibility: hidden;
+			@include centered-v;
+			grid-column: 1;
+			grid-row: 1;
+			height: 100%;
+			width: 100%;
+			z-index: 1;
+			font-size: calc(2vh);
+			font-weight: 900;
+			filter: drop-shadow(rgb(0, 0, 0) 0.1rem 0.1rem 0.1rem)
+							drop-shadow(rgb(0, 0, 0) 0.3rem 0.3rem 0.3rem)
+							drop-shadow(rgb(0, 0, 0) -0.3rem -0.3rem 0.3rem);
+			color: white;
+			text-align: center;
+			line-height: 110%;
+		}
+	}
+    
+	.nav-icon:hover {
+		filter: drop-shadow($highlighter-yellow 3px 3px 10px);
+		transform: all 1s ease;
+
+		.icon-text {
+			visibility: visible;
+		}
+	}
+}

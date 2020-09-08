@@ -8,8 +8,10 @@ import navReducer from '../../utils/nav-reducer'
 import './view-cards.scss'
 import Card from './card'
 import Header from '../header'
-import NavSlideOut from '../nav-slide-out'
+import MenuSlideOut from '../menu-slide-out'
 
+import CreateCardIcon from '../../assets/svg/sketch-style/089-pen.svg'
+import FilterIcon from '../../assets/svg/sketch-style/066-filter.svg'
 import ViewCardsIcon from '../../assets/svg/sketch-style/018-layers.svg'
 
 export default function ViewCards () {
@@ -46,7 +48,7 @@ export default function ViewCards () {
 
   return (
     <div className='page view-cards-page'>
-      <NavSlideOut
+      <MenuSlideOut
         navState={navState}
         navDispatch={navDispatch}
       />
@@ -57,6 +59,22 @@ export default function ViewCards () {
         title={"Card Library"}
       />
       <main className='main view-cards-container'>
+        {cards.length > 0 && (
+          <div className="card-list-controls">
+            {/* <img
+              alt="filter"
+              className="control-icon"
+              title="filter cards"
+              src={FilterIcon}
+            /> */}
+            <img
+              alt="create"
+              className="control-icon"
+              title="create card"
+              src={CreateCardIcon}
+            />
+          </div>
+        )}
         {cards.length > 0
           ? (
             cards.map(card => (

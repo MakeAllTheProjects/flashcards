@@ -32,6 +32,13 @@
       @include font-marker;
       font-size: 5rem;
       color: $pencil-dark;
+      width: 100%;
+      padding-left: 3rem;
+      text-align: left;
+
+      @include tablet-landscape-down {
+        font-size: 4rem;
+      }
     }
   }
 

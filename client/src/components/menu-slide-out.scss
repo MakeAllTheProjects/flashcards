@@ -1,6 +1,6 @@
 @import '../variables.scss';
 
-.nav-slide-out-container {
+.menu-slide-out-container {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -8,7 +8,7 @@
   @include level-one;
   transition: right 0.3s ease;
 
-  .nav-slide-out {
+  .menu-slide-out {
     position: absolute;
     top: 0;
     right: -2rem;
@@ -24,23 +24,23 @@
     }
   }
 
-  .nav-slide-out:nth-child(1n) {
+  .menu-slide-out:nth-child(1n) {
     background-color: $yellow-stickynote
   }
 
-  .nav-slide-out:nth-child(2n) {
+  .menu-slide-out:nth-child(2n) {
     background-color: $blue-stickynote
   }
 
-  .nav-slide-out:nth-child(3n) {
+  .menu-slide-out:nth-child(3n) {
     background-color: $pink-stickynote
   }
 
-  .nav-slide-out:nth-child(4n) {
+  .menu-slide-out:nth-child(4n) {
     background-color: $green-stickynote
   }
 
-  .nav-slide-out:nth-child(5n) {
+  .menu-slide-out:nth-child(5n) {
     background-color: $orange-stickynote
   }
 }

@@ -4,9 +4,10 @@ import navReducer from '../utils/nav-reducer'
 
 import './not-found.scss'
 import Header from './header'
-import NavSlideOut from './nav-slide-out'
+import NavSlideOut from './menu-slide-out'
 import OhNoIcon from '../assets/svg/sticker-style/002-human.svg'
 import ExclaimIcon from '../assets/svg/sticker-style/130-mark-1.svg'
+import NavBar from './nav-bar'
 
 export default function NotFound () {
   const [navState, navDispatch] = React.useReducer(navReducer)

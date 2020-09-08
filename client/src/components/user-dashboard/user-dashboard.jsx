@@ -6,7 +6,8 @@ import navReducer from '../../utils/nav-reducer'
 
 import './user-dashboard.scss'
 import Header from '../header'
-import NavSlideOut from '../nav-slide-out'
+import MenuSlideOut from '../menu-slide-out'
+import NavBar from '../nav-bar'
 
 import BrainIcon from '../../assets/svg/sticker-style/045-brain-2.svg'
 import CreateDecksIcon from '../../assets/svg/sketch-style/014-project-plan.svg'
@@ -73,39 +74,19 @@ export default function UserDashboard () {
   if (isCookie) {  
     return (
       <div className='page user-dashboard-page'>
-        <NavSlideOut
+        <MenuSlideOut
           navState={navState}
           navDispatch={navDispatch}
         />
+        <NavBar/>
         <Header
           cornerIcon={BrainIcon}
           navState={navState}
           navDispatch={navDispatch}
-          title={"Welcome!"}
+          title={""}
         />
         <main className='main user-dashboard-container'>
-          <div
-            className='nav-icons-container'
-            style={{
-              width: `calc(${(navIcons.length / 2) * 25}vh)`
-            }}
-          >
-            {navIcons.length > 0 && navIcons.map(navIcon => (
-              <Link
-                key={navIcon.pathName}
-                to={`/${navIcon.pathName}`}
-                className='user-dashboard-nav-icon'
-              >
-                <img
-                  alt={navIcon.name}
-                  className='icon-image'
-                  title={navIcon.name}
-                  src={navIcon.icon}
-                />
-                <p className='icon-text'>{navIcon.name}</p>
-              </Link>
-            ))}
-          </div>
+
         </main>
       </div>
     )

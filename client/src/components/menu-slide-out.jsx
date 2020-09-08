@@ -3,9 +3,9 @@ import { useCookies } from 'react-cookie'
 
 import userReducer from '../utils/user-reducer'
 
-import './nav-slide-out.scss'
+import './menu-slide-out.scss'
 
-export default function NavSlideOut ({navState, navDispatch}) {
+export default function MenuSlideOut ({navState, navDispatch}) {
   // eslint-disable-next-line
   const [cookies, setCookie, removeCookie] = useCookies(['authToken'])
   // eslint-disable-next-line
@@ -20,11 +20,11 @@ export default function NavSlideOut ({navState, navDispatch}) {
 
   return (
     <div
-      className='nav-slide-out-container'
+      className='menu-slide-out-container'
       style={{right: navState && navState.navOpen ? '0' : '-100%'}}
     >
       <nav
-        className='nav-slide-out'
+        className='menu-slide-out'
         style={{ transform: navState && navState.navOpen ? 'rotate(-17.5deg) skew(0)' : 'rotate(0) skew(25deg, -25deg)'}}
       >
         <p onClick={() => handleLogout()}>LOGOUT</p>
