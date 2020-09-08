@@ -18,7 +18,7 @@
 		bottom: 0;
 		height: 8vh;
 		width: 100%;
-		padding: 0 10rem 2rem 10rem;
+		padding: 0 8vh 2rem 8vh;
 		background-color: $highlighter-blue;
 	}
 
@@ -33,6 +33,10 @@
 		width: calc(1vh);        
 		cursor: pointer;
 		text-decoration: none;
+
+		@include phone-only {
+			margin: 0 4vw 0 4vw; 
+		}
 
 		.icon-image {
 			grid-column: 1;

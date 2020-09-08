@@ -39,6 +39,10 @@
       @include tablet-landscape-down {
         font-size: 4rem;
       }
+
+      @include phone-only {
+        font-size: 4vh;
+      }
     }
   }
 

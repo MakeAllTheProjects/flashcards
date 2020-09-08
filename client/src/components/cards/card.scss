@@ -11,19 +11,19 @@
 		.card-front,
 		.card-back {
 			@include centered-h;
-			width: calc(30vh);
-			height: 30vh;
-			font-size: 2rem;
-			font-weight: 900;
-			box-shadow: $pencil-extra-light 0.3rem 0.3rem 0.3rem;
+			@include card-style (calc(30vh));
 			backface-visibility: hidden;
-			transition: all 1s ease;
 			cursor: pointer;
+			margin: 2rem;
+
+			@include phone-only {
+				@include card-style(calc(35vh));
+			}
 		}
 
 		.card-back {
 			transform: rotateY(180deg);
-			margin: -100% 0 0 0;
+			margin: calc(-100% + 2rem) 0 0 2rem;
 		}
 
 		.card-front:nth-child(1n),

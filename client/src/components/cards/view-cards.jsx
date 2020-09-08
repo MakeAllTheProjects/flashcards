@@ -7,6 +7,7 @@ import navReducer from '../../utils/nav-reducer'
 
 import './view-cards.scss'
 import Card from './card'
+import CreateCardForm from './create-card-form'
 import Header from '../header'
 import MenuSlideOut from '../menu-slide-out'
 import NavBar from '../nav-bar'
@@ -20,6 +21,7 @@ export default function ViewCards () {
   const [navState, navDispatch] = React.useReducer(navReducer)
   const [errorMessage, setErrorMessage] = React.useState('')
   const [cards, setCards] = React.useState([])
+  const [createCard, setCreateCard] = React.useState(false)
 
   const cardsAxios = axios.create({
     headers: {
@@ -27,10 +29,7 @@ export default function ViewCards () {
     }
   })
 
-  React.useEffect(() => {
-
-    navDispatch({ type: 'CLOSE' })
-  
+  const fetchCards = () => {
     cardsAxios.get(`/api/cards/user/${cookies.authToken.id}`)
       .then(response => {
         setCards(response.data.cards)
@@ -38,7 +37,11 @@ export default function ViewCards () {
         console.error(err)
         setErrorMessage('Server error. Please try again later.')
       })
-  
+  }
+
+  React.useEffect(() => {
+    navDispatch({ type: 'CLOSE' })
+    fetchCards()  
   }, [])
 
   React.useEffect(() => {
@@ -61,7 +64,7 @@ export default function ViewCards () {
         title={"Card Library"}
       />
       <main className='main view-cards-container'>
-        {cards.length > 0 && (
+        {!createCard && cards.length > 0 && (
           <div className="card-list-controls">
             {/* <img
               alt="filter"
@@ -74,23 +77,36 @@ export default function ViewCards () {
               className="control-icon"
               title="create card"
               src={CreateCardIcon}
+              onClick={() => setCreateCard(!createCard)}
             />
           </div>
         )}
-        {cards.length > 0
-          ? (
-            cards.map(card => (
-              <Card
-                key={card.id}
-                answer={card.answer}
-                question={card.question}
-                tags={card.tags}
-              />
-            ))
-          ) : (
-            <p>No cards found</p>
+
+        {!createCard && (
+          cards.length > 0
+            ? (
+              cards.map(card => (
+                <Card
+                  key={card.id}
+                  answer={card.answer}
+                  question={card.question}
+                  tags={card.tags}
+                />
+              ))
+            ) : (
+              <p>No cards found</p>
+            )
           )
         }
+
+        {createCard && (
+          <CreateCardForm 
+            createCard={createCard}
+            setCreateCard={setCreateCard}
+            cardsAxios={cardsAxios}
+            setCards={setCards}
+          />
+        )}
       </main>
     </div>
   )

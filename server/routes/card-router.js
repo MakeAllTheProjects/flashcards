@@ -44,7 +44,7 @@ cardRouter.get('/user/:id', async (req, res, next) => {
 	}
 })
 
-cardRouter.post('/create-card', async (req, res, next) => {
+cardRouter.post('/create', async (req, res, next) => {
 	try {
 		const newCard = await cardDB.createCard(req.user.id, req.body.question, req.body.answer)
 		

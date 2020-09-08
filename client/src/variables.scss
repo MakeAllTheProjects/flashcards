@@ -154,3 +154,12 @@ $header-height: calc(10vh);
     border-radius: 5rem;
   }
 }
+
+@mixin card-style ($cardHeight) {
+  width: $cardHeight;
+  height: $cardHeight;
+  font-size: 2rem;
+  font-weight: 900;
+  box-shadow: $pencil-extra-light 0.3rem 0.3rem 0.3rem;
+  transition: all 1s ease;
+}

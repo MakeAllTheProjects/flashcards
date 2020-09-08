@@ -10,17 +10,29 @@
 		overflow: auto;
 		@include thin-scroll-bar();
 
+		@include phone-only {
+			@include no-scroll-bar();
+		}
+
 		.card-list-controls {
 			position: absolute;
-			top: 0.5rem;
+			top: 1.5rem;
 			left: 0.5rem;
 			right: 0.5rem;
 			@include centered-h;
+
+			@include phone-only {
+				top: 0.5rem;
+			}
 
 			.control-icon {
 				height: 8vh;
 				filter: opacity(55%);
 				transition: all ease 0.25s;
+
+				@include phone-only {
+					height: 5vh;
+				}
 			}
 
 			.control-icon:hover {
