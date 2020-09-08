@@ -6,18 +6,21 @@ import navReducer from '../utils/nav-reducer'
 
 import './not-available.scss'
 import Header from '../components/header'
-import NavSlideOut from '../components/menu-slide-out'
+import MenuSlideOut from '../components/menu-slide-out'
+import NavBar from '../components/nav-bar'
 import ComingSoonIcon from '../assets/svg/sticker-style/043-idea.svg'
 
 export default function NotAvailable () {
   const [ cookies ] = useCookies( [ 'authToken' ] )
-  const  [navState, navDispatch ] = React.useReducer( navReducer )
+  const [navState, navDispatch ] = React.useReducer( navReducer )
+  const [isCookie, setIsCookie] = React.useState(false)
 
   React.useEffect(() => {
     navDispatch({ type: 'CLOSE' })
   }, [])
 
   React.useEffect(() => {
+    setIsCookie(cookies.authToken ? true : false)
     if ( !cookies.authToken ) {
       navigate('/')
     }
@@ -25,10 +28,11 @@ export default function NotAvailable () {
 
   return (
     <div className='page not-available-page'>
-      <NavSlideOut
+      <MenuSlideOut
         navState={navState}
         navDispatch={navDispatch}
       />
+      {isCookie && <NavBar/>}
       <Header
         cornerIcon={ComingSoonIcon}
         navState={navState}
