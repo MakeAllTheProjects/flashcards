@@ -39,11 +39,11 @@ $header-height: calc(10vh);
 }
 
 @mixin tablet-landscape-up {
-  @media (min-width: 900px) { @content };
+  @media (min-width: 1115px) { @content };
 }
 
 @mixin tablet-landscape-down {
-  @media (max-width: 900px) { @content };
+  @media (max-width: 1115px) { @content };
 }
 
 @mixin small-monitor-up {
