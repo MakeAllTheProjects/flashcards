@@ -18,7 +18,6 @@ export default function Card (props) {
   })
 
   const handleDeleteCard = () => {
-    console.log(props.cardId)
     cardsAxios.delete(`/api/cards/${props.cardId}`)
       .then(response => {
         props.setCards(response.data.cards)

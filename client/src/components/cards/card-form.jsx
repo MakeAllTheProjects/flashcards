@@ -23,9 +23,6 @@ export default function CardForm (props) {
 		formAction(question, answer)
 	}
 
-	console.log(question)
-	console.log(answer)
-
 	return (
 		<main className="main create-card-container">
 			{errorMessage && <p className="error-message">{errorMessage}</p>}

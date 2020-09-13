@@ -94,12 +94,6 @@ export default function ViewCards () {
     }
   }, [cookies])
 
-  console.log("currentId: ", currentId)
-  console.log("currentQuestion: ", currentQuestion)
-  console.log("currentAnswer: ", currentAnswer)
-  console.log("newQuestion: ", newQuestion)
-  console.log("newAnswer: ", newAnswer)
-
   return (
     <div className='page view-cards-page'>
       <MenuSlideOut
