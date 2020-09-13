@@ -6,6 +6,8 @@ import './card.scss'
 
 import DeleteIcon from '../../assets/svg/sketch-style/delete.svg'
 import EditIcon from '../../assets/svg/sketch-style/pencil.svg'
+import FailureIcon from '../../assets/svg/sticker-style/038-delete.svg'
+import SuccessIcon from '../../assets/svg/sticker-style/039-interface-6.svg'
 
 export default function Card (props) {
   const [isFlipped, setIsFlipped] = React.useState(false)
@@ -66,6 +68,20 @@ export default function Card (props) {
         </div>
         <div className="card-back">
           {props.answer}
+          <div className="attempt-panel">
+            <img
+              alt="failed attempt"
+              className="attempt-icon failure"
+              src={FailureIcon}
+              title="Got the answer wrong!"
+            />
+            <img
+              alt="success attempt"
+              className="attempt-icon success"
+              src={SuccessIcon}
+              title="Got the answer right!"
+            />
+          </div>
         </div>
       </div>
     </div>

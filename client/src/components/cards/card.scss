@@ -46,9 +46,29 @@
 		}
 
 		.card-back {
+			position: relative;
 			transform: rotateY(180deg);
 			margin: calc(-100% + 2rem) 0 0 2rem;
 			border-radius: 0 3rem 0 3rem;
+
+			.attempt-panel {
+				position: absolute;
+				bottom: 1rem;
+				left: 1.5rem;
+				right: 1rem;
+				@include centered-h;
+				justify-content: space-between;
+
+				.attempt-icon {
+					height: 3rem;
+					filter: grayscale(100%);
+					transition: 0.5s all ease;
+				}
+
+				.attempt-icon:hover {
+					filter: grayscale(0);
+				}
+			}
 		}
 	}
 }
