@@ -20,7 +20,8 @@
 		height: 8vh;
 		width: 100%;
 		@include centered-h;
-		justify-content: space-between;
+		justify-content: space-around;
+		// justify-content: space-between;
 		padding: 0 8vh 2rem 8vh;
 		background-color: $highlighter-blue;
 	}

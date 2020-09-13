@@ -18,7 +18,8 @@ export default function App () {
 			<div className='app-grid'>
 				<Router>
           <NotFound path='*' />
-					<Landing path='/'/>
+					{/* <Landing path='/'/> */}
+					<ViewCards path='/' />
 					<UserDashboard path='/home' />
 					<ViewCards path='/view-cards' />
 					<NotAvailable path='/view-decks'/>

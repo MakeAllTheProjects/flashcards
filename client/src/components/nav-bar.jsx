@@ -22,31 +22,32 @@ export default function NavBar () {
 			icon: WriteCardIcon,
 			name: 'Write Card',
 			pathName: 'write-card'
-		}, {
-			icon: ViewDecksIcon,
-			name: 'View Decks',
-			pathName: 'view-decks'
-		}, {
-			icon: CreateDecksIcon,
-			name: 'Create Deck',
-			pathName: 'create-deck'
-		}, {
-			icon: ReadNotesIcon,
-			name: 'Read Notes',
-			pathName: 'read-notes'
-		}, {
-			icon: WriteNotesIcon,
-			name: 'Write Note',
-			pathName: 'write-note'
-		}, {
-			icon: StudyIcon,
-			name: 'Study',
-			pathName: 'study'
-		}, {
-			icon: StudyStatsIcon,
-			name: 'Study Stats',
-			pathName: 'study-stats'
 		}
+		// }, {
+		// 	icon: ViewDecksIcon,
+		// 	name: 'View Decks',
+		// 	pathName: 'view-decks'
+		// }, {
+		// 	icon: CreateDecksIcon,
+		// 	name: 'Create Deck',
+		// 	pathName: 'create-deck'
+		// }, {
+		// 	icon: ReadNotesIcon,
+		// 	name: 'Read Notes',
+		// 	pathName: 'read-notes'
+		// }, {
+		// 	icon: WriteNotesIcon,
+		// 	name: 'Write Note',
+		// 	pathName: 'write-note'
+		// }, {
+		// 	icon: StudyIcon,
+		// 	name: 'Study',
+		// 	pathName: 'study'
+		// }, {
+		// 	icon: StudyStatsIcon,
+		// 	name: 'Study Stats',
+		// 	pathName: 'study-stats'
+		// }
 	]
 	
 	return (
