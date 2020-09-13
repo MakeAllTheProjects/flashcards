@@ -4,13 +4,14 @@ import { Link } from '@reach/router'
 import './header.scss'
 
 import DefaultLogo from '../assets/logo.png'
-import HomeButton from './home-button'
 
 export default function Header ({title, cornerIcon, navState, navDispatch}) {
   return (
     <header className='app-header'>
       <div className='icon-container'>
-        <img src={cornerIcon ? cornerIcon : DefaultLogo} className='header-logo' alt=''/>
+        <Link to="/">
+          <img src={cornerIcon ? cornerIcon : DefaultLogo} className='header-logo' alt=''/>
+        </Link>
       </div>
       <div className='header-main'>
         <h1 className='header-title'>{title}</h1>
@@ -24,9 +25,6 @@ export default function Header ({title, cornerIcon, navState, navDispatch}) {
           <div className={navState && navState.navOpen ? 'menu-bar open' : 'menu-bar'} />
           <div className={navState && navState.navOpen ? 'menu-bar open' : 'menu-bar'} />
         </div>
-      }
-      {window.location.pathname !== '/' && window.location.pathname !== '/home' &&
-        <HomeButton/>
       }
     </header>
   )

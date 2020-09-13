@@ -6,7 +6,8 @@
 	right: 7.5rem;
 	bottom: auto;
 	left: auto;
-	@include centered-h;
+	display: flex;
+	align-items: flex-end;
 	justify-content: space-between;
 	height: 1vh;
 	width: calc(8vh + 32rem);
@@ -18,6 +19,8 @@
 		bottom: 0;
 		height: 8vh;
 		width: 100%;
+		@include centered-h;
+		justify-content: space-between;
 		padding: 0 8vh 2rem 8vh;
 		background-color: $highlighter-blue;
 	}

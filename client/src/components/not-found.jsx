@@ -1,4 +1,5 @@
 import React from 'react'
+import { useCookies } from 'react-cookie'
 
 import navReducer from '../utils/nav-reducer'
 
@@ -10,14 +11,21 @@ import ExclaimIcon from '../assets/svg/sticker-style/130-mark-1.svg'
 import NavBar from './nav-bar'
 
 export default function NotFound () {
+  const [cookies] = useCookies(['authToken'])
   const [navState, navDispatch] = React.useReducer(navReducer)
+  const [isCookie, setIsCookie] = React.useState(false)
 
   React.useEffect(() => {
     navDispatch({ type: 'CLOSE' })
   }, [])
 
+  React.useEffect(() => {
+    setIsCookie(cookies.authToken ? true : false)
+  }, [cookies])
+
   return (
     <div className='page not-found-page'>
+      {isCookie && <NavBar />}
       <NavSlideOut
         navState={navState}
         navDispatch={navDispatch}

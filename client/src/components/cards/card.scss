@@ -1,8 +1,26 @@
 @import '../../variables.scss';
 
 .card {
+	position: relative;
 	perspective: 50rem;
 	margin: 0 0 0 0;
+
+	@include tablet-landscape-down {
+		margin: 0 0 1rem 0;
+	}
+
+	.card-control-panel {
+		position: absolute;
+		top: 0;
+		right: 2rem;
+		display: none;
+
+		.card-control-icon {
+			height: 1.5rem;
+			margin-left: 1rem;
+			cursor: pointer;
+		}
+	}
 
 	.card-content {
 		transition: transform 1s;
@@ -11,7 +29,7 @@
 		.card-front,
 		.card-back {
 			@include centered-h;
-			@include card-style (calc(30vh));
+			@include card-style (calc(30vh), calc(30vh));
 			backface-visibility: hidden;
 			cursor: pointer;
 			margin: 2rem;
@@ -19,7 +37,7 @@
 			text-align: center;
 
 			@include phone-only {
-				@include card-style(calc(35vh));
+				@include card-style(calc(35vh), calc(35vh));
 			}
 		}
 
@@ -74,5 +92,15 @@
 	.card-back,
 	.card-front {
 		background-color: $pink-stickynote;
+	}
+}
+
+.card:hover {
+	.card-control-panel {
+		display: inline-block;
+
+		.card-control-icon:hover {
+			filter: drop-shadow($pencil-light 0 0 0.1rem);
+		}
 	}
 }
