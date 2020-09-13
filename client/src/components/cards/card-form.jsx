@@ -33,6 +33,7 @@ export default function CardForm (props) {
 							placeholder="Question goes here"
 							value={question}
 							onChange={e => setQuestion(e.target.value)}
+							onFocus={e => e.target.select()}
 						/>
 					</div>
 				</div>
@@ -42,6 +43,7 @@ export default function CardForm (props) {
 							placeholder="Answer goes here"
 							value={answer}
 							onChange={e => setAnswer(e.target.value)}
+							onFocus={e => e.target.select()}
 						/>
 					</div>
 				</div>

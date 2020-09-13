@@ -37,6 +37,18 @@ export default function Card (props) {
     props.setNewQuestion(props.question)
     props.openEdit()
   }
+
+  const logAttempt = (attemptValue) => {
+    cardsAxios.post(
+      `/api/cards/attempt/${props.cardId}`, 
+      { attemptStatus: attemptValue }
+    ).then(response => {
+      props.setCards(response.data.cards)
+    }).catch(err => {
+      console.error(err)
+      props.setErrorMessage("Server error. Please try again later.")
+    })
+  }
   
   return (
     <div
@@ -72,12 +84,22 @@ export default function Card (props) {
             <img
               alt="failed attempt"
               className="attempt-icon failure"
+              onClick={() => logAttempt(false)}
               src={FailureIcon}
               title="Got the answer wrong!"
             />
+            {props.attempts.length > 0 && (
+              <p className="card-attempts">
+                { props.attempts.length <= 10
+                  ? `${Math.round((props.attempts.filter(function (attempt) { return attempt.success }).length / (props.attempts.length <= 10 ? props.attempts.length : 10)) * 100)}%`
+                  : `${Math.round((props.attempts.slice(props.attempts.length - 11, props.attempts.length - 1).filter(function (attempt) { return attempt.success }).length / (props.attempts.length <= 10 ? props.attempts.length : 10)) * 100)}%`
+                }
+              </p>
+            )}
             <img
               alt="success attempt"
               className="attempt-icon success"
+              onClick={() => logAttempt(true)}
               src={SuccessIcon}
               title="Got the answer right!"
             />

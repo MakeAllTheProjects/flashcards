@@ -46,7 +46,7 @@ export default function ViewCards () {
   }
 
   const editCard = () => {
-    if (currentAnswer !== newAnswer && currentQuestion !== newQuestion) {
+    if (currentAnswer !== newAnswer || currentQuestion !== newQuestion) {
       cardsAxios.put(`/api/cards/${currentId}`, 
         {
           question: newQuestion, 
@@ -130,6 +130,7 @@ export default function ViewCards () {
                     answer={card.answer}
                     question={card.question}
                     tags={card.tags}
+                    attempts={card.attempts}
                     setCards={setCards}
                     setErrorMessage={setErrorMessage}
                     newAnswer={newAnswer}

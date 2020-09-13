@@ -11,37 +11,48 @@ const pool = mysql.createPool({
 })
 
 let cardDB = {}
-let tagDB = {}
 
+const fetchCardsQuery = `
+	SELECT
+		cards.id,
+		cards.question,
+	cards.answer,
+	JSON_ARRAYAGG (
+		JSON_OBJECT (
+			'tagId', tags.id,
+			'tagName', tags.tagName
+		)
+	) AS 'tags',
+	JSON_ARRAYAGG (
+		JSON_OBJECT (
+			'attemptId', attempts.id,
+			'attemptTimestamp', attempts.attempt_timestamp,
+			'success', attempts.success
+		)
+	) AS 'attempts'
+	FROM cards
+	LEFT JOIN cardTags
+		ON cardTags.cardId = cards.id
+	LEFT JOIN tags
+		ON tags.id = cardTags.tagId
+	LEFT JOIN attempts
+		ON attempts.card_id = cards.id
+	WHERE cards.userId = ?
+	GROUP BY cards.id;
+`
 cardDB.getCards = (userId) => {
 	return new Promise((resolve, reject) => {
-		pool.query(`
-			SELECT
-				cards.id,
-				cards.question,
-			cards.answer,
-			JSON_ARRAYAGG (
-				JSON_OBJECT (
-					'tagId', tags.id,
-					'tagName', tags.tagName
-				)
-			) AS 'tags'
-			FROM cards
-			LEFT JOIN cardTags
-				ON cardTags.cardId = cards.id
-			LEFT JOIN tags
-				ON tags.id = cardTags.tagId
-			WHERE cards.userId = ?
-			GROUP BY cards.id;
-		`,
-		[ userId ],
-		(err, results) => {
-			if (err) {
-				console.error(err)
-				return reject(err)
+		pool.query(
+			fetchCardsQuery,
+			[ userId ],
+			(err, results) => {
+				if (err) {
+					console.error(err)
+					return reject(err)
+				}
+				return resolve(results)
 			}
-			return resolve(results)
-		})
+		)
 	})
 }
 
@@ -94,7 +105,8 @@ cardDB.updateCard = (cardId, question, answer) => {
 				cards.question = ?,
 				cards.answer = ?
 			WHERE cards.id = ?;
-		`, [
+		`, 
+		[
 			question,
 			answer,
 			cardId
@@ -109,24 +121,39 @@ cardDB.updateCard = (cardId, question, answer) => {
 	})
 }
 
-tagDB.getTags = (userId) => {
+cardDB.logAttempt = (userId, cardId, attemptStatus) => {
 	return new Promise((resolve, reject) => {
 		pool.query(`
-			SELECT
-				tags.id,
-				tags.tagName
-			FROM tags
-			WHERE userId = ?;
-		`,
-			[userId],
-			(err, results) => {
-				if (err) {
-					console.error(err)
-					return reject(err)
+			INSERT INTO attempts (
+				user_id,
+				card_id,
+				success
+			) VALUES (?, ?, ?);
+		`, 
+		[
+			userId,
+			cardId,
+			attemptStatus
+		],
+		(err, results) => {
+			if (err) {
+				console.error(err)
+				return reject(err)
+			}
+			
+			pool.query(
+				fetchCardsQuery,
+				[userId],
+				(cardErr, cardResults) => {
+					if (cardErr) {
+						console.error(cardErr)
+						return reject(cardErr)
+					}
+					return resolve(cardResults)
 				}
-				return resolve(results)
-			})
+			)
+		})
 	})
 }
 
-module.exports = {cardDB, tagDB}
+module.exports = {cardDB}
