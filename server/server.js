@@ -11,7 +11,7 @@ app.use(cors())
 
 app.use('/auth', require('./routes/auth-router'))
 
-app.use('/api', expressJwt({ secret: process.env.SECRET }))
+app.use('/api', expressJwt({ secret: process.env.SECRET, algorithms: ['HS256'] }))
 app.use('/api/cards', require('./routes/card-router'))
 
 app.use((err, req, res, next) => {
