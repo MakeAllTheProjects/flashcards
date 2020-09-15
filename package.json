@@ -1,7 +1,7 @@
 {
   "name": "flashcards",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "repository": "git@github.com:MeghanBomberger/flashcards.git",
   "author": "Meghan Bomberger <meghanbomberger@gmail.com>",
   "license": "MIT",
