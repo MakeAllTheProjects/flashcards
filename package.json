@@ -1,13 +1,13 @@
 {
   "name": "flashcards",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "repository": "git@github.com:MeghanBomberger/flashcards.git",
   "author": "Meghan Bomberger <meghanbomberger@gmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "npm run build",
-    "start": "nodemon server.js",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
