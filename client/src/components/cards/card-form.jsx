@@ -34,6 +34,7 @@ export default function CardForm (props) {
 							value={question}
 							onChange={e => setQuestion(e.target.value)}
 							onFocus={e => e.target.select()}
+							maxLength={200}
 						/>
 					</div>
 				</div>
@@ -44,6 +45,7 @@ export default function CardForm (props) {
 							value={answer}
 							onChange={e => setAnswer(e.target.value)}
 							onFocus={e => e.target.select()}
+							maxLength={200}
 						/>
 					</div>
 				</div>

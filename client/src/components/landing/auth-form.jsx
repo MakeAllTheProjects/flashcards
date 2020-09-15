@@ -8,6 +8,7 @@ import userReducer from '../../utils/user-reducer'
 import './auth-form.scss'
 
 export default function AuthForm () {
+  const [isLoading, setIsLoading] = useState(false)
   const [isNewUser, setIsNewUser] = useState(false)
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -26,20 +27,23 @@ export default function AuthForm () {
 
   const handleAuth = async (e) => {
     e.preventDefault()
-
-    return await authAxios.post(`/auth/${isNewUser ? 'signup' : 'login'}`, {
+    
+    await authAxios.post(`/auth/${isNewUser ? 'signup' : 'login'}`, {
       username,
       password,
       email,
       firstname,
       lastname
-    }).then(async response => {
+    }).then(response => {
       if (response.data.errMessage) {
         setErrorMessage(response.data.errMessage)
       }
 
       if (response.data.user && response.data.token) {
+        setIsLoading(true)
+        
         const user = response.data.user
+
         userDispatch({
           type: 'LOGIN',
           id: user.id,
@@ -58,6 +62,8 @@ export default function AuthForm () {
           },
           { path: '/' }
         )
+
+        setIsLoading(false)
       }
     }).catch(async err => {
       console.error(err)
@@ -65,7 +71,7 @@ export default function AuthForm () {
     })
   }
 
-  if (!cookies.authToken) {
+  if (!cookies.authToken && !isLoading) {
     return (
       <form className='auth-form' autoComplete='off'>
         <h2>{isNewUser ? 'Sign up to start learning...' : 'Login to get back to learning...'}</h2>
@@ -166,6 +172,14 @@ export default function AuthForm () {
       </form>
     )
   } else {
-    return (<Redirect from='/' to='/home' />)
+    if (isLoading) {
+      return (
+        <div className="loading">
+          <p>Loading, please wait...</p>
+        </div>
+      )
+    } else {
+      return (<Redirect from='/' to='/home' />)
+    }
   }
 }

@@ -70,6 +70,26 @@ export default function ViewCards () {
     }
   }
 
+  const createFirstCard = () => {
+    cardsAxios.post(`/api/cards/create`, { 
+      question: newQuestion, 
+      answer: newAnswer 
+    })
+      .then(response => {
+        setErrorMessage("Card created!")
+        setNewAnswer("")
+        setNewQuestion("")
+        setCurrentAnswer("")
+        setCurrentQuestion("")
+        setCurrentId(0)
+        setCanEdit(false)
+        setCards(response.data.cards)
+      }).catch(err => {
+        console.error(err)
+        setErrorMessage('Server error. Please try again later.')
+      })
+  }
+
   const handleOpenEdit = () => {
     setCanEdit(true)
   }
@@ -102,16 +122,20 @@ export default function ViewCards () {
       />
       <NavBar/>
       <Header
-        cornerIcon={canEdit? EditCardIcon : ViewCardsIcon}
+        cornerIcon={cards.length === 0 || canEdit ? EditCardIcon : ViewCardsIcon}
         navState={navState}
         navDispatch={navDispatch}
-        title={canEdit ? "Edit Card" : "Card Library"}
+        title={
+          cards.length > 0 
+            ? canEdit ? "Edit Card" : "Card Library"
+            : "Create Your First Card"
+        }
       />
 
-      {canEdit ? (
+      {cards.length === 0 || canEdit ? (
         <CardForm
           setErrorMessage={setErrorMessage}
-          formAction={editCard}
+          formAction={cards.length > 0 ? editCard : createFirstCard}
           answer={newAnswer}
           setAnswer={setNewAnswer}
           question={newQuestion}
@@ -121,7 +145,7 @@ export default function ViewCards () {
       ) : (
         <main className='main view-cards-container'>
           {!createCard && (
-            cards.length > 0
+            cards && cards.length > 0
               ? (
                 cards.map(card => (
                   <Card

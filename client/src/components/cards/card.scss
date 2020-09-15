@@ -3,7 +3,7 @@
 .card {
 	position: relative;
 	perspective: 50rem;
-	margin: 0 0 0 0;
+	margin: 1.5rem 0 0 0;
 
 	@include tablet-landscape-down {
 		margin: 0 0 1rem 0;
@@ -28,17 +28,79 @@
 
 		.card-front,
 		.card-back {
+			position: relative;
 			@include centered-h;
-			@include card-style (calc(30vh), calc(30vh));
+			display: grid;
+			grid-template-columns: 3rem 1fr 3rem;
+			grid-template-rows: 1fr 4rem;
+			@include card-style (calc(40vh), calc(40vh));
 			backface-visibility: hidden;
 			cursor: pointer;
 			margin: 2rem;
-			padding: 2rem;
-			text-align: center;
-			word-break: break-word;
+			
+			p {
+				grid-column: 1/4;
+				grid-row: 1;
+				padding: 3rem 2rem 0 2rem;
+				font-size: 100%;
+				text-align: center;
+				word-break: break-word;
+			}
 
 			@include phone-only {
 				@include card-style(calc(35vh), calc(35vh));
+			}
+
+			.attempt-icon {
+				grid-row: 2;
+				height: 3rem;
+				opacity: 20%;
+				transition: 0.5s all ease;
+			}
+
+			.attempt-icon.success {
+				grid-column: 3;
+				margin: 0 0 1rem -0.75rem;
+			}
+
+			.attempt-icon.failure {
+				grid-column: 1;
+				margin: 0 0 1rem 1rem;
+			}
+
+			.attempt-icon:hover {
+				opacity: 100%;
+			}
+
+			.card-attempts {
+				grid-column: 2;
+				grid-row: 2;
+				height: 4rem;
+				@include centered-h;
+				margin: 0 auto 0 auto;
+				transition: all ease 0.25s;
+
+				p {
+					margin-top: -6rem;
+					width: 8rem;
+					font-size: 1.5rem;
+					color: white;
+					text-shadow: $pencil-dark 1px 1px 2px;
+				}
+
+				.attempt-bar {
+					margin-top: -3rem;
+					@include centered-h;
+					width: 100%;
+
+					.attempt-block {
+						width: 1rem;
+						height: 1rem;
+						border: 1px solid white;
+						border-radius: 100%;
+						margin: 0 0.1rem 0 0.1rem;
+					}
+				}
 			}
 		}
 
@@ -51,31 +113,6 @@
 			transform: rotateY(180deg);
 			margin: calc(-100% + 2rem) 0 0 2rem;
 			border-radius: 0 3rem 0 3rem;
-
-			.attempt-panel {
-				position: absolute;
-				bottom: 1rem;
-				left: 1.5rem;
-				right: 1rem;
-				@include centered-h;
-				justify-content: space-between;
-
-				.attempt-icon {
-					height: 3rem;
-					opacity: 20%;
-					transition: 0.5s all ease;
-				}
-
-				.attempt-icon:hover {
-					opacity: 100%;
-				}
-
-				.card-attempts {
-					font-size: 2.5rem;
-					color: white;
-					text-shadow: $pencil-dark 1px 1px 2px;
-				}
-			}
 		}
 	}
 }

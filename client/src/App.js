@@ -19,8 +19,8 @@ export default function App () {
 				<Router>
           <NotFound path='*' />
 					<Landing path='/'/>
-					{/* <UserDashboard path='/home' /> */}
-					<ViewCards path='/home' />
+					<UserDashboard path='/home' />
+					{/* <ViewCards path='/home' /> */}
 					<ViewCards path='/view-cards' />
 					<NotAvailable path='/view-decks'/>
 					<NotAvailable path='/read-notes'/>

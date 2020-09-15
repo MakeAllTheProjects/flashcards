@@ -68,9 +68,14 @@ cardRouter.post('/create', async (req, res, next) => {
 	try {
 		const newCard = await cardDB.createCard(req.user.id, req.body.question, req.body.answer)
 		
+		const cardsData = await cardDB.getCards(req.user.id)
+
+		const cards = await mapCards(cardsData)
+		
 		res.send({ 
 			success: true,
-			newCardId: newCard.id
+			newCardId: newCard.id,
+			cards: cards
 		})
 	} catch (err) {
 		console.error(err)
