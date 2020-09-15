@@ -1,7 +1,9 @@
 {
-  "name": "server",
+  "name": "flashcards",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
+  "repository": "git@github.com:MeghanBomberger/flashcards.git",
+  "author": "Meghan Bomberger <meghanbomberger@gmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "npm run build",

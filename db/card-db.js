@@ -44,7 +44,7 @@ cardDB.getCards = (userId) => {
 	return new Promise((resolve, reject) => {
 		pool.query(
 			fetchCardsQuery,
-			[ userId ],
+			[userId],
 			(err, results) => {
 				if (err) {
 					console.error(err)
@@ -64,19 +64,19 @@ cardDB.createCard = (userId, question, answer) => {
 				cards.question,
 				cards.answer
 			) VALUES (?, ?, ?);
-		`, 
-		[
-			userId,
-			question,
-			answer
-		],
-		(err, results) => {
-			if (err) {
-				console.error(err)
-				return reject(err)
-			}
-			return resolve(results)
-		})
+		`,
+			[
+				userId,
+				question,
+				answer
+			],
+			(err, results) => {
+				if (err) {
+					console.error(err)
+					return reject(err)
+				}
+				return resolve(results)
+			})
 	})
 }
 
@@ -86,14 +86,14 @@ cardDB.deleteCard = (cardId) => {
 			DELETE FROM cards
 			WHERE cards.id = ?;
 		`,
-		[ cardId ],
-		(err, results) => {
-			if (err) {
-				console.error(err)
-				return reject(err)
-			}
-			return resolve(results)
-		})
+			[cardId],
+			(err, results) => {
+				if (err) {
+					console.error(err)
+					return reject(err)
+				}
+				return resolve(results)
+			})
 	})
 }
 
@@ -105,19 +105,19 @@ cardDB.updateCard = (cardId, question, answer) => {
 				cards.question = ?,
 				cards.answer = ?
 			WHERE cards.id = ?;
-		`, 
-		[
-			question,
-			answer,
-			cardId
-		],
-		(err, results) => {
-			if (err) {
-				console.error(err)
-				return reject(err)
-			}
-			return resolve(results)
-		})
+		`,
+			[
+				question,
+				answer,
+				cardId
+			],
+			(err, results) => {
+				if (err) {
+					console.error(err)
+					return reject(err)
+				}
+				return resolve(results)
+			})
 	})
 }
 
@@ -129,31 +129,31 @@ cardDB.logAttempt = (userId, cardId, attemptStatus) => {
 				card_id,
 				success
 			) VALUES (?, ?, ?);
-		`, 
-		[
-			userId,
-			cardId,
-			attemptStatus
-		],
-		(err, results) => {
-			if (err) {
-				console.error(err)
-				return reject(err)
-			}
-			
-			pool.query(
-				fetchCardsQuery,
-				[userId],
-				(cardErr, cardResults) => {
-					if (cardErr) {
-						console.error(cardErr)
-						return reject(cardErr)
-					}
-					return resolve(cardResults)
+		`,
+			[
+				userId,
+				cardId,
+				attemptStatus
+			],
+			(err, results) => {
+				if (err) {
+					console.error(err)
+					return reject(err)
 				}
-			)
-		})
+
+				pool.query(
+					fetchCardsQuery,
+					[userId],
+					(cardErr, cardResults) => {
+						if (cardErr) {
+							console.error(cardErr)
+							return reject(cardErr)
+						}
+						return resolve(cardResults)
+					}
+				)
+			})
 	})
 }
 
-module.exports = {cardDB}
+module.exports = { cardDB }

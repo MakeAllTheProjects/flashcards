@@ -7,15 +7,15 @@ const authRouter = express.Router()
 
 authRouter.post('/signup', async (req, res, next) => {
 	try {
-		const isUser = await authDB.validateByUsername({username: req.body.username})
-		
-		if (isUser === true) {		
+		const isUser = await authDB.validateByUsername({ username: req.body.username })
+
+		if (isUser === true) {
 			res.send({
 				success: true,
 				errMessage: "This username is already in use."
 			})
 		} else {
-			const isEmail = await authDB.validateByEmail({email: req.body.email})
+			const isEmail = await authDB.validateByEmail({ email: req.body.email })
 
 			if (isEmail === true) {
 				res.send({
@@ -100,7 +100,7 @@ authRouter.post('/login', async (req, res, next) => {
 
 authRouter.get('/', (req, res, next) => {
 	try {
-		res.json({success: true})
+		res.json({ success: true })
 	} catch (err) {
 		console.error(err)
 		res.sendStatus(500).json({

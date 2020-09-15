@@ -1,5 +1,5 @@
 const express = require('express')
-const {cardDB, tagDB} = require('../db/card-db')
+const { cardDB, tagDB } = require('../db/card-db')
 
 const cardRouter = express.Router()
 
@@ -67,12 +67,12 @@ cardRouter.get('/user/:id', async (req, res, next) => {
 cardRouter.post('/create', async (req, res, next) => {
 	try {
 		const newCard = await cardDB.createCard(req.user.id, req.body.question, req.body.answer)
-		
+
 		const cardsData = await cardDB.getCards(req.user.id)
 
 		const cards = await mapCards(cardsData)
-		
-		res.send({ 
+
+		res.send({
 			success: true,
 			newCardId: newCard.id,
 			cards: cards
@@ -89,7 +89,7 @@ cardRouter.post('/create', async (req, res, next) => {
 cardRouter.delete('/:id', async (req, res, next) => {
 	try {
 		await cardDB.deleteCard(req.params.id)
-		
+
 		const cardsData = await cardDB.getCards(req.user.id)
 		const cards = await mapCards(cardsData)
 
@@ -125,7 +125,7 @@ cardRouter.put('/:id', async (req, res, next) => {
 				cards: [],
 				updatedCardId: null
 			})
-		}			
+		}
 	} catch (err) {
 		console.error(err)
 		res.sendStatus(500).json({
@@ -138,8 +138,8 @@ cardRouter.put('/:id', async (req, res, next) => {
 cardRouter.post(`/attempt/:id`, async (req, res, next) => {
 	try {
 		const attemptsData = await cardDB.logAttempt(
-			req.user.id, 
-			req.params.id, 
+			req.user.id,
+			req.params.id,
 			req.body.attemptStatus
 		)
 		const cards = await mapCards(attemptsData)
