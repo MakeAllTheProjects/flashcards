@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie'
 
 import './card.scss'
 
+import AlertIcon from '../../assets/svg/sketch-style/problem.svg'
 import DeleteIcon from '../../assets/svg/sketch-style/delete.svg'
 import EditIcon from '../../assets/svg/sketch-style/pencil.svg'
 import FailureIcon from '../../assets/svg/sticker-style/038-delete.svg'
@@ -75,6 +76,14 @@ export default function Card (props) {
       className={isFlipped ? "card flipped" : "card"}
     >
       <div className="card-control-panel">
+        {props.answer === "" && (
+          <img
+            alt="issue with card"
+            className="card-alert-icon"
+            src={AlertIcon}
+            title="issue with card"
+          />
+        )}
         <img
           alt="view card details"
           className="card-control-icon view"

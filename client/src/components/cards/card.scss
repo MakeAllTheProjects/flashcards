@@ -10,15 +10,28 @@
 	}
 
 	.card-control-panel {
+		display: flex;
+		justify-content: flex-end;
 		position: absolute;
 		top: 0;
 		right: 2rem;
-		display: none;
-
+		width: 100%;
+		
 		.card-control-icon {
 			height: 1.5rem;
 			margin-left: 1rem;
 			cursor: pointer;
+			display: none;
+		}
+
+		.card-alert-icon {
+			position: absolute;
+			left: 1.5rem;
+			top: 0.25rem;
+			height: 3rem;
+			z-index: 2;
+			margin-left: 1rem;
+			transform: rotate(-45deg);
 		}
 	}
 
@@ -161,7 +174,9 @@
 
 .card:hover {
 	.card-control-panel {
-		display: inline-block;
+		.card-control-icon {
+			display: inline-block;
+		}
 
 		.card-control-icon:hover {
 			filter: drop-shadow($pencil-light 0 0 0.1rem);
