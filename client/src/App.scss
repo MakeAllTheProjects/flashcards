@@ -2,10 +2,19 @@
 
 * {
 	margin: 0;
-	font-size: 10px;
 	box-sizing: border-box;
+	font-size: 10px;
+	color: $pencil-medium;
+	@include font-shadow-into-light;
 };
 
-.app {
-	
+button, a {
+	outline: none;
+}
+
+.page {
+	@include app-grid;
+	.main {
+		@include main-placement;
+	}
 }

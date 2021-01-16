@@ -106,7 +106,7 @@ $header-height: calc(10vh);
   bottom: 0;
   display: grid;
   grid-template-columns: $header-height 1fr;
-  grid-template-rows: $header-height 1fr;
+  grid-template-rows: calc(4vh) 1fr;
 
   @include tablet-landscape-down {
     grid-template-rows: $header-height 1fr 8vh;
