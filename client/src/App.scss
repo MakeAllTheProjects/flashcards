@@ -16,5 +16,6 @@ button, a {
 	@include app-grid;
 	.main {
 		@include main-placement;
+		font-size: 2rem;
 	}
 }
