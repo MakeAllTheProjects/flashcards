@@ -7,7 +7,8 @@
   display: grid;
   grid-template-columns: $header-height 1fr auto;
   grid-template-rows: 50% 50%;
-	margin: 0 0.75rem 0 0;
+  padding: 1rem 0 1rem 0;
+  height: $header-height;
 	
 	.corner-icon {
     grid-column: 1;
@@ -19,6 +20,10 @@
       width: calc(6.5vh);
       transform: rotate(-5deg);
       margin: 1.5vh 0 0 0;
+
+      @include phone-only {
+        width: calc(4vh);
+      }
     }
   }
 
@@ -33,7 +38,7 @@
       font-size: 5rem;
       color: $pencil-dark;
       width: 100%;
-      padding-left: 1rem;
+      padding-left: 3rem;
       text-align: left;
 
       @include tablet-landscape-down {
