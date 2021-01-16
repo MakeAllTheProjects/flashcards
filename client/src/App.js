@@ -3,6 +3,7 @@ import React from 'react'
 import { Router } from '@reach/router'
 
 import AppBackground from './components/app-background/AppBackground'
+import NotAvailable from './components/pages/not-available/NotAvailable'
 import NotFound from './components/pages/not-found/NotFound'
 
 import './App.scss'
@@ -14,8 +15,8 @@ export default function App () {
     <AppBackground>
       <div className="app">
         <Router>
-          <NotFound path='/' />
-          {/* <NotFound path='*' /> */}
+          <NotFound path='*' />
+          <NotAvailable path='/' />
           {/* <Landing path='/' /> */}
           {/* <UserDashboard path='/home' /> */}
           {/* <ViewCards path='/home' /> */}

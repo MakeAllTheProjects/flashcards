@@ -1,0 +1,12 @@
+@import '../../../variables.scss';
+
+.not-available-page {
+	.not-available-container {
+		@include centered-v;
+		p {
+			width: 90%;
+			font-size: 5rem;
+			text-align: center;
+		}
+	}
+}
