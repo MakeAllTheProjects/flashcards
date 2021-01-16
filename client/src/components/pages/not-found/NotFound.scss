@@ -1,5 +1,29 @@
 @import '../../../variables.scss';
 
-.not-found {
+.page.not-found-page {
+  .main.not-found-container {
+    @include centered-v;
 
-};
+    h2 {
+			margin-top: 2rem;
+      font-size: 1200%;
+      @include font-shadow-into-light;
+      text-align: center;
+      line-height: 100%;
+    }
+
+    h3 {
+			margin-left: -1rem;
+      font-size: 200%;
+      @include font-shadow-into-light;
+      text-align: center;
+      text-transform: uppercase;
+      line-height: 100%;
+    }
+
+    .exclaimation-icon {
+      height: 30vh;
+      margin: 0 -1.5rem 1rem -1.5rem;
+    }
+  }
+}
