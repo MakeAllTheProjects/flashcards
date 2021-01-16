@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Redirect } from '@reach/router'
 
 import './AuthForm.scss'
 
