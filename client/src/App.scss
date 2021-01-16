@@ -3,18 +3,9 @@
 * {
 	margin: 0;
 	font-size: 10px;
-	@include font-shadow-into-light;
-	color: $pencil-medium;
 	box-sizing: border-box;
-}
+};
 
-button {
-	outline: none;
-}
-
-.page {
-	@include app-grid;
-	.main {
-		@include main-placement;
-	}
+.app {
+	
 }

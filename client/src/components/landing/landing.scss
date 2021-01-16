@@ -1,9 +1,0 @@
-@import '../../variables.scss';
-
-.landing-page {
-  @include app-grid;
-
-  .landing-container {
-    @include main-placement;
-  }
-}

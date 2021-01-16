@@ -1,0 +1,56 @@
+@import '../../variables.scss';
+
+.app-background-container {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 0;
+	background: rgb(255, 250, 235);
+
+	.holes-contianer {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: calc(10vh);
+		min-height: 100vh;
+		padding: 5vh 0 0 0;
+		@include center-spaced-v;
+		border-right: solid rgba(205, 0, 50, .5) 0.2rem;
+		
+		.punch-hole {
+			z-index: 1;
+			height: 4vh;
+			width: calc(4vh);
+			border-radius: 100%;
+			background-color: rgb(75, 75, 100);
+			box-shadow: inset rgba(0, 0, 0, 0.65) 0.2rem 0.2rem 0.3rem,
+									inset rgb(255, 250, 235) 0.2rem 0.2rem 0.1rem,
+									inset rgba(0, 0, 0, 0.65) 0.3rem 0.3rem 0.3rem,
+									inset rgb(255, 250, 235) 0.3rem 0.3rem 0.1rem,
+									inset rgba(0, 0, 0, 0.65) 0.4rem 0.4rem 0.3rem,
+									inset rgb(255, 250, 235) 0.4rem 0.4rem 0.1rem,
+									inset rgba(0, 0, 0, 0.65) 0.5rem 0.5rem 0.3rem,
+									inset rgb(255, 250, 235) 0.5rem 0.5rem 0.1rem;
+		}
+	}
+
+	.blue-lines-container {
+		position: fixed;
+		top: $header-height;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		@include center-spaced-v;
+	
+		.blue-line {
+			width: 100vw;
+			border-bottom: solid rgba(0, 150, 200, 0.5) 0.1rem;
+		}
+
+		.blue-line:first-child {
+			border-top: solid rgba(0, 150, 200, 0.5) 0.2rem;
+		}
+	}
+}
