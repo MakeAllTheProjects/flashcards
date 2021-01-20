@@ -1,5 +1,7 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import { Redirect } from '@reach/router'
+import { baseURL } from '../../../App'
 
 import './AuthForm.scss'
 
@@ -14,10 +16,25 @@ export default function AuthForm () {
 	const [lastname, setLastname] = useState("")
 	const [errMessage, setErrorMessage] = useState("")
 
-	const handleAuth = () => {}
+	const handleAuth = (e) => {
+		e.preventDefault()
+		axios.post(`${baseURL}/auth/${isNewUser ? 'signup' : 'login'}`, { 
+			username: username,
+			email: email,
+			firstname: firstname,
+			lastname: lastname,
+			password: password
+		})
+			.then(res => {
+				console.log(res.data)
+			})
+			.catch(err => {
+				console.error(err)
+			})
+	}
 
 	return (
-		<form className="auth-form" autoComplete='off'>
+		<form className="auth-form" autoComplete='off' onSubmit={e => handleAuth(e)}>
 			<h2>{isNewUser ? 'Sign up to start studying...' : 'Login and get back to studying...'}</h2>
 			
 			<input
@@ -94,16 +111,11 @@ export default function AuthForm () {
 				/>
 			)}
 
-			<button
+			<input
 				className="auth-button"
-				onClick={(e) => handleAuth(e)}
-			>
-				{
-					isNewUser
-						? "Sign Up"
-						: "Login"
-				}
-			</button>
+				type="submit"
+				value={isNewUser ? "Sign Up" : "Login"}
+			/>
 
 			{isNewUser && password !== confirmPassword && <p className="password-confirm-error">Password must match confirmation</p>}
 			<p className="auth-error-message">

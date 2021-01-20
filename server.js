@@ -5,6 +5,8 @@ const express = require('express')
 const path = require('path')
 const serveStatic = require('serve-static')
 
+const authRouter = require('./routes/AuthRouter')
+
 const server = express()
 
 const whitelist = [
@@ -33,6 +35,8 @@ server.use(serveStatic(__dirname + '/client/build'))
 server.get("/api", (req, res) => {
 	res.send({ message: "Hello World!" })
 })
+
+server.use('/api/auth', authRouter)
 
 server.use((err, req, res, next) => {
 	if (err) {
