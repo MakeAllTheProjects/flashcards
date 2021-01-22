@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from '@reach/router'
+import { Link } from 'react-router-dom'
 
 import './Header.scss'
 import defaultLogo from '../../assets/logo.png'

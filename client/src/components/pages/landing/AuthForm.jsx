@@ -1,11 +1,16 @@
 import axios from 'axios'
-import React, { useState } from 'react'
-import { Redirect } from '@reach/router'
-import { baseURL } from '../../../App'
+import React, { useState, useContext } from 'react'
+import { useCookies } from 'react-cookie'
+import { useHistory } from 'react-router-dom'
 
+import { GlobalContext } from '../../../App'
+import { baseURL } from '../../../App'
 import './AuthForm.scss'
 
 export default function AuthForm () {
+	const [cookies, setCookie] = useCookies(['authToken'])
+	const context = useContext(GlobalContext)
+	const { state, dispatch } = context
 	const [isLoading, setIsLoading] = useState(false)
 	const [isNewUser, setIsNewUser] = useState(false)
 	const [username, setUsername] = useState("")
@@ -15,9 +20,11 @@ export default function AuthForm () {
 	const [firstname, setFirstname] = useState("")
 	const [lastname, setLastname] = useState("")
 	const [errMessage, setErrorMessage] = useState("")
+	let history = useHistory()
 
 	const handleAuth = (e) => {
 		e.preventDefault()
+		setIsLoading(true)
 		axios.post(`${baseURL}/auth/${isNewUser ? 'signup' : 'login'}`, { 
 			username: username,
 			email: email,
@@ -26,10 +33,40 @@ export default function AuthForm () {
 			password: password
 		})
 			.then(res => {
-				console.log(res.data)
+				dispatch({
+					type: 'LOGIN_SUCCESS',
+					payload: {
+						userId: res.data.user.id,
+						username: res.data.user.username,
+						firstname: res.data.user.firstname,
+						token: res.data.token
+					}
+				})
+				return res.data
+			}).then(data => {
+				setCookie(
+					'authToken',
+					{
+						user: {
+							userId: data.user.userId,
+							username: data.user.username,
+							firstname: data.user.firstname
+						},
+						token: data.token
+					},
+					{ path: '/' }
+				)
+			}).then(() => {
+				history.push('/user')
 			})
 			.catch(err => {
 				console.error(err)
+				dispatch({ 
+					type: 'LOGIN_FAIL', 
+					payload: {
+						message: 'Authorization failed.'
+					}
+				})
 			})
 	}
 
