@@ -12,8 +12,14 @@ export default function UserDashboard () {
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
-		if (state.user.id && state.user.id !== 0) {
-			axios.get(`${baseURL}/cards/user/${state.user.id}`)
+		if (state.user.id) {
+			const axiosUser = axios.create({
+				headers: {
+					Authorization: `Bearer ${state.token}`
+				}
+			})
+
+			axiosUser.get(`${baseURL}/api/cards/user/${state.user.id}`)
 				.then(res => {
 					dispatch({
 						type: 'FETCH_CARDS_SUCCESS',
@@ -36,7 +42,7 @@ export default function UserDashboard () {
 					setIsLoading(false)
 				})
 		}
-	}, [state.user.id])
+	}, [state.token])
 
 	return (
 		<div className="page user-dashboard">

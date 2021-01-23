@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const cors = require('cors')
 const express = require('express')
-const jwt = require('jsonwebtoken')
+const expressJwt = require('express-jwt')
 const path = require('path')
 const serveStatic = require('serve-static')
 
@@ -34,11 +34,9 @@ server.use(express.json())
 server.use(cors(corsOptions.origin))
 server.use(serveStatic(__dirname + '/client/build'))
 
-server.get('/api', (req, res) => {
-	res.send({ message: "Hello World!" })
-})
+server.use('/auth', authRouter)
 
-server.use('/api/auth', authRouter)
+server.get('/api', expressJwt({ secret: process.env.SECRET, algorithms: ['HS256']}))
 server.use('/api/cards', cardRouter)
 
 server.use((err, req, res, next) => {

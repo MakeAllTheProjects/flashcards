@@ -1,4 +1,4 @@
-// import axios from 'axios'
+import axios from 'axios'
 import React, {
   useEffect,
   useReducer
@@ -15,7 +15,7 @@ import UserDashboard from './components/pages/user-dashboard/UserDashboard'
 
 import './App.scss'
 
-export const baseURL = process.env.REACT_APP_IS_PRODUCTION ? 'https://flashcourse.herokuapp.com/api' : 'http://localhost:8080/api'
+export const baseURL = process.env.REACT_APP_IS_PRODUCTION ? 'https://flashcourse.herokuapp.com' : 'http://localhost:8080'
 
 export const GlobalContext = React.createContext()
 
@@ -31,7 +31,7 @@ const initialState = {
 }
 
 export const UserReducer = (state, action) => {
-  const newState = {...state}
+  let newState = {...state}
 
   switch (action.type) {
     case 'LOGIN_SUCCESS':
