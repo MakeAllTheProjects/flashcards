@@ -14,8 +14,11 @@ button, a {
 
 .page {
 	@include app-grid;
+
 	.main {
 		@include main-placement;
 		font-size: 2rem;
+		@include no-scroll-bar();
+		overflow: auto;
 	}
 }
