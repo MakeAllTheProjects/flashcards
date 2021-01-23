@@ -3,7 +3,7 @@ import React, {
   useEffect,
   useReducer
 } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, useHistory } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
 import AppBackground from './components/app-background/AppBackground'
@@ -67,6 +67,7 @@ export const UserReducer = (state, action) => {
 export default function App () {
   const [ state, dispatch ] = useReducer(UserReducer, initialState)
   const [ cookies, setCookie ] = useCookies(['authToken'])
+  const history = useHistory()
 
   useEffect(() => {
     if (cookies && cookies.authToken) {
@@ -82,6 +83,12 @@ export default function App () {
       })
     }
   }, [cookies])
+
+  useEffect(() => {
+    if (state.token) {
+      history.push('/user')
+    }
+  }, [state.token])
 
   return (
     <GlobalContext.Provider

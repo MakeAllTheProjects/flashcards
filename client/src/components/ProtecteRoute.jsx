@@ -13,7 +13,7 @@ export default function ProtectedRoute ({children, ...rest}) {
 		<Route
 			{...rest}
 			render={({ location }) =>
-				state.token && state.user.username || cookies.authToken.token && cookies.authToken.user.username ? (
+				cookies.authToken && cookies.authToken.token || state && state.token ? (
 					children
 				) : (
 						<Redirect
