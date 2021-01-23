@@ -21,10 +21,11 @@ export const GlobalContext = React.createContext()
 
 const initialState = {
   user: {
-    userId: '',
+    id: '',
     username: '',
     firstname: ''
   },
+  cards: [],
   token: '',
   message: ''
 }
@@ -35,7 +36,7 @@ export const UserReducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
       newState.user = {
-        userId: action.payload.userId,
+        id: action.payload.id,
         username: action.payload.username,
         firstname: action.payload.firstname
       }
@@ -44,8 +45,18 @@ export const UserReducer = (state, action) => {
       return newState
 
     case 'LOGIN_FAIL':
-      // newState = initialState
+      newState = { ...initialState }
       newState.message = action.payload.message
+      return newState
+
+    case 'FETCH_CARDS_SUCCESS':
+      newState.cards = [...action.payload.cards]
+      newState.message = `You have ${action.payload.cards.length} card${action.payload.cards.length > 1 ? 's' : ''}`
+      return newState
+
+    case 'FETCH_CARDS_FAIL':
+      newState.cards = []
+      newState.message = 'No cards found.'
       return newState
 
     default:
@@ -63,7 +74,7 @@ export default function App () {
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: {
-          userId: user.id,
+          id: user.id,
           username: user.username,
           firstname: user.firstname,
           token: cookies.authToken.token

@@ -7,6 +7,7 @@ const path = require('path')
 const serveStatic = require('serve-static')
 
 const authRouter = require('./routes/AuthRouter')
+const cardRouter = require('./routes/CardRouter')
 
 const server = express()
 
@@ -33,11 +34,12 @@ server.use(express.json())
 server.use(cors(corsOptions.origin))
 server.use(serveStatic(__dirname + '/client/build'))
 
-server.get("/api", (req, res) => {
+server.get('/api', (req, res) => {
 	res.send({ message: "Hello World!" })
 })
 
 server.use('/api/auth', authRouter)
+server.use('/api/cards', cardRouter)
 
 server.use((err, req, res, next) => {
 	if (err) {

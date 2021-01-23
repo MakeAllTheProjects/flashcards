@@ -36,7 +36,7 @@ export default function AuthForm () {
 				dispatch({
 					type: 'LOGIN_SUCCESS',
 					payload: {
-						userId: res.data.user.id,
+						id: res.data.user.id,
 						username: res.data.user.username,
 						firstname: res.data.user.firstname,
 						token: res.data.token
@@ -48,7 +48,7 @@ export default function AuthForm () {
 					'authToken',
 					{
 						user: {
-							userId: data.user.userId,
+							id: data.user.id,
 							username: data.user.username,
 							firstname: data.user.firstname
 						},
