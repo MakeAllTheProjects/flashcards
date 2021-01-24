@@ -6,10 +6,11 @@ import React, {
 import { Route, Switch, useHistory } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
+import { UserReducer, initialState } from './UserReducer'
+
 import AppBackground from './components/app-background/AppBackground'
 import CardLibrary from './components/pages/card-library/CardLibrary'
 import Landing from './components/pages/landing/Landing'
-import NotAvailable from './components/pages/not-available/NotAvailable'
 import NotFound from './components/pages/not-found/NotFound'
 import ProtectedRoute from './components/ProtecteRoute'
 import UserDashboard from './components/pages/user-dashboard/UserDashboard'
@@ -20,55 +21,6 @@ import './App.scss'
 export const baseURL = process.env.REACT_APP_IS_PRODUCTION ? 'https://flashcourse.herokuapp.com' : 'http://localhost:8080'
 
 export const GlobalContext = React.createContext()
-
-const initialState = {
-  user: {
-    id: '',
-    username: '',
-    firstname: ''
-  },
-  cards: [],
-  token: '',
-  message: ''
-}
-
-export const UserReducer = (state, action) => {
-  let newState = {...state}
-
-  switch (action.type) {
-    case 'LOGIN_SUCCESS':
-      newState.user = {
-        id: action.payload.id,
-        username: action.payload.username,
-        firstname: action.payload.firstname
-      }
-      newState.token = action.payload.token
-      newState.message = `Welcome, ${action.payload.firstname}!`
-      return newState
-
-    case 'LOGIN_FAIL':
-      newState = { ...initialState }
-      newState.message = action.payload.message
-      return newState
-
-    case 'LOGOUT':
-      newState = { ...initialState }
-      return newState
-
-    case 'FETCH_CARDS_SUCCESS':
-      newState.cards = [...action.payload.cards]
-      newState.message = `You have ${action.payload.cards.length} card${action.payload.cards.length > 1 ? 's' : ''}`
-      return newState
-
-    case 'FETCH_CARDS_FAIL':
-      newState.cards = []
-      newState.message = 'No cards found.'
-      return newState
-
-    default:
-      return state
-  }
-}
 
 export default function App () {
   const [ state, dispatch ] = useReducer(UserReducer, initialState)

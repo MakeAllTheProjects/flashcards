@@ -42,7 +42,7 @@ export default function NavBar ({ isMenuOpen, setIsMenuOpen }) {
 				title="user menu"
 				onClick={() => setIsMenuOpen(!isMenuOpen)}
 				style={{
-					margin: '1rem 0 0 2rem',
+					margin: '1.5rem 0 0 2rem',
 					filter: 'hue-rotate(230deg)'
 				}}
 			/>
