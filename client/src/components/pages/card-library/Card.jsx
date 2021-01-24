@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { GlobalContext } from '../../../App'
+import Modal from '../../Modal'
 import './Card.scss'
 import AlertIcon from '../../../assets/svg/sketch-style/problem.svg'
 import DeleteIcon from '../../../assets/svg/sketch-style/delete.svg'
@@ -15,6 +16,7 @@ export default function Card ({card}) {
 	const { state, dispatch } = context
 	const [isFlipped, setIsFlipped] = useState(false)
 	const [viewCardDetails, setViewCardDetails] = useState(false)
+	const [isModalDisplayed, setIsModalDisplayed] = useState(false)
 	let history = useHistory()
 
 	const handleEditCard = async (id) => {
@@ -28,69 +30,85 @@ export default function Card ({card}) {
 		await history.push('/user/cards/edit')
 	}
 
-	return (
-		<div
-			className={isFlipped ? "card flipped" : "card"}
-		>
-			<div className="card-control-panel">
-				{!card.answer || card.answer === "" && (
-					<img
-						alt="issue with card"
-						className="card-alert-icon"
-						src={AlertIcon}
-						title="issue with card"
-					/>
-				)}
-				<img
-					alt="view card details"
-					className="card-control-icon view"
-					onClick={() => setViewCardDetails(!viewCardDetails)}
-					src={ViewIcon}
-					title="view card details"
-				/>
-				<img
-					alt="edit card"
-					className="card-control-icon edit"
-					onClick={() => handleEditCard(card.id)}
-					src={EditIcon}
-					title="edit card"
-				/>
-				<img
-					alt="delete card"
-					className="card-control-icon delete"
-					// onClick={() => handleDeleteCard()}
-					src={DeleteIcon}
-					title="delete card"
-				/>
-			</div>
+	const handleDeleteCard = async (id) => {
+		await dispatch({
+			type: 'SET_SELECTED_CARD',
+			payload: {
+				selectedCardId: id
+			}
+		})
+		setIsModalDisplayed(!isModalDisplayed)
+	}
 
+	return (
+		<>
 			<div
-				className="card-content"
-				onClick={() => setIsFlipped(!isFlipped)}
+				className={isFlipped ? "card flipped" : "card"}
 			>
-				<div className="card-front">
-					<p>{card.question}</p>
-					{/* {viewCardDetailsPanel} */}
+				<div className="card-control-panel">
+					{!card.answer || card.answer === "" && (
+						<img
+							alt="issue with card"
+							className="card-alert-icon"
+							src={AlertIcon}
+							title="issue with card"
+						/>
+					)}
+					<img
+						alt="view card details"
+						className="card-control-icon view"
+						onClick={() => setViewCardDetails(!viewCardDetails)}
+						src={ViewIcon}
+						title="view card details"
+					/>
+					<img
+						alt="edit card"
+						className="card-control-icon edit"
+						onClick={() => handleEditCard(card.id)}
+						src={EditIcon}
+						title="edit card"
+					/>
+					<img
+						alt="delete card"
+						className="card-control-icon delete"
+						onClick={() => handleDeleteCard(card.id)}
+						src={DeleteIcon}
+						title="delete card"
+					/>
 				</div>
-				<div className="card-back">
-					<p>{card.answer}</p>
-					<img
-						alt="failed attempt"
-						className="attempt-icon failure"
-						// onClick={() => logAttempt(false)}
-						src={FailureIcon}
-						title="Got the answer wrong!"
-					/>
-					{/* {viewCardDetailsPanel} */}
-					<img
-						alt="success attempt"
-						className="attempt-icon success"
-						// onClick={() => logAttempt(true)}
-						src={SuccessIcon}
-						title="Got the answer right!"
-					/>
+
+				<div
+					className="card-content"
+					onClick={() => setIsFlipped(!isFlipped)}
+				>
+					<div className="card-front">
+						<p>{card.question}</p>
+						{/* {viewCardDetailsPanel} */}
+					</div>
+					<div className="card-back">
+						<p>{card.answer}</p>
+						<img
+							alt="failed attempt"
+							className="attempt-icon failure"
+							// onClick={() => logAttempt(false)}
+							src={FailureIcon}
+							title="Got the answer wrong!"
+						/>
+						{/* {viewCardDetailsPanel} */}
+						<img
+							alt="success attempt"
+							className="attempt-icon success"
+							// onClick={() => logAttempt(true)}
+							src={SuccessIcon}
+							title="Got the answer right!"
+						/>
+					</div>
 				</div>
 			</div>
-		</div>
+			<Modal
+				display={isModalDisplayed}
+				setDisplay={setIsModalDisplayed}
+			/>
+		</>
 	)
 }
