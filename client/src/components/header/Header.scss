@@ -33,6 +33,11 @@
     @include centered-h;
     width: 100%;
 
+    @include phone-only {
+      grid-row: 1;
+      grid-column: 2/4;
+    }
+
     h1 {
       @include font-marker;
       font-size: 5rem;
@@ -46,7 +51,10 @@
       }
 
       @include phone-only {
+        padding-left: 0;
+        margin-top: -1rem;
         font-size: 4vh;
+        text-align: center;
       }
     }
   }

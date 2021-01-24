@@ -50,9 +50,6 @@ export default function UserDashboard () {
 				title="Welcome"
 			/>
 			<main className="main not-found-container">
-				<h2>{state.user.username}</h2>
-				{isLoading && <p>Loading....</p>}
-				{!isLoading && <p>You have {state.cards.length} cards.</p>}
 			</main>
 		</div>
 	)

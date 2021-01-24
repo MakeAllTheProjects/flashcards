@@ -7,6 +7,7 @@ import { Route, Switch, useHistory } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
 import AppBackground from './components/app-background/AppBackground'
+import CardLibrary from './components/pages/card-library/CardLibrary'
 import Landing from './components/pages/landing/Landing'
 import NotAvailable from './components/pages/not-available/NotAvailable'
 import NotFound from './components/pages/not-found/NotFound'
@@ -105,8 +106,11 @@ export default function App () {
         <div className="app">
           <Switch>
             <Route exact path="/" component={Landing} />
-            <ProtectedRoute path="/user">
+            <ProtectedRoute exact path="/user">
               <UserDashboard/>
+            </ProtectedRoute>
+            <ProtectedRoute exact path="/user/cards">
+              <CardLibrary/>
             </ProtectedRoute>
             <Route path="*" component={NotFound}/>
           </Switch>
