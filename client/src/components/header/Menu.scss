@@ -5,8 +5,8 @@
 	top: 0;
 	bottom: 0;
 	width: 100vw;
-	@include level-one;
-	transition: right 0.3s ease;
+	z-index: 15;
+	transition: right 1s ease;
 
 	.menu {
 		position: absolute;
