@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { GlobalContext } from '../../../App'
+import DialogBox from '../../DialogBox'
 import Modal from '../../Modal'
 import './Card.scss'
 import AlertIcon from '../../../assets/svg/sketch-style/problem.svg'
@@ -30,11 +31,25 @@ export default function Card ({card}) {
 		await history.push('/user/cards/edit')
 	}
 
-	const handleDeleteCard = async (id) => {
+	const handleDeleteCardConfirmation = async (id) => {
 		await dispatch({
 			type: 'SET_SELECTED_CARD',
 			payload: {
 				selectedCardId: id
+			}
+		})
+		setIsModalDisplayed(!isModalDisplayed)
+	}
+
+	const deleteCard = () => {
+		console.log("delete card")
+	}
+
+	const cancelDeleteCard = async () => {
+		await dispatch({
+			type: 'SET_SELECTED_CARD',
+			payload: {
+				selectedCardId: 0
 			}
 		})
 		setIsModalDisplayed(!isModalDisplayed)
@@ -71,7 +86,7 @@ export default function Card ({card}) {
 					<img
 						alt="delete card"
 						className="card-control-icon delete"
-						onClick={() => handleDeleteCard(card.id)}
+						onClick={() => handleDeleteCardConfirmation(card.id)}
 						src={DeleteIcon}
 						title="delete card"
 					/>
@@ -108,7 +123,16 @@ export default function Card ({card}) {
 			<Modal
 				display={isModalDisplayed}
 				setDisplay={setIsModalDisplayed}
-			/>
+			>
+				<DialogBox
+					open={isModalDisplayed}
+					message="Are you sure you want to delete this card?"
+					cancelAction={cancelDeleteCard}
+					cancelText="No"
+					confirmAction={deleteCard}
+					confirmText="Yes"
+				/>
+			</Modal>
 		</>
 	)
 }

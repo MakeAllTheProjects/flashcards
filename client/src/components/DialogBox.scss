@@ -1,0 +1,42 @@
+@import '../variables.scss';
+
+.dialog-box {
+	@include centered-v;
+	margin: 40vh auto;
+	@include card-style(30rem, 30rem);
+	border: none;
+	border-radius: 1rem;
+	box-shadow: $pencil-medium 1rem 1rem 1rem;
+	background-color: $blue-stickynote;
+
+	p {
+		font-size: 2rem;
+		text-align: center;
+		padding-bottom: 3rem;
+	}
+
+	.dialog-box-menu {
+		@include centered-h;
+		justify-content: space-evenly;
+		width: 100%;
+
+		.cancel-button, .confirm-button {
+			margin-left: -2rem;
+			min-width: 25%;
+			font-size: 1.5rem;
+			font-weight: 900;
+			@include font-abel;
+			border-radius: 1rem;
+			border: none;
+			box-shadow: $pencil-light 0.1rem 0.1rem 0.3rem;
+		}
+
+		.cancel-button {
+			background-color: $pink-stickynote;
+		}
+
+		.confirm-button {
+			background-color: $green-stickynote;
+		}
+	}
+}

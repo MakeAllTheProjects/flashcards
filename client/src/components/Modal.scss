@@ -2,6 +2,8 @@
 
 .modal {
 	@include fullscreen-fixed;
+	height: 100vh;
+	@include centered-v;
 	z-index: 30;
 	background-color: rgba(0, 0, 0, 0.2);
 }
