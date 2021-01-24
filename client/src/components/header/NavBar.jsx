@@ -4,12 +4,18 @@ import { Link } from 'react-router-dom'
 import './NavBar.scss'
 import CardLibraryIcon from '../../assets/svg/sketch-style/018-layers.svg'
 import UserIcon from '../../assets/svg/sketch-style/user.svg'
+import WriteCardIcon from '../../assets/svg/sketch-style/005-draw.svg'
 
 const navList = [
 	{
 		name: "Card Library",
 		icon: CardLibraryIcon,
 		path: "/user/cards"
+	},
+	{
+		name: "Write Card",
+		icon: WriteCardIcon,
+		path: "/user/cards/write"
 	}
 ]
 
@@ -34,8 +40,8 @@ export default function NavBar ({ isMenuOpen, setIsMenuOpen }) {
 				title="user menu"
 				onClick={() => setIsMenuOpen(!isMenuOpen)}
 				style={{
-					marginLeft: '2rem',
-					marginTop: '0.5rem'
+					margin: '1rem 0 0 2rem',
+					filter: 'hue-rotate(230deg)'
 				}}
 			/>
 		</nav>

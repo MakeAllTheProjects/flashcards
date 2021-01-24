@@ -20,10 +20,6 @@
       width: calc(6.5vh);
       transform: rotate(-5deg);
       margin: 1.5vh 0 0 0;
-
-      @include phone-only {
-        width: calc(4vh);
-      }
     }
   }
 

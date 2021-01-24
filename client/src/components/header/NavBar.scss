@@ -19,7 +19,13 @@
 	}
 
 	.nav-icon {
-		margin-top: 1rem;
-		height: 2.5rem;
+		margin: 3vh 1rem 0 1rem;
+		height: 5vh;
+		cursor: pointer;
+
+		@include phone-only {
+			height: 4vh;
+			margin: 2vh 1rem 0 1rem;
+		}
 	}
 }
