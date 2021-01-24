@@ -66,7 +66,10 @@ export default function App () {
               <CardLibrary/>
             </ProtectedRoute>
             <ProtectedRoute exact path="/user/cards/write">
-              <WriteCard/>
+              <WriteCard isEdit={false}/>
+            </ProtectedRoute>
+            <ProtectedRoute exact path="/user/cards/edit">
+              <WriteCard isEdit={true} />
             </ProtectedRoute>
             <Route path="*" component={NotFound}/>
           </Switch>

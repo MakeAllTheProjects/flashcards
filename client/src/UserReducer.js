@@ -6,7 +6,8 @@ export const initialState = {
 	},
 	cards: [],
 	token: '',
-	message: ''
+	message: '',
+	selectedCard: 0
 }
 
 export const UserReducer = (state, action) => {
@@ -44,6 +45,10 @@ export const UserReducer = (state, action) => {
 
 		case 'SET_MESSAGE':
 			newState.message = action.payload.message
+			return newState
+
+		case 'SET_SELECTED_CARD':
+			newState.selectedCard = action.payload.selectedCardId
 			return newState
 
 		default:

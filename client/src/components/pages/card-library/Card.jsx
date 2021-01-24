@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { useHistory } from 'react-router-dom'
 
+import { GlobalContext } from '../../../App'
 import './Card.scss'
 import AlertIcon from '../../../assets/svg/sketch-style/problem.svg'
 import DeleteIcon from '../../../assets/svg/sketch-style/delete.svg'
@@ -9,8 +11,22 @@ import SuccessIcon from '../../../assets/svg/sticker-style/039-interface-6.svg'
 import ViewIcon from '../../../assets/svg/sketch-style/show.svg'
 
 export default function Card ({card}) {
+	const context = useContext(GlobalContext)
+	const { state, dispatch } = context
 	const [isFlipped, setIsFlipped] = useState(false)
 	const [viewCardDetails, setViewCardDetails] = useState(false)
+	let history = useHistory()
+
+	const handleEditCard = async (id) => {
+		await dispatch({
+			type: 'SET_SELECTED_CARD',
+			payload: {
+				selectedCardId: id
+			}
+		})
+
+		await history.push('/user/cards/edit')
+	}
 
 	return (
 		<div
@@ -35,7 +51,7 @@ export default function Card ({card}) {
 				<img
 					alt="edit card"
 					className="card-control-icon edit"
-					// onClick={() => handleEditCard()}
+					onClick={() => handleEditCard(card.id)}
 					src={EditIcon}
 					title="edit card"
 				/>

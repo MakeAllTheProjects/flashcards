@@ -15,7 +15,16 @@ const createCardQuery = `
 	) VALUES (?, ?, ?);
 `
 
+const editCardQuery = `
+	UPDATE flashcourse_cards
+	SET
+		question = ?,
+		answer = ?
+	WHERE id = ?;
+`
+
 module.exports = {
 	fetchCardsByUserQuery,
-	createCardQuery
+	createCardQuery,
+	editCardQuery
 }

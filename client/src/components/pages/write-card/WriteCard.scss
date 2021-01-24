@@ -2,6 +2,21 @@
 
 .write-card-page {
 	.write-card-container {
-		
+		.card-form {
+			@include centered-v;
+			width: 100%;
+
+			textarea {
+				@include input-style;
+				padding: 1rem 1.5rem;
+				height: 32.5vh;
+				width: 80%;
+				@include font-quicksand;
+			}
+
+			.submit-button {
+				@include submit-button;
+			}
+		}
 	}
 }

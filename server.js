@@ -31,8 +31,8 @@ const corsOptions = {
 }
 
 server.use(express.json())
-server.use(cors(corsOptions.origin))
 server.use(serveStatic(__dirname + '/client/build'))
+server.use(cors(corsOptions.origin))
 
 server.use('/auth', authRouter)
 
