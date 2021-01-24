@@ -42,6 +42,10 @@ export const UserReducer = (state, action) => {
 			newState.message = 'No cards found.'
 			return newState
 
+		case 'SET_MESSAGE':
+			newState.message = action.payload.message
+			return newState
+
 		default:
 			return state
 	}

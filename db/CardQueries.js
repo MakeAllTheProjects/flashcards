@@ -1,4 +1,4 @@
-const fetchCardsByUser = `
+const fetchCardsByUserQuery = `
 	SELECT
 		id,
 		question,
@@ -7,6 +7,15 @@ const fetchCardsByUser = `
 	WHERE user_id = ?;
 `
 
+const createCardQuery = `
+	INSERT INTO flashcourse_cards (
+		user_id,
+		question,
+		answer
+	) VALUES (?, ?, ?);
+`
+
 module.exports = {
-	fetchCardsByUser
+	fetchCardsByUserQuery,
+	createCardQuery
 }
