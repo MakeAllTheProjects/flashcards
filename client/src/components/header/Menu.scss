@@ -1,0 +1,46 @@
+@import '../../variables.scss';
+
+.menu-container {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	width: 100vw;
+	@include level-one;
+	transition: right 0.3s ease;
+
+	.menu {
+		position: absolute;
+		top: 0;
+		right: -2rem;
+		@include centered-v;
+		height: 15rem;
+		width: 15rem;
+		box-shadow: rgba(0, 0,0, 0.2) 0.5rem 0.5rem 0.5rem;
+    transition: transform 0.4s ease 0.05s;
+
+    p {
+      font-size: 1.75rem;
+      cursor: pointer;
+    }
+	}
+
+	.menu:nth-child(1n) {
+		background-color: $yellow-stickynote
+	}
+
+	.menu:nth-child(2n) {
+		background-color: $blue-stickynote
+	}
+
+	.menu:nth-child(3n) {
+		background-color: $pink-stickynote
+	}
+
+	.menu:nth-child(4n) {
+		background-color: $green-stickynote
+	}
+
+	.menu:nth-child(5n) {
+		background-color: $orange-stickynote
+	}
+}

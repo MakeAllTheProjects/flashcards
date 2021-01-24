@@ -1,0 +1,16 @@
+@import '../../variables.scss';
+
+.navbar-container {
+	grid-column: 3;
+	grid-row: 1;
+	margin: 1rem 1rem 0 0;
+	height: $header-height;
+	@include centered-h;
+	
+	transition: 0.5s all ease;
+	z-index: 10;
+
+	.nav-icon {
+		height: 2.5rem;
+	}
+}

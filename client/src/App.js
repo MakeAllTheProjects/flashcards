@@ -49,6 +49,10 @@ export const UserReducer = (state, action) => {
       newState.message = action.payload.message
       return newState
 
+    case 'LOGOUT':
+      newState = { ...initialState }
+      return newState
+
     case 'FETCH_CARDS_SUCCESS':
       newState.cards = [...action.payload.cards]
       newState.message = `You have ${action.payload.cards.length} card${action.payload.cards.length > 1 ? 's' : ''}`
@@ -68,7 +72,7 @@ export default function App () {
   const [ state, dispatch ] = useReducer(UserReducer, initialState)
   const [ cookies, setCookie ] = useCookies(['authToken'])
   const history = useHistory()
-
+  
   useEffect(() => {
     if (cookies && cookies.authToken) {
       const user = cookies.authToken.user
