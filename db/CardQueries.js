@@ -23,8 +23,14 @@ const editCardQuery = `
 	WHERE id = ?;
 `
 
+const deleteCardQuery = `
+	DELETE FROM flashcourse_cards
+	WHERE id = ?;
+`
+
 module.exports = {
 	fetchCardsByUserQuery,
 	createCardQuery,
-	editCardQuery
+	editCardQuery,
+	deleteCardQuery
 }

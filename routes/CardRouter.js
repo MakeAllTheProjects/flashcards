@@ -40,7 +40,7 @@ cardRouter.post('/user/:id', async (req, res, next) => {
 		} else {
 			res.send({
 				cards: cards,
-				message: `New card made`
+				message: `New card made.`
 			})
 		}
 	} catch (err) {
@@ -68,7 +68,33 @@ cardRouter.put('/:id/user/:userId', async (req, res, next) => {
 		} else {
 			res.send({
 				cards: cards,
-				message: `Card editted made`
+				message: `Card editted made.`
+			})
+		}
+	} catch (err) {
+		console.error(err)
+		res.sendStatus(500).json({
+			message: err
+		})
+	}
+})
+
+cardRouter.delete('/:id/user/:userId', async (req, res, next) => {
+	try {
+		const cards = await cardDB.deleteCard({
+			userId: req.params.userId,
+			id: req.params.id
+		})
+
+		if (cards.length === 0) {
+			res.send({
+				cards: [],
+				message: 'No cards found.'
+			})
+		} else {
+			res.send({
+				cards: cards,
+				message: `Card deleted.`
 			})
 		}
 	} catch (err) {

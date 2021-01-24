@@ -1,7 +1,8 @@
+import axios from 'axios'
 import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import { GlobalContext } from '../../../App'
+import { GlobalContext, baseURL } from '../../../App'
 import DialogBox from '../../DialogBox'
 import Modal from '../../Modal'
 import './Card.scss'
@@ -19,6 +20,7 @@ export default function Card ({card}) {
 	const [viewCardDetails, setViewCardDetails] = useState(false)
 	const [isModalDisplayed, setIsModalDisplayed] = useState(false)
 	let history = useHistory()
+
 
 	const handleEditCard = async (id) => {
 		await dispatch({
@@ -41,8 +43,35 @@ export default function Card ({card}) {
 		setIsModalDisplayed(!isModalDisplayed)
 	}
 
-	const deleteCard = () => {
-		console.log("delete card")
+	const deleteCard = async () => {
+		const axiosCards = axios.create({
+			headers: {
+				Authorization: `Bearer ${state.token}`
+			}
+		})
+		
+		await axiosCards.delete(`${baseURL}/api/cards/${state.selectedCard}/user/${state.user.id}`)
+			.then(res => {
+				dispatch({
+					type: 'FETCH_CARDS_SUCCESS',
+					payload: {
+						cards: res.data.cards
+					}
+				})
+			})
+			.then(() => {
+				setIsModalDisplayed(false)
+			})
+			.catch(err => {
+				console.error(err)
+				dispatch({
+					type: 'SET_MESSAGE',
+					payload: {
+						message: 'New card not created.'
+					}
+				})
+				setIsModalDisplayed(false)
+			})
 	}
 
 	const cancelDeleteCard = async () => {

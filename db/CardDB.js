@@ -2,7 +2,8 @@ const connection = require('./connection')
 const { 
 	fetchCardsByUserQuery,
 	createCardQuery,
-	editCardQuery
+	editCardQuery,
+	deleteCardQuery
 } = require('./CardQueries')
 
 let cardDB = {}
@@ -70,6 +71,33 @@ cardDB.editCard = (card) => {
 				card.answer,
 				card.id
 			],
+			(err, results) => {
+				if (err) {
+					console.error(err)
+					return reject(err)
+				}
+
+				connection.query(
+					fetchCardsByUserQuery,
+					[card.userId],
+					(nextErr, nextResults) => {
+						if (nextErr) {
+							console.error(nextErr)
+							return reject(nextErr)
+						}
+						return resolve(nextResults)
+					}
+				)
+			}
+		)
+	})
+}
+
+cardDB.deleteCard = (card) => {
+	return new Promise((resolve, reject) => {
+		connection.query(
+			deleteCardQuery,
+			[card.id],
 			(err, results) => {
 				if (err) {
 					console.error(err)
