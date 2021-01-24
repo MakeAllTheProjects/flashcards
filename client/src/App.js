@@ -13,6 +13,7 @@ import NotAvailable from './components/pages/not-available/NotAvailable'
 import NotFound from './components/pages/not-found/NotFound'
 import ProtectedRoute from './components/ProtecteRoute'
 import UserDashboard from './components/pages/user-dashboard/UserDashboard'
+import WriteCard from './components/pages/write-card/WriteCard'
 
 import './App.scss'
 
@@ -111,6 +112,9 @@ export default function App () {
             </ProtectedRoute>
             <ProtectedRoute exact path="/user/cards">
               <CardLibrary/>
+            </ProtectedRoute>
+            <ProtectedRoute exact path="/user/cards/write">
+              <WriteCard/>
             </ProtectedRoute>
             <Route path="*" component={NotFound}/>
           </Switch>

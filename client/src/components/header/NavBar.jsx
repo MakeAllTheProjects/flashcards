@@ -23,9 +23,11 @@ export default function NavBar ({ isMenuOpen, setIsMenuOpen }) {
 	return (
 		<nav className="navbar-container">
 			{navList.map(navLink => (
-				<Link to={navLink.path}>
+				<Link 
+					key={`nav-link:${navLink.name.split(" ").join("")}`}
+					to={navLink.path}
+				>
 					<img
-						key={`nav-link:${navLink.name.split(" ").join("")}`}
 						className="nav-icon"
 						src={navLink.icon}
 						alt={navLink.name}

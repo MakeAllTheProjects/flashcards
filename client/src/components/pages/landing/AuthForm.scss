@@ -7,10 +7,11 @@
 	h2 {
 		font-size: 2.75rem;
 		text-align: center;
+		@include font-shadow-into-light;
 
 		@include tablet-portrait-down {
 			font-size: 2.25rem;
-			margin: 1.75rem 0 0.5rem 0;
+			margin: 1.75rem 0 1.5rem 0;
 		}
 	}
 
@@ -23,43 +24,13 @@
 	input:-webkit-autofill:focus,
 	input:-internal-autofill-selected,
 	input {
-		margin: 1.5rem;
-		padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-		width: 30vw;
+		@include input-style;
+		width: 50vw;
 		max-width: 45rem;
-		background: $highlighter-yellow;
-		box-shadow: $highlighter-yellow 0.3rem 0.5rem 0.3rem,
-								$highlighter-yellow -0.3rem -0.3rem 0.3rem;
-		border: 2px solid $pencil-light;
-		border-radius: 0.5rem;
-		font-size: 1.75rem;
-		@include font-indie-flower;
-
-		@include tablet-portrait-down {
-			font-size: 1rem;
-			margin: .75rem;
-		}
 	}
 
 	.auth-button {
-		width: 30vw;
-		max-width: 15rem;
-		font-size: 2.5rem;
-		margin: 0.5rem 1.5rem 1.5rem 1.5rem;
-		background: url('../../../assets/svg/sketch-style/doodle-rectangle.svg'), $highlighter-green;
-		box-shadow: $highlighter-green 0.3rem 0.1rem 0.3rem,
-								$highlighter-green -0.2rem -0.3rem 0.3rem;
-		background-size: contain, cover;
-		background-repeat: no-repeat, no-repeat;
-		background-position: center, center;
-		border: none;
-		cursor: pointer;
-
-		@include tablet-portrait-down {
-			font-size: 2rem;
-			text-align: center;
-			margin: 0.5 0 0 0;
-		}
+		@include submit-button;
 	}
 
 	.password-confirm-error,
@@ -78,6 +49,7 @@
 
 	.new-user-toggle {
 		font-size: 2rem;
+		@include font-indie-flower;
 		cursor: pointer;
 
 		@include tablet-portrait-down {
