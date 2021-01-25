@@ -44,12 +44,15 @@ authRouter.post('/signup', async (req, res, next) => {
 				}				
 			}
 		}
+		return
 	} catch (err) {
 		console.error(err)
 		res.sendStatus(500).json({
 			success: false,
 			message: err
 		})
+		next()
+		return
 	} 
 })
 
@@ -76,9 +79,12 @@ authRouter.post('/login', async ( req, res, next ) => {
 				})
 			}
 		}
+		return
 	} catch ( err ) {
 		console.error(err)
 		res.sendStatus(500).json({ message: err })
+		next()
+		return
 	}
 })
 

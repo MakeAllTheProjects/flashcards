@@ -16,11 +16,14 @@ cardRouter.get('/user/:id', async (req, res, next) => {
 				cards: cards
 			})
 		}
+		return
 	} catch (err) {
 		console.error(err)
 		res.sendStatus(500).json({
 			message: err
 		})
+		next()
+		return
 	}
 })
 
@@ -43,11 +46,14 @@ cardRouter.post('/user/:id', async (req, res, next) => {
 				message: `New card made.`
 			})
 		}
+		return
 	} catch (err) {
 		console.error(err)
 		res.sendStatus(500).json({
 			message: err
 		})
+		next()
+		return
 	}
 })
 
@@ -71,11 +77,13 @@ cardRouter.put('/:id/user/:userId', async (req, res, next) => {
 				message: `Card editted made.`
 			})
 		}
+		return
 	} catch (err) {
 		console.error(err)
 		res.sendStatus(500).json({
 			message: err
 		})
+		return
 	}
 })
 
@@ -97,11 +105,13 @@ cardRouter.delete('/:id/user/:userId', async (req, res, next) => {
 				message: `Card deleted.`
 			})
 		}
+		return
 	} catch (err) {
 		console.error(err)
 		res.sendStatus(500).json({
 			message: err
 		})
+		return
 	}
 })
 

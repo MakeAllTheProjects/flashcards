@@ -11,6 +11,10 @@ const cardRouter = require('./routes/CardRouter')
 
 const server = express()
 
+process.on('uncaughtException', function (error) {
+	console.log(error.stack);
+});
+
 const whitelist = [
 	'localhost:3000',
 	'localhost:8080',
