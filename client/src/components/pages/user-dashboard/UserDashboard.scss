@@ -3,7 +3,8 @@
 .user-dashboard {
 	@include centered-v;
 
-	h1 {
-		font-size: 3rem;
+	p {
+		font-size: 2.5rem;
+		@include font-satisfy;
 	}
 }

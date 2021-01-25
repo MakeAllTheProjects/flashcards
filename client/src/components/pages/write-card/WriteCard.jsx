@@ -3,8 +3,9 @@ import React, { useEffect, useState, useContext } from 'react'
 import { useCookies } from 'react-cookie'
 
 import { GlobalContext, baseURL } from '../../../App'
-import './WriteCard.scss'
 import Header from '../../header/Header'
+import './WriteCard.scss'
+import EditCardIcon from '../../../assets/svg/sketch-style/005-draw.svg'
 
 export default function WriteCard ({isEdit}) {
 	const context = useContext(GlobalContext)
@@ -95,6 +96,7 @@ export default function WriteCard ({isEdit}) {
 		<div className="page write-card-page">
 			<Header
 				title={isEdit ? "Edit Card" : "Write a Card"}
+				cornerIcon={EditCardIcon}
 			/>
 			<main className="main write-card-container">
 				<form

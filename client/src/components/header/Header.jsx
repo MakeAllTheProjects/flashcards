@@ -16,7 +16,7 @@ export default function Header ({ title, cornerIcon }) {
 		<>
 			<header className='app-header'>
 				<div className="corner-icon">
-					<Link to="/">
+					<Link to={state.token ? "/user" : "/"}>
 						<img
 							alt="home"
 							className='header-logo'

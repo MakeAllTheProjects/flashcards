@@ -9,7 +9,6 @@ export default function Landing () {
 	return (
 		<div className="page landing-page">
 			<Header
-				cornerIcon={false}
 				title="Welcome to FlashCourse"
 			/>
 			<main className="main landing-container">

@@ -3,8 +3,9 @@ import React, { useContext, useState, useEffect } from 'react'
 
 import { baseURL } from '../../../App'
 import { GlobalContext } from '../../../App'
-import './UserDashboard.scss'
 import Header from '../../header/Header'
+import './UserDashboard.scss'
+import BrainIcon from '../../../assets/svg/sticker-style/045-brain-2.svg'
 
 export default function UserDashboard () {
 	const context = useContext(GlobalContext)
@@ -47,9 +48,11 @@ export default function UserDashboard () {
 	return (
 		<div className="page user-dashboard">
 			<Header
-				title="Welcome"
+				title={`Welcome ${state.user.firstname}`}
+				cornerIcon={BrainIcon}
 			/>
 			<main className="main not-found-container">
+				<p>You have {state.cards.length} card{state.cards.length > 1 ? 's' : ''}.</p>
 			</main>
 		</div>
 	)
