@@ -34,9 +34,16 @@ server.use(express.json())
 server.use(serveStatic(__dirname + '/client/build'))
 server.use(cors(corsOptions.origin))
 
+// Throw away route to use for keeping Heroku app from sleeping on free tier. Remove if upgraded.
+server.get('/hello', (req, res, next) => {
+	res.send({
+		message: 'hello'
+	})
+})
+
 server.use('/auth', authRouter)
 
-server.get('/api', expressJwt({ secret: process.env.SECRET, algorithms: ['HS256']}))
+server.use('/api', expressJwt({ secret: process.env.SECRET, algorithms: ['HS256']}))
 server.use('/api/cards', cardRouter)
 
 server.use((err, req, res, next) => {
