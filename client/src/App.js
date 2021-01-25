@@ -18,7 +18,7 @@ import WriteCard from './components/pages/write-card/WriteCard'
 
 import './App.scss'
 
-export const baseURL = process.env.REACT_APP_IS_PRODUCTION ? 'https://flashcourse.herokuapp.com' : 'http://localhost:8080'
+export const baseURL = process.env.REACT_APP_IS_PRODUCTION ? 'https://flash-course.herokuapp.com' : 'http://localhost:8080'
 
 export const GlobalContext = React.createContext()
 
