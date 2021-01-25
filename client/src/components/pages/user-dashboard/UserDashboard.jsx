@@ -52,7 +52,7 @@ export default function UserDashboard () {
 				cornerIcon={BrainIcon}
 			/>
 			<main className="main not-found-container">
-				<p>You have {state.cards.length} card{state.cards.length > 1 ? 's' : ''}.</p>
+				<p>You have {state.cards.length} card{state.cards.length !== 1 ? 's' : ''}.</p>
 			</main>
 		</div>
 	)
