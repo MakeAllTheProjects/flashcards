@@ -9,10 +9,12 @@ import { useCookies } from 'react-cookie'
 import { UserReducer, initialState } from './UserReducer'
 
 import AppBackground from './components/app-background/AppBackground'
+import ProtectedRoute from './components/ProtecteRoute'
+
 import CardLibrary from './components/pages/card-library/CardLibrary'
+import DemoAccess from './components/pages/demo-access/DemoAccess'
 import Landing from './components/pages/landing/Landing'
 import NotFound from './components/pages/not-found/NotFound'
-import ProtectedRoute from './components/ProtecteRoute'
 import UserDashboard from './components/pages/user-dashboard/UserDashboard'
 import WriteCard from './components/pages/write-card/WriteCard'
 
@@ -59,6 +61,7 @@ export default function App () {
         <div className="app">
           <Switch>
             <Route exact path="/" component={Landing} />
+            <Route exact path="/demo" component={DemoAccess} />
             <ProtectedRoute exact path="/user">
               <UserDashboard/>
             </ProtectedRoute>

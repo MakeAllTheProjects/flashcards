@@ -1,0 +1,11 @@
+@import '../../../variables.scss';
+
+.demo-access-page {
+	.demo-access-container {
+		@include centered-v;
+		p {
+			font-size: 3rem;
+			@include font-satisfy;
+		}
+	}
+}
