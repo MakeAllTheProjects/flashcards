@@ -9,6 +9,7 @@ import { useCookies } from 'react-cookie'
 import { UserReducer, initialState } from './UserReducer'
 
 import AppBackground from './components/app-background/AppBackground'
+import MessageBanner from './components/MessageBanner'
 import ProtectedRoute from './components/ProtecteRoute'
 
 import CardLibrary from './components/pages/card-library/CardLibrary'
@@ -59,6 +60,7 @@ export default function App () {
     >
       <AppBackground>
         <div className="app">
+          {state.message && <MessageBanner />}
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/demo" component={DemoAccess} />

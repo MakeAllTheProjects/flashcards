@@ -35,7 +35,7 @@ export const UserReducer = (state, action) => {
 
 		case 'FETCH_CARDS_SUCCESS':
 			newState.cards = [...action.payload.cards]
-			newState.message = `You have ${action.payload.cards.length} card${action.payload.cards.length > 1 ? 's' : ''}`
+			newState.message = "Card library loaded."
 			return newState
 
 		case 'FETCH_CARDS_FAIL':

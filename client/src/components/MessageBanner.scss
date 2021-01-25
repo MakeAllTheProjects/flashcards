@@ -1,0 +1,23 @@
+@import '../variables.scss';
+
+.message-banner {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 99;
+	@include centered-v;
+	min-height: 3vh;
+	background-color: $pink-stickynote;
+	box-shadow: $pencil-light 1rem 1rem 1rem;
+	transition: all ease 1s;
+	
+	p {
+		margin: auto;
+		padding: 2rem;
+		font-size: 3rem;
+		@include font-amatic;
+		font-weight: 900;
+		text-align: center;
+	}
+}
