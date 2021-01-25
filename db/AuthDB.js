@@ -66,7 +66,7 @@ authDB.signup = ( user ) => {
 
 						connection.query(
 							fetchValidatedUserQuery,
-							[ results.insertId ],
+							[ user.username ],
 							( nextErr, nextResults ) => {
 								if ( nextErr ) {
 									console.error(nextErr)

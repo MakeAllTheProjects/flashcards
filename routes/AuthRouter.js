@@ -26,16 +26,22 @@ authRouter.post('/signup', async (req, res, next) => {
 					lastname: req.body.lastname
 				})
 
-				const token = jwt.sign({
-					id: newUser.id,
-					username: newUser.username,
-					firstname: newUser.firstname
-				}, process.env.SECRET)
+				if (newUser === false) {
+					res.send({
+						message: 'Failed to signup.'
+					})
+				} else {
+					const token = jwt.sign({
+						id: newUser.id,
+						username: newUser.username,
+						firstname: newUser.firstname
+					}, process.env.SECRET)
 
-				res.send({
-					user: newUser,
-					token: token
-				})
+					res.send({
+						user: newUser,
+						token: token
+					})
+				}				
 			}
 		}
 	} catch (err) {
