@@ -35,7 +35,7 @@ const fetchValidatedUserQuery = `
 		username,
 		firstname
 	FROM flashcourse_users
-	WHERE username = ?;
+	WHERE id = ?;
 `
 
 module.exports = {

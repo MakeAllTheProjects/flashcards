@@ -65,8 +65,6 @@ export default function WriteCard ({isEdit}) {
 	const editCard = async (e) => {
 		e.preventDefault()
 
-		console.log("editting")
-
 		axiosCards.put(`${baseURL}/api/cards/${state.selectedCard}/user/${state.user.id}`, { question: question, answer: answer })
 			.then(res => {
 				dispatch({
