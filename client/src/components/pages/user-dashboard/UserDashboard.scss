@@ -3,8 +3,17 @@
 .user-dashboard {
 	@include centered-v;
 
-	p {
-		font-size: 2.5rem;
-		@include font-satisfy;
+	section {
+		@include centered-h;
+
+		p {
+			font-size: 3rem;
+			@include font-satisfy;
+		}
+
+		.card-icon {
+			height: 5.5rem;
+			margin-right: 2rem;
+		}
 	}
 }
