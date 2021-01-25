@@ -13,6 +13,8 @@ const saltRounds = 10
 
 let authDB = {}
 
+connection.connect()
+
 authDB.validateByUsername = ( user ) => {
 	return new Promise(( resolve, reject ) => {
 		connection.query(

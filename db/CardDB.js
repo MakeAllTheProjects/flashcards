@@ -8,6 +8,8 @@ const {
 
 let cardDB = {}
 
+connection.connect()
+
 cardDB.fetchCardsByUser = ( user ) => {
 	return new Promise(( resolve, reject ) => {
 		connection.query(
