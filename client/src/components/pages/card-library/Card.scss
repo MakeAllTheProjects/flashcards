@@ -42,10 +42,10 @@
 		.card-front,
 		.card-back {
 			position: relative;
-			@include centered-h;
+			@include centered-v;
 			display: grid;
 			grid-template-columns: 3rem 1fr 3rem;
-			grid-template-rows: 1fr 4rem;
+			grid-template-rows: calc(40vh - 4rem) 4rem;
 			@include card-style (calc(40vh), calc(40vh));
 			backface-visibility: hidden;
 			cursor: pointer;
@@ -54,10 +54,14 @@
 			p {
 				grid-column: 1/4;
 				grid-row: 1;
-				padding: 3rem 2rem 0 2rem;
+				padding: 3rem 2rem 3rem 2rem;
+				max-height: calc(40vh - 4rem);
 				font-size: 100%;
+				line-height: 150%;
 				text-align: center;
 				word-break: break-word;
+				overflow: auto;
+				@include thin-scroll-bar();
 			}
 
 			@include phone-only {
@@ -119,6 +123,10 @@
 
 		.card-front {
 			border-radius: 3rem 0 3rem 0;
+
+			p {
+				grid-row: 1/3;
+			}
 		}
 
 		.card-back {

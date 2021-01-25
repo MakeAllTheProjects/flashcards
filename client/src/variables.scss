@@ -173,6 +173,7 @@ $large-monitor: 1800px;
 @mixin thin-scroll-bar() {
   &::-webkit-scrollbar {
     height: 50%;
+    width: 1rem;
   }
 
   &::-webkit-scrollbar-thumb {
