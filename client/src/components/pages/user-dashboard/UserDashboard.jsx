@@ -15,7 +15,7 @@ export default function UserDashboard () {
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
-		if (state.user.id) {
+		if (state.user.id && state.cards.length === 0) {
 			const axiosUser = axios.create({
 				headers: {
 					Authorization: `Bearer ${state.token}`

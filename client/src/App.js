@@ -31,7 +31,7 @@ export default function App () {
   const history = useHistory()
   
   useEffect(() => {
-    if (cookies && cookies.authToken) {
+    if ( !state.user.username && cookies && cookies.authToken ) {
       const user = cookies.authToken.user
       dispatch({
         type: 'LOGIN_SUCCESS',
