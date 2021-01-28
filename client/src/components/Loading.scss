@@ -1,0 +1,78 @@
+@import '../variables.scss';
+
+.loading {
+	position: absolute;
+	height: 20rem;
+	width: 20rem;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+
+	.loading-card {
+		position: absolute;
+		height: 8rem;
+		width: 8rem;
+		border-radius: 0.5rem;
+		box-shadow: $pencil-extra-light 0.5rem 0.5rem 0.5rem;
+	}
+
+	.pink {
+		background-color: $pink-stickynote;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		animation: pink-card_move 1.8s cubic-bezier(0.6, 0.01, 0.4, 1) infinite;
+	}
+
+	.blue {
+		background-color: $blue-stickynote;
+		top: 0;
+		right: 0;
+		animation: blue-card_move 1.8s cubic-bezier(0.6, 0.01, 0.4, 1) infinite;
+	}
+
+	.green {
+		background-color: $green-stickynote;
+		bottom: 0;
+		right: 0;
+		z-index: 1;
+		animation: green-card_move 1.8s cubic-bezier(0.6, 0.01, 0.4, 1) infinite;
+	}
+
+	.yellow {
+		background-color: $yellow-stickynote;
+		bottom: 0;
+		left: 0;
+		animation: yellow-card_move 1.8s cubic-bezier(0.6, 0.01, 0.4, 1) infinite;
+	}
+
+	@keyframes pink-card_move {
+  0%, 100% {transform: translate(0, 0)} 
+  25% {transform: translate(0, 100px)} 
+  50% {transform: translate(100px, 100px)} 
+  75% {transform: translate(100px, 0)} 
+}
+
+@keyframes blue-card_move {
+  0%, 100% {transform: translate(0, 0)} 
+  25% {transform: translate(-100px, 0)} 
+  50% {transform: translate(-100px, 100px)} 
+  75% {transform: translate(0, 100px)} 
+}
+
+@keyframes green-card_move {
+  0%, 100% {transform: translate(0, 0)} 
+  25% {transform: translate(0, -100px)} 
+  50% {transform: translate(-100px, -100px)} 
+  75% {transform: translate(-100px, 0)} 
+}
+
+@keyframes yellow-card_move {
+  0%, 100% {transform: translate(0, 0)} 
+  25% {transform: translate(100px, 0)} 
+  50% {transform: translate(100px, -100px)} 
+  75% {transform: translate(0, -100px)} 
+}
+}

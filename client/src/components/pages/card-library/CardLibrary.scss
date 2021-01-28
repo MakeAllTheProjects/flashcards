@@ -17,6 +17,14 @@
 			@include no-scroll-bar();
 		}
 
+		.loading-library {
+			z-index: 5;
+			font-size: 3rem;
+			@include font-marker;
+			text-align: center;
+			text-shadow: $highlighter-blue 0.5rem 0.5rem 0.5rem;
+		}
+
 		.card-list-controls {
 			position: absolute;
 			top: 1.5rem;
