@@ -1,0 +1,27 @@
+@import '../variables.scss';
+
+.sidebar {
+	grid-column: 1;
+	grid-row: 2/4;
+	@include centered-v;
+	justify-content: start;
+	padding: 2rem 0 2rem 1rem;
+
+	.sidebar-button {
+		margin-bottom: 2rem;
+		height: 5rem;
+		filter: drop-shadow(white 0.5rem 0.5rem 0.1rem) drop-shadow(white -0.5rem -0.5rem 0.1rem) drop-shadow($pencil-extra-light 0.1rem 0.1rem 0.1rem);
+
+		&:hover {
+			filter: drop-shadow(white 0.5rem 0.5rem 0.1rem) drop-shadow(white -0.5rem -0.5rem 0.1rem) drop-shadow($pencil-light 0.2rem 0.2rem 0.3rem);
+		}
+	}
+
+	.sidebar-button:nth-child(1n) {
+		transform: rotate(10deg);
+	}
+
+	.sidebar-button:nth-child(2n) {
+		transform: rotate(-10deg);
+	}
+}
