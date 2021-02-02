@@ -19,11 +19,19 @@ cardDB.fetchCardsByUser = ( user ) => {
 					return reject(err)
 				}
 
-				const cards = results.map(result => ({
-					id: result.id,
-					question: result.question,
-					answer: result.answer
-				}))
+				const cards = results.map(result => {
+					return {
+						id: result.id,
+						question: result.question,
+						answer: result.answer,
+						tags: result.tag_id === null ? [] : [
+							{
+								tagId: result.tag_id,
+								tagLabel: result.tag
+							}
+						]
+					}
+				})
 				
 				resolve(cards)
 			}

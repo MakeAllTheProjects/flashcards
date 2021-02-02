@@ -1,0 +1,33 @@
+@import '../../../variables.scss';
+
+.card-tags-container {
+	position: absolute;
+	top: 5vh;
+	bottom: 5vh;
+	@include centered-v;
+	justify-content: flex-start;
+	margin: 1rem 0 0 0;
+	height: 35vh;
+	width: 0;
+	z-index: 0;
+	transition: all ease 1s;
+
+	.tag {
+		padding: 0.5rem 0;
+		width: 100%;
+		border-radius: 50% 0 0 50%;
+		text-align: center;
+		line-height: 200%;
+		font-size: 1.15rem;
+		font-weight: 900;
+		color: $pencil-dark;
+		background-color: rgb(215, 200, 255);
+		box-shadow: inset  rgba(50, 50, 50, 0.1) -0.5rem 0 1rem,
+								$pencil-light 0 0.1rem 0.4rem;
+	}
+}
+
+.card-tags-container.open {
+	margin: 1rem -2rem 0 -5rem;
+	width: 7rem;
+}

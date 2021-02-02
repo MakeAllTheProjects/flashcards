@@ -90,12 +90,35 @@ export default function CardLibrary () {
 						<Loading/>
 					</>
 				)}
-				{!isLoading && visibleCards.length > 0 && visibleCards.map(card => (
-					<Card
-						key={card.id}
-						card={card}
-					/>
-				))}
+				{!isLoading && visibleCards.length > 0 && visibleCards.map((card, i) => {
+					let cardColor = "rgb(84, 205, 242)"
+
+					switch(i % 5) {
+						case 1: 
+							cardColor = "rgb(248, 229, 58)"
+							break
+						case 2: 
+							cardColor = "rgb(241, 126, 176)"
+							break
+						case 3: 
+							cardColor = "rgb(175, 247, 42)"
+							break
+						case 4: 
+							cardColor = "rgb(252, 183, 18)"
+							break
+						default: 
+							cardColor = "rgb(84, 205, 242)"
+							break
+					}
+
+					return (
+						<Card
+							key={card.id}
+							card={card}
+							cardColor={cardColor}
+						/>
+					)
+				})}
 			</main>
 		</div>
 	)

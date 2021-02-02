@@ -3,6 +3,8 @@ import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { GlobalContext, baseURL } from '../../../App'
+import AttemptDetails from './AttemptDetails'
+import CardTags from './CardTags'
 import DialogBox from '../../DialogBox'
 import Modal from '../../Modal'
 import './Card.scss'
@@ -13,7 +15,7 @@ import FailureIcon from '../../../assets/svg/sticker-style/038-delete.svg'
 import SuccessIcon from '../../../assets/svg/sticker-style/039-interface-6.svg'
 import ViewIcon from '../../../assets/svg/sketch-style/show.svg'
 
-export default function Card ({card}) {
+export default function Card ({card, cardColor}) {
 	const context = useContext(GlobalContext)
 	const { state, dispatch } = context
 	const [isFlipped, setIsFlipped] = useState(false)
@@ -85,17 +87,23 @@ export default function Card ({card}) {
 	}
 
 	return (
-		<>
+		<div className="card-container">
+			{viewCardDetails && (
+				<CardTags
+					viewCardDetails={viewCardDetails}
+					tags={card.tags}
+				/>
+			)}
 			<div
 				className={isFlipped ? "card flipped" : "card"}
 			>
 				<div className="card-control-panel">
-					{!card.answer || card.answer === "" && (
+					{card.answer === "" && (
 						<img
-							alt="issue with card"
+							alt="question only"
 							className="card-alert-icon"
 							src={AlertIcon}
-							title="issue with card"
+							title="question only"
 						/>
 					)}
 					<img
@@ -125,12 +133,17 @@ export default function Card ({card}) {
 					className="card-content"
 					onClick={() => setIsFlipped(!isFlipped)}
 				>
-					<div className="card-front">
-						<p>{card.question}</p>
-						{/* {viewCardDetailsPanel} */}
+					<div className="card-front" style={{backgroundColor: cardColor}}>
+						<p className="card-text">{card.question}</p>
+						{viewCardDetails && (
+							<AttemptDetails
+								viewCardDetails={viewCardDetails}
+								recentAttempts={[]}
+							/>
+						)}
 					</div>
-					<div className="card-back">
-						<p>{card.answer}</p>
+					<div className="card-back" style={{backgroundColor: cardColor}}>
+						<p className="card-text">{card.answer}</p>
 						<img
 							alt="failed attempt"
 							className="attempt-icon failure"
@@ -138,7 +151,12 @@ export default function Card ({card}) {
 							src={FailureIcon}
 							title="Got the answer wrong!"
 						/>
-						{/* {viewCardDetailsPanel} */}
+						{viewCardDetails && (
+							<AttemptDetails
+								viewCardDetails={viewCardDetails}
+								recentAttempts={[]}
+							/>
+						)}
 						<img
 							alt="success attempt"
 							className="attempt-icon success"
@@ -162,6 +180,6 @@ export default function Card ({card}) {
 					confirmText="Yes"
 				/>
 			</Modal>
-		</>
+		</div>
 	)
 }
