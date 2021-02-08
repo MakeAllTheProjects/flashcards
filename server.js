@@ -8,6 +8,7 @@ const serveStatic = require('serve-static')
 
 const authRouter = require('./routes/AuthRouter')
 const cardRouter = require('./routes/CardRouter')
+const tagRouter = require('./routes/TagRouter')
 
 const server = express()
 
@@ -49,6 +50,7 @@ server.use('/auth', authRouter)
 
 server.use('/api', expressJwt({ secret: process.env.SECRET, algorithms: ['HS256']}))
 server.use('/api/cards', cardRouter)
+server.use('/api/tags', tagRouter)
 
 server.use((err, req, res, next) => {
 	if (err) {

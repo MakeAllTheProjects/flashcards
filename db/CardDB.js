@@ -54,17 +54,7 @@ cardDB.createCard = (card) => {
 					return reject(err)
 				}
 
-				connection.query(
-					fetchCardsByUserQuery,
-					[ card.userId ],
-					(nextErr, nextResults) => {
-						if (nextErr) {
-							console.error(nextErr)
-							return reject(nextErr)
-						}
-						return resolve(nextResults)
-					}
-				)
+				return resolve(results.insertId)
 			}
 		)
 	})

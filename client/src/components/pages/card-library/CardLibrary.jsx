@@ -52,7 +52,6 @@ export default function CardLibrary () {
 				}
 			})
 		} else {
-			console.log(cardsList)
 			setVisibleCards(cardsList)
 			dispatch({
 				type: 'SET_MESSAGE',

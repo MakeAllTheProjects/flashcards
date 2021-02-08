@@ -9,7 +9,6 @@ export default function MessageBanner () {
 	const [opacity, setOpacity] = useState(0)
 
 	useEffect(() => {
-		console.log(state.message)
 		if (state.message.length > 0) {
 			setOpacity(100)
 			setTimeout(() => {

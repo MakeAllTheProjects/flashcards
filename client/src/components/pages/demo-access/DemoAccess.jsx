@@ -15,7 +15,6 @@ export default function DemoAccess () {
 	const [demoLoadingMessage, setDemoLoadingMessage] = useState("Please wait while the demo is loading...")
 
 	useEffect(() => {
-		console.log(process.env.REACT_APP_DEMO_USER)
 		axios.post(`${baseURL}/auth/login`, {
 			username: 'demo',
 			password: 'demodemo'

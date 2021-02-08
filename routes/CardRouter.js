@@ -1,5 +1,6 @@
 const express = require('express')
 const cardDB = require('../db/CardDB')
+const tagDB = require('../db/TagDB')
 
 const cardRouter = express.Router()
 
@@ -29,23 +30,60 @@ cardRouter.get('/user/:id', async (req, res, next) => {
 
 cardRouter.post('/user/:id', async (req, res, next) => {
 	try {
-		const cards = await cardDB.createCard({
+		let cards = []
+		let tags = []
+
+		const newCard = await cardDB.createCard({
 			userId: req.params.id,
 			question: req.body.question,
 			answer: req.body.answer
 		})
 
-		if (cards.length === 0) {
-			res.send({
-				cards: [],
-				message: 'No cards found.'
-			})
-		} else {
-			res.send({
-				cards: cards,
-				message: `New card made.`
-			})
+		if (newCard > 0) {
+			if (req.body.tag.tagId) {
+				let tagId
+				
+				if (req.body.tag.tagId === "new") {
+					const newTag = await tagDB.createTag({
+						userId: req.params.id,
+						tag: req.body.tag.tagLabel
+					})
+
+					if (newTag > 0) {
+						tagId = newTag
+					}					
+				} else {
+					tagId = req.body.tag.tagId
+				}
+
+				const newTags = await tagDB.fetchTagsByUser({id: req.params.id})
+				if (newTags.length > 0 ) {
+					tags = [...newTags]
+				}
+
+				if (tagId) {
+					await tagDB.connectTagToCard({
+						cardId: newCard,
+						tagId: tagId
+					})
+				}
+			}
 		}
+
+		const newCards = await cardDB.fetchCardsByUser({
+			id: req.params.id
+		})
+
+		if (newCards.length > 0) {
+			cards = [...newCards]
+		}
+
+		res.send({
+			cards: cards,
+			tags: tags,
+			message: cards.length > 0 ? `${cards.length} cards found.` : 'No cards found.'
+		})
+
 		return
 	} catch (err) {
 		console.error(err)
