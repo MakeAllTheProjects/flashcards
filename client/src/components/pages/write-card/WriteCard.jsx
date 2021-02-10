@@ -15,7 +15,6 @@ export default function WriteCard ({isEdit}) {
 	const [question, setQuestion] = useState('')
 	const [tags, setTags] = useState([])
 	const [selectedTag, setSelectedTag] = useState({})
-	const [isNewTag, setIsNewTag] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 	const [cookies] = useCookies(['authToken'])
 
@@ -25,6 +24,11 @@ export default function WriteCard ({isEdit}) {
 				const cardToEdit = state.cards.find(card => card.id === state.selectedCard)
 				cardToEdit.answer && setAnswer(cardToEdit.answer)
 				cardToEdit.question && setQuestion(cardToEdit.question)
+				cardToEdit.tags && cardToEdit.tags.length > 0 && setSelectedTag({
+					tagId: cardToEdit.tags[0].tagId,
+					tagLabel: cardToEdit.tags[0].tagLabel
+				})
+				console.log("cardToEdit", cardToEdit)
 			}
 		}
 	}, [isEdit, state.selectedCard, state.cards])
@@ -92,12 +96,27 @@ export default function WriteCard ({isEdit}) {
 	const editCard = async (e) => {
 		e.preventDefault()
 
-		axiosCards.put(`${baseURL}/api/cards/${state.selectedCard}/user/${state.user.id}`, { question: question, answer: answer })
+		axiosCards.put(
+			`${baseURL}/api/cards/${state.selectedCard}/user/${state.user.id}`, 
+			{ 
+				question: question, 
+				answer: answer,
+				tag: selectedTag 
+			}
+		) 
 			.then(res => {
 				dispatch({
 					type: 'FETCH_CARDS_SUCCESS',
 					payload: {
 						cards: res.data.cards
+					}
+				})
+			})
+			.then(() => {
+				dispatch({
+					type: 'SET_MESSAGE',
+					payload: {
+						message: "Card editted."
 					}
 				})
 			})
@@ -109,7 +128,7 @@ export default function WriteCard ({isEdit}) {
 				dispatch({
 					type: 'SET_MESSAGE',
 					payload: {
-						message: 'Card not editted created.'
+						message: 'Card not editted.'
 					}
 				})
 				setIsLoading(false)
@@ -214,6 +233,10 @@ export default function WriteCard ({isEdit}) {
 						onChange={handleTagChange}
 						onInputChange={handleTagChange}
 						placeholder="(Optional) Select a tag..."
+						value={{
+							label: selectedTag.tagLabel,
+							value: selectedTag
+						}}
 					/>
 					<textarea
 						placeholder="Question..."

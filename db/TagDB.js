@@ -1,13 +1,16 @@
+const e = require('express')
 const connection = require('./connection')
 const {
 		connectTagToCardQuery,
 		createTagQuery,
-		fetchTagsByUserQuery
+		editCardTagQuery,
+		fetchTagsByUserQuery,
+		verifyCardHasTagQuery
 } = require('./TagQueries')
 
 let tagDB = {}
 
-tagDB.fetchTagsByUser = (user) => {
+tagDB.fetchTagsByUser = ( user ) => {
 	return new Promise(( resolve, reject ) => {
 		connection.query(
 			fetchTagsByUserQuery,
@@ -31,7 +34,7 @@ tagDB.fetchTagsByUser = (user) => {
 	})
 }
 
-tagDB.createTag = ({userId, tag}) => {
+tagDB.createTag = ({ userId, tag }) => {
 	return new Promise ((resolve, reject) => {
 		connection.query(
 			createTagQuery,
@@ -51,7 +54,7 @@ tagDB.createTag = ({userId, tag}) => {
 	})
 }
 
-tagDB.connectTagToCard = ({cardId, tagId}) => {
+tagDB.connectTagToCard = ({ cardId, tagId }) => {
 	return new Promise ((resolve, reject) => {
 		connection.query(
 			connectTagToCardQuery,
@@ -66,6 +69,53 @@ tagDB.connectTagToCard = ({cardId, tagId}) => {
 				}
 
 				return resolve(true)
+			}
+		)
+	})
+}
+
+tagDB.editCardTag = ({ cardId, tagId }) => {
+	return new Promise ((resolve, reject) => {
+		connection.query(
+			verifyCardHasTagQuery,
+			[cardId],
+			(err, results) => {
+				if (err) {
+					console.error(err)
+					return reject(err)
+				}
+
+				if (results.length > 0) {
+					connection.query(
+						editCardTagQuery,
+						[
+							tagId,
+							cardId
+						],
+						(nextErr, nextResults) => {
+							if (nextErr) {
+								console.error(nextErr)
+								return reject(nextResults)
+							}
+							return resolve(true)
+						}
+					)
+				} else {
+					connection.query(
+						connectTagToCardQuery,
+						[
+							cardId,
+							tagId
+						],
+						(nextErr, nextResults) => {
+							if (nextErr) {
+								console.error(nextErr)
+								return reject(nextResults)
+							}
+							return resolve(true)
+						}
+					)
+				}
 			}
 		)
 	})

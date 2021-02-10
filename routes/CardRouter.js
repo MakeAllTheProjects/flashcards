@@ -97,6 +97,25 @@ cardRouter.post('/user/:id', async (req, res, next) => {
 
 cardRouter.put('/:id/user/:userId', async (req, res, next) => {
 	try {
+		let tagId
+
+		if (req.body.tag.tagId === "new") {
+			const newTag = await tagDB.createTag({
+				userId: req.params.userId,
+				tag: req.body.tag.tagLabel
+			})
+			if (newTag > 0) {
+				tagId = newTag
+			}					
+		} else {
+			tagId = req.body.tag.tagId
+		}
+
+		await tagDB.editCardTag({
+			cardId: req.params.id,
+			tagId: tagId
+		})
+
 		const cards = await cardDB.editCard({
 			userId: req.params.userId,
 			id: req.params.id,
@@ -104,14 +123,20 @@ cardRouter.put('/:id/user/:userId', async (req, res, next) => {
 			answer: req.body.answer
 		})
 
+		const tags = await tagDB.fetchTagsByUser({
+			id: req.params.id
+		})
+
 		if (cards.length === 0) {
 			res.send({
 				cards: [],
+				tags: [],
 				message: 'No cards found.'
 			})
 		} else {
 			res.send({
 				cards: cards,
+				tags: tags,
 				message: `Card editted made.`
 			})
 		}

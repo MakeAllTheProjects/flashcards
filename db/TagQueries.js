@@ -20,8 +20,23 @@ const fetchTagsByUserQuery = `
 	WHERE user_id = ?;
 `
 
+const editCardTagQuery = `
+	UPDATE flashcourse_card_tags
+	SET tag_id = ?
+	WHERE card_id = ?;
+`
+
+const verifyCardHasTagQuery = `
+	SELECT
+		tag_id
+	FROM flashcourse_card_tags
+	WHERE card_id = ?;
+`
+
 module.exports = {
 	connectTagToCardQuery,
 	createTagQuery,
-	fetchTagsByUserQuery
+	editCardTagQuery,
+	fetchTagsByUserQuery,
+	verifyCardHasTagQuery
 }
