@@ -28,7 +28,6 @@ export default function WriteCard ({isEdit}) {
 					tagId: cardToEdit.tags[0].tagId,
 					tagLabel: cardToEdit.tags[0].tagLabel
 				})
-				console.log("cardToEdit", cardToEdit)
 			}
 		}
 	}, [isEdit, state.selectedCard, state.cards])
