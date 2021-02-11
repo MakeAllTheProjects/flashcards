@@ -111,10 +111,14 @@ cardRouter.put('/:id/user/:userId', async (req, res, next) => {
 			tagId = req.body.tag.tagId
 		}
 
-		await tagDB.editCardTag({
-			cardId: req.params.id,
-			tagId: tagId
-		})
+		if (tagId === "delete") {
+			await tagDB.removeTagFromCard({cardId: req.params.id})
+		} else if (tagId) {
+			await tagDB.editCardTag({
+				cardId: req.params.id,
+				tagId: tagId
+			})
+		}
 
 		const cards = await cardDB.editCard({
 			userId: req.params.userId,

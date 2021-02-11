@@ -95,12 +95,14 @@ export default function WriteCard ({isEdit}) {
 	const editCard = async (e) => {
 		e.preventDefault()
 
+		const tag = selectedTag.tagId ? selectedTag : {tagId: "delete", tagLabel: ""}
+
 		axiosCards.put(
 			`${baseURL}/api/cards/${state.selectedCard}/user/${state.user.id}`, 
 			{ 
 				question: question, 
 				answer: answer,
-				tag: selectedTag 
+				tag: tag 
 			}
 		) 
 			.then(res => {

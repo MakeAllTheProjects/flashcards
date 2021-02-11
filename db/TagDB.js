@@ -5,6 +5,7 @@ const {
 		createTagQuery,
 		editCardTagQuery,
 		fetchTagsByUserQuery,
+		removeTagFromCardQuery,
 		verifyCardHasTagQuery
 } = require('./TagQueries')
 
@@ -116,6 +117,22 @@ tagDB.editCardTag = ({ cardId, tagId }) => {
 						}
 					)
 				}
+			}
+		)
+	})
+}
+
+tagDB.removeTagFromCard = ({cardId}) => {
+	return new Promise ((resolve, reject) => {
+		connection.query(
+			removeTagFromCardQuery,
+			[cardId],
+			(err, results) => {
+				if (err) {
+					console.error(err)
+					return reject(err)
+				}
+				return resolve(true)
 			}
 		)
 	})
