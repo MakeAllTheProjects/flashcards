@@ -1,24 +1,8 @@
-@import './variables.scss';
+@import './helpers/styles';
 
 * {
-	margin: 0;
-	box-sizing: border-box;
-	font-size: 10px;
-	color: $pencil-medium;
-	@include font-quicksand;
-};
-
-button, a {
-	outline: none;
-}
-
-.page {
-	@include app-grid;
-
-	.main {
-		@include main-placement;
-		font-size: 2rem;
-		@include no-scroll-bar();
-		overflow: auto;
-	}
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 10px;
+  color: $pencil-medium;
 }

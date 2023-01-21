@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Indie+Flower&family=Permanent+Marker&family=Quicksand&family=Shadows+Into+Light&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Quicksand&family=Satisfy&display=swap');
+
+@mixin font-amatic {
+  font-family: 'Amatic SC', cursive;
+}
+
+@mixin font-indie-flower {
+  font-family: 'Indie Flower', cursive;
+}
+
+@mixin font-marker {
+  font-family: 'Permanent Marker', cursive;
+}
+
+@mixin font-shadow-into-light {
+  font-family: 'Shadows Into Light', cursive;
+}
+
+@mixin font-abel {
+  font-family: 'Abel', sans-serif;
+}
+
+@mixin font-quicksand {
+  font-family: 'Quicksand', sans-serif;
+}
+
+@mixin font-satisfy {
+  font-family: 'Satisfy', cursive;
+}

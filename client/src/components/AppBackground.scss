@@ -1,0 +1,57 @@
+@import '../helpers/styles';
+
+.app-background-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  background-color: $paper;
+
+  .holes-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(10vh);
+    min-height: 100vh;
+    padding: 5vh 0 0 0;
+    @include center-spaced-v;
+    border-right: solid $paperRedLine 0.2rem;
+
+    .punch-hole {
+      z-index: 1;
+      height: 4vh;
+      width: calc(4vh);
+      border-radius: 100%;
+      background-color: $paperShadowLight;
+      box-shadow: 
+        inset $paperShadowDark 0.2rem 0.2rem 0.3rem,
+        inset $paper 0.2rem 0.2rem 0.1rem,
+        inset $paperShadowDark 0.3rem 0.3rem 0.3rem,
+        inset $paper 0.3rem 0.3rem 0.1rem,
+        inset $paperShadowDark 0.4rem 0.4rem 0.3rem,
+        inset $paper 0.4rem 0.4rem 0.1rem,
+        inset $paperShadowDark 0.5rem 0.5rem 0.3rem,
+        inset $paper 0.5rem 0.5rem 0.1rem;
+    }
+  }
+
+  .blue-lines-container {
+    position: fixed;
+    top: $header-height;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    @include center-spaced-v;
+
+    .blue-line {
+      width: 100vw;
+      border-bottom: solid $paperBlueLine 0.1rem;
+    }
+
+    .blue-line:first-child {
+      border-top: solid $paperBlueLine 0.2rem;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+@import './colors.scss';
+
+@mixin no-scroll-bar() {
+  &::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 0;
+    width: 0;
+  }
+
+  &::-webkit-scrollbar-track {
+    height: 0;
+    width: 0;
+  }
+}
+
+@mixin thin-scroll-bar() {
+  &::-webkit-scrollbar {
+    height: 50%;
+    width: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 0.5rem;
+    width: 0.5rem;
+    background-color: $pencil-extra-light;
+    border-radius: 5rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    height: 50%;
+    background-color: rgba(0, 100, 255, 0.25);
+    border-radius: 5rem;
+  }
+}

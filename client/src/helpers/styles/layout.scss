@@ -1,0 +1,134 @@
+$header-height: calc(10vh);
+
+$phone-width: 575px;
+$tablet-width: 700px;
+$tablet-height: 1115px;
+$small-monitor: 1200px;
+$large-monitor: 1800px;
+
+@mixin phone-only {
+  @media (max-width: $phone-width) {
+    @content
+  }
+
+  ;
+}
+
+@mixin tablet-portrait-up {
+  @media (min-width: $phone-width) {
+    @content
+  };
+}
+
+@mixin tablet-portrait-down {
+  @media (max-width: $phone-width) {
+    @content
+  };
+}
+
+@mixin tablet-landscape-up {
+  @media (min-width: $tablet-height) {
+    @content
+  };
+}
+
+@mixin tablet-landscape-down {
+  @media (max-width: $tablet-height) {
+    @content
+  };
+}
+
+@mixin small-monitor-up {
+  @media (min-width: $small-monitor) {
+    @content
+  };
+}
+
+@mixin large-monitor-up {
+  @media (min-width: $large-monitor) {
+    @content
+  };
+}
+
+@mixin centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin centered-h {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+@mixin centered-v {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@mixin center-spaced-h {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+@mixin center-spaced-v {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+@mixin fullscreen {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+@mixin fullscreen-fixed {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+@mixin fill-space {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+@mixin app-grid {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: $header-height 1fr;
+  grid-template-rows: calc(14vh) 1fr;
+
+  @include tablet-landscape-down {
+    grid-template-rows: calc(11.5vh) 1fr 8vh;
+  }
+}
+
+@mixin main-placement {
+  grid-column: 2;
+  grid-row: 2;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding: 1rem;
+  @include center-spaced-v;
+}
