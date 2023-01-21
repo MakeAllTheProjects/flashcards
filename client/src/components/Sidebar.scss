@@ -4,7 +4,7 @@
 	grid-column: 1;
 	grid-row: 2/4;
 	@include centered-v;
-	justify-content: start;
+	justify-content: flex-start;
 	padding: 2rem 0 2rem 1rem;
 
 	.sidebar-button {

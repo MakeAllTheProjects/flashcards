@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { GlobalContext, baseURL } from '../../../App'
@@ -15,14 +15,13 @@ import FailureIcon from '../../../assets/svg/sticker-style/038-delete.svg'
 import SuccessIcon from '../../../assets/svg/sticker-style/039-interface-6.svg'
 import ViewIcon from '../../../assets/svg/sketch-style/show.svg'
 
-export default function Card ({card, cardColor}) {
+export default function Card({ card, cardColor }) {
 	const context = useContext(GlobalContext)
 	const { state, dispatch } = context
 	const [isFlipped, setIsFlipped] = useState(false)
 	const [viewCardDetails, setViewCardDetails] = useState(false)
 	const [isModalDisplayed, setIsModalDisplayed] = useState(false)
 	let history = useHistory()
-
 
 	const handleEditCard = async (id) => {
 		await dispatch({
@@ -51,7 +50,7 @@ export default function Card ({card, cardColor}) {
 				Authorization: `Bearer ${state.token}`
 			}
 		})
-		
+
 		await axiosCards.delete(`${baseURL}/api/cards/${state.selectedCard}/user/${state.user.id}`)
 			.then(res => {
 				dispatch({
@@ -84,6 +83,34 @@ export default function Card ({card, cardColor}) {
 			}
 		})
 		setIsModalDisplayed(!isModalDisplayed)
+	}
+
+	const logAttempt = async (attempt) => {
+		const axiosCards = axios.create({
+			headers: {
+				Authorization: `Bearer ${state.token}`
+			}
+		})
+
+		await axiosCards.post(`${baseURL}/api/attempt/card/${card.id}/user/${state.user.id}`, { attempt })
+			.then(res => {
+				dispatch({
+					type: 'LOG_ATTEMPT',
+					payload: {
+						cardId: card.id,
+						attempts: res.data.attempts
+					}
+				})
+			})
+			.catch(err => {
+				console.error(err)
+				dispatch({
+					type: 'SET_MESSAGE',
+					payload: {
+						message: "Answer not logged"
+					}
+				})
+			})
 	}
 
 	return (
@@ -133,34 +160,34 @@ export default function Card ({card, cardColor}) {
 					className="card-content"
 					onClick={() => setIsFlipped(!isFlipped)}
 				>
-					<div className="card-front" style={{backgroundColor: cardColor}}>
+					<div className="card-front" style={{ backgroundColor: cardColor }}>
 						<p className="card-text">{card.question}</p>
 						{viewCardDetails && (
 							<AttemptDetails
 								viewCardDetails={viewCardDetails}
-								recentAttempts={[]}
+								recentAttempts={card.attempts?.length > 10 ? card.attempts.slice(0, 10) : card.attempts}
 							/>
 						)}
 					</div>
-					<div className="card-back" style={{backgroundColor: cardColor}}>
+					<div className="card-back" style={{ backgroundColor: cardColor }}>
 						<p className="card-text">{card.answer}</p>
 						<img
 							alt="failed attempt"
 							className="attempt-icon failure"
-							// onClick={() => logAttempt(false)}
+							onClick={() => logAttempt(false)}
 							src={FailureIcon}
 							title="Got the answer wrong!"
 						/>
 						{viewCardDetails && (
 							<AttemptDetails
 								viewCardDetails={viewCardDetails}
-								recentAttempts={[]}
+								recentAttempts={card.attempts.length > 10 ? card.attempts.slice(0, 10) : card.attempts}
 							/>
 						)}
 						<img
 							alt="success attempt"
 							className="attempt-icon success"
-							// onClick={() => logAttempt(true)}
+							onClick={() => logAttempt(true)}
 							src={SuccessIcon}
 							title="Got the answer right!"
 						/>

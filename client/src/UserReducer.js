@@ -42,6 +42,11 @@ export const UserReducer = (state, action) => {
 			newState.message = 'No cards found.'
 			return newState
 
+		case 'LOG_ATTEMPT':
+			const logToCardIndex = newState.cards.findIndexOf(card => card.id === action.payload.cardId)
+			newState.cards[logToCardIndex].attempts = action.payloads.attempts
+			return newState
+
 		case 'SET_MESSAGE':
 			newState.message = action.payload.message
 			return newState
