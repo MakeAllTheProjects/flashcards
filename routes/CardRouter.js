@@ -1,18 +1,22 @@
 const express = require('express')
 const cardDB = require('../db/CardDB')
 const tagDB = require('../db/TagDB')
+const { cardsFormatter } = require('../utils/CardFormatter')
 
 const cardRouter = express.Router()
 
 cardRouter.get('/user/:id', async (req, res, next) => {
 	try {
-		const cards = await cardDB.fetchCardsByUser({ id: req.params.id })
-		if (cards.length === 0) {
+		const cardsData = await cardDB.fetchCardsByUser({ id: req.params.id })
+		if (cardsData?.length === 0) {
 			res.send({
 				cards: [],
 				message: 'No cards found.'
 			})
 		} else {
+			const attempts = await cardDB.fetchCardAttemptsByUser({ id: req.params.id })
+			const cards = cardsFormatter(cardsData, attempts)
+
 			res.send({
 				cards: cards
 			})
@@ -42,7 +46,7 @@ cardRouter.post('/user/:id', async (req, res, next) => {
 		if (newCard > 0) {
 			if (req.body.tag.tagId) {
 				let tagId
-				
+
 				if (req.body.tag.tagId === "new") {
 					const newTag = await tagDB.createTag({
 						userId: req.params.id,
@@ -51,13 +55,13 @@ cardRouter.post('/user/:id', async (req, res, next) => {
 
 					if (newTag > 0) {
 						tagId = newTag
-					}					
+					}
 				} else {
 					tagId = req.body.tag.tagId
 				}
 
-				const newTags = await tagDB.fetchTagsByUser({id: req.params.id})
-				if (newTags.length > 0 ) {
+				const newTags = await tagDB.fetchTagsByUser({ id: req.params.id })
+				if (newTags.length > 0) {
 					tags = [...newTags]
 				}
 
@@ -106,13 +110,13 @@ cardRouter.put('/:id/user/:userId', async (req, res, next) => {
 			})
 			if (newTag > 0) {
 				tagId = newTag
-			}					
+			}
 		} else {
 			tagId = req.body.tag.tagId
 		}
 
 		if (tagId === "delete") {
-			await tagDB.removeTagFromCard({cardId: req.params.id})
+			await tagDB.removeTagFromCard({ cardId: req.params.id })
 		} else if (tagId) {
 			await tagDB.editCardTag({
 				cardId: req.params.id,

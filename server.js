@@ -6,6 +6,7 @@ const expressJwt = require('express-jwt')
 const path = require('path')
 const serveStatic = require('serve-static')
 
+const attemptRouter = require('./routes/AttemptRouter')
 const authRouter = require('./routes/AuthRouter')
 const cardRouter = require('./routes/CardRouter')
 const tagRouter = require('./routes/TagRouter')
@@ -13,7 +14,7 @@ const tagRouter = require('./routes/TagRouter')
 const server = express()
 
 process.on('uncaughtException', function (error) {
-	console.log(error.stack);
+	console.error(error.stack);
 });
 
 const whitelist = [
@@ -24,12 +25,12 @@ const whitelist = [
 
 const corsOptions = {
 	origin: function (origin, callback) {
-		console.log("** Origin of request " + origin.headers.host)
+		console.info("** Origin of request " + origin.headers.host)
 		if (whitelist.indexOf(origin.headers.host) !== -1 || !origin) {
-			console.log("Origin acceptable")
+			console.info("Origin acceptable")
 			callback(null, true)
 		} else {
-			console.log("Origin rejected")
+			console.info("Origin rejected")
 			callback(new Error('Not allowed by CORS - ' + origin.headers.host))
 		}
 	}
@@ -48,7 +49,8 @@ server.get('/hello', (req, res, next) => {
 
 server.use('/auth', authRouter)
 
-server.use('/api', expressJwt({ secret: process.env.SECRET, algorithms: ['HS256']}))
+server.use('/api', expressJwt({ secret: process.env.SECRET, algorithms: ['HS256'] }))
+server.use('/api/attempt', attemptRouter)
 server.use('/api/cards', cardRouter)
 server.use('/api/tags', tagRouter)
 
@@ -73,5 +75,5 @@ if (process.env.NODE_ENV === 'production') {
 
 server.listen(
 	process.env.PORT || 4000,
-	() => console.log(`Server listening on port ${process.env.PORT || 4000}`)
+	() => console.info(`Server listening on port ${process.env.PORT || 4000}`)
 )

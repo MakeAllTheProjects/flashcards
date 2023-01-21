@@ -1,19 +1,22 @@
 const connection = require('./connection')
-const { 
+const {
 	fetchCardsByUserQuery,
 	createCardQuery,
 	editCardQuery,
 	deleteCardQuery
 } = require('./CardQueries')
+const {
+	fetchCardAttemptsByUserQuery
+} = require('./AttemptQueries')
 
 let cardDB = {}
 
-cardDB.fetchCardsByUser = ( user ) => {
-	return new Promise(( resolve, reject ) => {
+cardDB.fetchCardsByUser = (user) => {
+	return new Promise((resolve, reject) => {
 		connection.query(
 			fetchCardsByUserQuery,
 			[user.id],
-			( err, results ) => {
+			(err, results) => {
 				if (err) {
 					console.error(err)
 					return reject(err)
@@ -32,15 +35,31 @@ cardDB.fetchCardsByUser = ( user ) => {
 						]
 					}
 				})
-				
+
 				resolve(cards)
 			}
 		)
 	})
 }
 
+cardDB.fetchCardAttemptsByUser = (user) => {
+	return new Promise((resolve, reject) => {
+		connection.query(
+			fetchCardAttemptsByUserQuery,
+			[user.id],
+			(err, results) => {
+				if (err) {
+					console.error(err)
+					return reject(err)
+				}
+				resolve(results)
+			}
+		)
+	})
+}
+
 cardDB.createCard = (card) => {
-	return new Promise (( resolve, reject ) => {
+	return new Promise((resolve, reject) => {
 		connection.query(
 			createCardQuery,
 			[
@@ -61,7 +80,7 @@ cardDB.createCard = (card) => {
 }
 
 cardDB.editCard = (card) => {
-	return new Promise ((resolve, reject) => {
+	return new Promise((resolve, reject) => {
 		connection.query(
 			editCardQuery,
 			[

@@ -1,41 +1,54 @@
 const fetchCardsByUserQuery = `
 	SELECT
-		flashcourse_cards.id AS id,
-		flashcourse_cards.question AS question,
-		flashcourse_cards.answer AS answer,
-		flashcourse_card_tags.tag_id AS tag_id,
-		flashcourse_tags.tag AS tag
-	FROM flashcourse_cards
-	LEFT JOIN flashcourse_card_tags ON flashcourse_card_tags.card_id = flashcourse_cards.id
-	LEFT JOIN flashcourse_tags ON flashcourse_tags.id = flashcourse_card_tags.tag_id
-	WHERE flashcourse_cards.user_id = ?
-	GROUP BY flashcourse_cards.id;
+		cards.id AS id,
+		cards.question AS question,
+		cards.answer AS answer,
+		card_tags.tag_id AS tag_id,
+		tags.tag AS tag,
+		cards.user_id as user_id
+	FROM cards
+	LEFT JOIN card_tags ON card_tags.card_id = cards.id
+	LEFT JOIN tags ON tags.id = card_tags.tag_id
+	WHERE cards.user_id = ?
+	GROUP BY cards.id;
+`
+
+const fetchCardAttemptsByUserQuery = `
+	SELECT
+		card_attempts.id,
+		card_attempts.card_id,
+		card_attempts.attempt,
+		card_attempts.timestamp,
+		card_attempts.user_id
+	FROM card_attempts
+	WHERE card_attempts.user_id = ?;
 `
 
 const createCardQuery = `
-	INSERT INTO flashcourse_cards (
-		user_id,
-		question,
-		answer
+	INSERT INTO cards (
+		cards.user_id,
+		cards.question,
+		cards.answer
 	) VALUES (?, ?, ?);
 `
 
 const editCardQuery = `
-	UPDATE flashcourse_cards
+	UPDATE cards
 	SET
-		question = ?,
-		answer = ?
-	WHERE id = ?;
+		cards.question = ?,
+		cards.answer = ?
+	WHERE cards.id = ?;
 `
 
 const deleteCardQuery = `
-	DELETE FROM flashcourse_cards
-	WHERE id = ?;
+	DELETE FROM cards
+	WHERE cards.id = ?;
 `
 
 module.exports = {
-	fetchCardsByUserQuery,
 	createCardQuery,
+	deleteCardQuery,
 	editCardQuery,
-	deleteCardQuery
+	fetchCardsByUserQuery,
+	fetchCardAttemptsByUserQuery,
 }
