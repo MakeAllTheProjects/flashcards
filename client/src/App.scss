@@ -6,3 +6,19 @@
   font-size: 10px;
   color: $pencil-medium;
 }
+
+button,
+a {
+  outline: solid $pencil-extra-light 1px;
+}
+
+.page {
+  @include app-grid;
+
+  .main {
+    @include main-placement;
+    font-size: 2rem;
+    @include no-scroll-bar();
+    overflow: auto;
+  }
+}
