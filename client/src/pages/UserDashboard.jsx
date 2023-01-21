@@ -1,7 +1,12 @@
 import './UserDashboard.scss'
+import { PageWrapper } from '../components'
 
 export const UserDashboard = () => {
   return (
-    <p>UserDashboard</p>
+    <PageWrapper
+      isProtected
+    >
+      <p>UserDashboard</p>
+    </PageWrapper>
   )
 }
