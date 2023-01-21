@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { useEffect, useState, useContext } from 'react'
-import { useCookies } from 'react-cookie'
 import CreatableSelect from 'react-select/creatable'
 
 import { GlobalContext, baseURL } from '../../../App'
@@ -16,7 +15,6 @@ export default function WriteCard ({isEdit}) {
 	const [tags, setTags] = useState([])
 	const [selectedTag, setSelectedTag] = useState({})
 	const [isLoading, setIsLoading] = useState(false)
-	const [cookies] = useCookies(['authToken'])
 
 	useEffect(() => {
 		if (isEdit) {
