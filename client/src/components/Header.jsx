@@ -13,8 +13,6 @@ export const Header = ({
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  console.log({isMenuOpen})
-
   return (
     <>
       <header className="page-header">

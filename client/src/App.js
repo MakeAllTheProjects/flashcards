@@ -10,6 +10,7 @@ import {
   Landing,
   NotFound,
   UserDashboard,
+  WriteCard,
 } from './pages'
 
 import './App.scss'
@@ -31,6 +32,14 @@ export const App = () => {
         <Route
           path="/user"
           element={<UserDashboard/>}
+        />
+        <Route
+          path="/user/cards/write"
+          element={<WriteCard/>}
+        />
+        <Route
+          path="/user/cards/edit/:id"
+          element={<WriteCard/>}
         />
         <Route 
           path="*" 
