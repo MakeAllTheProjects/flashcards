@@ -1,5 +1,6 @@
 const connection = require('./connection')
 const {
+	fetchCardQuery,
 	fetchCardsByUserQuery,
 	createCardQuery,
 	editCardQuery,
@@ -37,6 +38,22 @@ cardDB.fetchCardsByUser = (user) => {
 				})
 
 				resolve(cards)
+			}
+		)
+	})
+}
+
+cardDB.fetchCard = (userId, cardId) => {
+	return new Promise((resolve, reject) => {
+		connection.query(
+			fetchCardQuery,
+			[userId, cardId],
+			(err, results) => {
+				if (err) {
+					console.error(err)
+					return reject(err)
+				}
+				resolve(results)
 			}
 		)
 	})

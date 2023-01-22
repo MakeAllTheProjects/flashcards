@@ -6,6 +6,7 @@ import {
 
 import './App.scss'
 import {
+  CardLibrary,
   DemoAccess,
   Landing,
   NotFound,
@@ -40,6 +41,10 @@ export const App = () => {
         <Route
           path="/user/cards/edit/:id"
           element={<WriteCard/>}
+        />
+        <Route
+          path="/user/cards"
+          element={<CardLibrary/>}
         />
         <Route 
           path="*" 

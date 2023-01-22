@@ -13,6 +13,20 @@ const fetchCardsByUserQuery = `
 	GROUP BY cards.id;
 `
 
+const fetchCardQuery = `
+	SELECT
+		cards.id AS id,
+		cards.question AS question,
+		cards.answer AS answer,
+		card_tags.tag_id AS tag_id,
+		tags.tag AS tag,
+		cards.user_id as user_id
+	FROM cards
+	LEFT JOIN card_tags ON card_tags.card_id = cards.id
+	LEFT JOIN tags ON tags.id = card_tags.tag_id
+	WHERE cards.user_id = ? AND cards.id = ?;
+`
+
 const fetchCardAttemptsByUserQuery = `
 	SELECT
 		card_attempts.id,
@@ -50,5 +64,6 @@ module.exports = {
 	deleteCardQuery,
 	editCardQuery,
 	fetchCardsByUserQuery,
+	fetchCardQuery,
 	fetchCardAttemptsByUserQuery,
 }

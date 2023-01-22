@@ -44,6 +44,22 @@ export const WriteCard = () => {
     ]
   )
 
+  const fetchCard = useCallback(
+    async () => {
+      setIsLoading(true)
+      const results = await axiosUser.get(
+        `${baseURL}/api/user/${cookies?.authToken?.user?.id}/card/${cardId}`
+      )
+      console.log(results)
+      return results
+    },
+    [
+      axiosUser,
+      cardId,
+      cookies?.authToken?.user?.id
+    ]
+  )
+
   const createCard = useCallback(
     async () => {
       setIsLoading(true)
@@ -75,6 +91,25 @@ export const WriteCard = () => {
       cardData,
       axiosUser
     ]
+  )
+
+  const initiateEditCard = useCallback(
+    () => {
+      console.log(cardId)
+      fetchCard()
+        .then(res => {
+          console.log(res)
+          setAnswer(res?.data?.card?.answer || '')
+          setQuestion(res?.data?.card?.question || '')
+          setIsLoading(false)
+        })
+        .catch(err => {
+          console.error(err)
+          setErrorMessage("Unable to fetch card info.")
+          setIsLoading(false)
+        })
+    },
+    [fetchCard]
   )
 
   const handleCreateCard = useCallback(
@@ -110,6 +145,23 @@ export const WriteCard = () => {
     },
     [editCard]
   )
+
+  useEffect(
+    () => {
+      if (!!cardId) {
+        console.log("hit?")
+        initiateEditCard()
+      }
+    },
+    []
+  )
+
+  console.log({
+    answer,
+    question,
+    cardId,
+    userId: cookies?.authToken?.user?.id
+  })
 
   return (
     <PageWrapper
