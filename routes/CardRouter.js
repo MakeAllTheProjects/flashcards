@@ -44,10 +44,10 @@ cardRouter.post('/user/:id', async (req, res, next) => {
 		})
 
 		if (newCard > 0) {
-			if (req.body.tag.tagId) {
+			if (req.body?.tag?.tagId) {
 				let tagId
 
-				if (req.body.tag.tagId === "new") {
+				if (req.body?.tag?.tagId === "new") {
 					const newTag = await tagDB.createTag({
 						userId: req.params.id,
 						tag: req.body.tag.tagLabel
@@ -57,15 +57,15 @@ cardRouter.post('/user/:id', async (req, res, next) => {
 						tagId = newTag
 					}
 				} else {
-					tagId = req.body.tag.tagId
+					tagId = req.body?.tag?.tagId
 				}
 
 				const newTags = await tagDB.fetchTagsByUser({ id: req.params.id })
-				if (newTags.length > 0) {
+				if (newTags?.length > 0) {
 					tags = [...newTags]
 				}
 
-				if (tagId) {
+				if (!!tagId) {
 					await tagDB.connectTagToCard({
 						cardId: newCard,
 						tagId: tagId

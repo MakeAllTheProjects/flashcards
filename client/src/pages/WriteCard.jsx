@@ -36,6 +36,7 @@ export const WriteCard = () => {
     () => ({
       question,
       answer,
+      tags: []
     }),
     [
       question,
