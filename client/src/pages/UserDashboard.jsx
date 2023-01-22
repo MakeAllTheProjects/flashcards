@@ -10,12 +10,12 @@ export const UserDashboard = () => {
   return (
     <PageWrapper
       isProtected
-      pageTitle={`Welcome ${cookies?.authToken?.user?.firstname || ''}`}
+      pageTitle={`Welcome ${cookies?.authToken?.user?.username || ''}`}
       cornerIcon={{
         icon: brainIcon
       }}
     >
-      <p>UserDashboard</p>
+      
     </PageWrapper>
   )
 }
