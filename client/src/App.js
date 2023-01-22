@@ -14,6 +14,8 @@ import {
 
 import './App.scss'
 
+export const baseURL = process.env.REACT_APP_IS_PRODUCTION ? 'https://flash-course.herokuapp.com' : 'http://localhost:8080'
+
 export const App = () => {
   return (
     <div className="App">
