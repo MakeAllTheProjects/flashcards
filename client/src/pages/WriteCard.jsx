@@ -77,6 +77,11 @@ export const WriteCard = () => {
 
   const editCard = useCallback(
     async () => {
+      console.log("edit card", {
+        cardData,
+        cardId,
+        userId: cookies?.authToken?.user?.id
+      })
       setIsLoading(true)
       const results = await axiosUser.put(
         `${baseURL}/api/cards/${cardId}/user/${cookies?.authToken?.user?.id || ''}`,

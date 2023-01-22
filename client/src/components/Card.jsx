@@ -1,5 +1,6 @@
 import {
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from 'react'
@@ -76,7 +77,7 @@ export const Card = ({
 						/>
 					)}
           
-          <button
+          {/* <button
             className="card-control-button"
             onClick={() => setViewCardDetails(!viewCardDetails)}
           >
@@ -110,7 +111,7 @@ export const Card = ({
               title="delete card"
               src={deleteIcon}
             />
-          </button>
+          </button> */}
         </menu>
 
         <button

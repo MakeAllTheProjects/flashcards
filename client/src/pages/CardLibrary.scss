@@ -15,4 +15,38 @@
   @include phone-only {
     @include no-scroll-bar();
   }
+
+  .loading-library {
+    z-index: 5;
+    font-size: 3rem;
+    @include font-marker;
+    text-align: center;
+    text-shadow: $highlighter-blue 0.5rem 0.5rem 0.5rem;
+  }
+
+  .card-list-controls {
+    position: absolute;
+    top: 1.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    @include centered-h;
+
+    @include phone-only {
+      top: 0.5rem;
+    }
+
+    .control-icon {
+      height: 8vh;
+      filter: opacity(55%);
+      transition: all ease 0.25s;
+
+      @include phone-only {
+        height: 5vh;
+      }
+    }
+
+    .control-icon:hover {
+      filter: opacity(75%);
+    }
+  }
 }

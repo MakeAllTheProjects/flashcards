@@ -32,7 +32,6 @@ cardRouter.get('/user/:id', async (req, res, next) => {
 	}
 })
 
-//TODO fix this, can't fetch
 cardRouter.get('/user/:userId/:cardId', async (req, res, next) => {
 	try {
 		const cardsData = await cardDB.fetchCard(req.params.userId, req.params.cardId)
@@ -129,29 +128,6 @@ cardRouter.post('/user/:id', async (req, res, next) => {
 
 cardRouter.put('/:id/user/:userId', async (req, res, next) => {
 	try {
-		let tagId
-
-		if (req.body.tag.tagId === "new") {
-			const newTag = await tagDB.createTag({
-				userId: req.params.userId,
-				tag: req.body.tag.tagLabel
-			})
-			if (newTag > 0) {
-				tagId = newTag
-			}
-		} else {
-			tagId = req.body.tag.tagId
-		}
-
-		if (tagId === "delete") {
-			await tagDB.removeTagFromCard({ cardId: req.params.id })
-		} else if (tagId) {
-			await tagDB.editCardTag({
-				cardId: req.params.id,
-				tagId: tagId
-			})
-		}
-
 		const cards = await cardDB.editCard({
 			userId: req.params.userId,
 			id: req.params.id,

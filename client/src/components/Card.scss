@@ -26,19 +26,7 @@
       top: -2rem;
       right: 2rem;
       width: 100%;
-
-      .card-control-button {
-        @include nakedButton;
-      }
-
-      .card-control-icon,
-      .card-control-button > img {
-        height: 1.5rem;
-        margin-left: 1rem;
-        cursor: pointer;
-        display: none;
-      }
-
+      
       .card-alert-icon {
         position: absolute;
         left: 1.5rem;
@@ -138,7 +126,7 @@
     }
   }
 
-  .flipped {
+  .card.flipped {
     .card-content {
       transform: rotateY(-180deg);
       transition: transform 0.5s;
