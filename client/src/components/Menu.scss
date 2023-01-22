@@ -1,0 +1,31 @@
+@import '../helpers/styles';
+
+.menu-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  z-index: 15;
+  transition: right 0.1s ease;
+
+  button {
+    position: absolute;
+    top: 0;
+    right: -2rem;
+    @include centered-v;
+    height: 15rem;
+    width: 15rem;
+    box-shadow: rgba(0, 0, 0, 0.2) 0.5rem 0.5rem 0.5rem;
+    transition: transform 0.4s ease 0.05s;
+    font-size: 2.25rem;
+    font-weight: 900;
+    @include font-indie-flower;
+    cursor: pointer;
+    border: none;
+  }
+
+  .logout {
+    background-color: $yellow-stickynote;
+    transform: rotate(-15deg);
+  }
+}

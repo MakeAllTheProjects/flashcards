@@ -21,7 +21,7 @@ export const PageWrapper = ({
   const [ cookies ] = useCookies(['authToken'])
 
   const isAuthed = useMemo(
-    () => cookies?.authToken?.token && cookies?.authToken?.user,
+    () => !!cookies?.authToken?.token && !!cookies?.authToken?.user,
     [
       cookies?.authToken?.token,
       cookies?.authToken?.user,

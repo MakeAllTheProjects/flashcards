@@ -24,35 +24,37 @@ const navList = [
 export const NavBar = ({
   isMenuOpen,
   setIsMenuOpen,
-}) => (
-  <nav className="navbar-container">
-    {navList.map(navLink => (
-      <Link
-        key={`nav-link:${navLink.name.split(" ".join(""))}`}
-        to={navLink.path}
-        className="nav-button"
-      >
-        <button>
-          <img
-            className="nav-icon"
-            src={navLink.icon}
-            alt={navLink.altText}
-            title={navLink.name}
-          />
-        </button>
-      </Link>
-    ))}
+}) => {
+  return (
+    <nav className="navbar-container">
+      {navList.map(navLink => (
+        <Link
+          key={`nav-link:${navLink.name.split(" ").join("")}`}
+          to={navLink.path}
+          className="nav-button"
+        >
+          <button>
+            <img
+              className="nav-icon"
+              src={navLink.icon}
+              alt={navLink.altText}
+              title={navLink.name}
+            />
+          </button>
+        </Link>
+      ))}
 
-    <button 
-      className="menu-button"
-      onClick={() => setIsMenuOpen(!isMenuOpen)}
-    >
-      <img
-        className="nav-icon user-menu-icon"
-        alt=""
-        title="User Menu"
-        src={userIcon}
-      />
-    </button>
-  </nav>
-)
+      <button 
+        className="menu-button"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        <img
+          className="nav-icon user-menu-icon"
+          alt=""
+          title="User Menu"
+          src={userIcon}
+        />
+      </button>
+    </nav>
+  )
+}

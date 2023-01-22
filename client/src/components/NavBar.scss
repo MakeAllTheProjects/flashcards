@@ -3,7 +3,8 @@
 .navbar-container {
   grid-column: 3;
   grid-row: 1;
-  margin: 1rem 1rem 0 0;
+  margin: auto 1rem auto 0;
+  width: 100%;
   height: $header-height;
   @include centered-h;
   transition: 0.5s all ease;
@@ -12,36 +13,25 @@
   @include phone-only {
     grid-column: 2/4;
     grid-row: 2;
-    margin: 1rem 15% 0 15%;
+    margin: auto;
     padding: 0 2rem 0.75rem 2rem;
     height: 3rem;
     width: 70%;
     justify-content: space-between;
   }
 
-  .nav-button, .menu-toggle-button {
+  a > button, 
+  .menu-button {
     @include nakedButton;
-
-    &:hover {
-      filter: drop-shadow($pencil-light 0.3rem 0.3rem 0.1rem);
-    }
-
+    @include centered-v;
+    cursor: pointer;
+    
     .nav-icon {
-      margin: 3vh 1rem 0 1rem;
-      height: 5vh;
-      cursor: pointer;
+      height: 3rem;
 
       @include phone-only {
         height: 4vh;
-        margin: 2vh 1rem 0 1rem;
       }
-    }
-  }
-
-  .menu-toggle-button {
-    margin: 1.5rem 0 0 2rem;
-    .nav-icon {
-      filter: hue-rotate(230deg);
     }
   }
 }
