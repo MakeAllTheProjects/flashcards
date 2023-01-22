@@ -1,6 +1,6 @@
 @import './colors.scss';
 
-@mixin card-style ($cardHeight, $cardWidth) {
+@mixin cardStyle ($cardHeight, $cardWidth) {
   width: $cardHeight;
   height: $cardWidth;
   font-size: 2rem;

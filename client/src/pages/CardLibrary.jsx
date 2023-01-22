@@ -6,13 +6,15 @@ import {
   useState,
 } from 'react'
 import { useCookies } from 'react-cookie'
+import { useNavigate } from 'react-router-dom'
 
 import './CardLibrary.scss'
 import viewCardsIcon from '../assets/svg/sketch-style/018-layers.svg'
-import { PageWrapper } from '../components'
+import { PageWrapper, Card } from '../components'
 import { baseURL } from '../App'
 
 export const CardLibrary = () => {
+  const navigate = useNavigate()
   const [cookies, setCookie] = useCookies(['authToken'])
   const [ isLoading, setIsLoading ] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
@@ -37,6 +39,14 @@ export const CardLibrary = () => {
       cookies?.authToken?.user?.id, 
       axiosUser
     ]
+  )
+
+  const filterCards = useMemo(
+    () => {
+      const newCardsList = !!cards?.length ? [...cards] : []
+      return newCardsList
+    },
+    [cards]
   )
 
   const getCards = useCallback(
@@ -66,7 +76,27 @@ export const CardLibrary = () => {
         icon: viewCardsIcon
       }}
     >
-      Card Library
+      {!filterCards?.length && (
+        <>
+          <p>Looks like you haven't created any cards yet.</p>
+          <button
+            className="creat-card"
+            onClick={() => navigate('/user/cards/write')}
+          >
+            Create a Card
+          </button>
+        </>
+      )}
+
+      <section className="card-list-container">
+        {filterCards?.map((card, i) => (
+          <Card
+            key={`card:${card.id}`}
+            card={card}
+            index={i}
+          />
+        ))}
+      </section>
     </PageWrapper>
   )
 }

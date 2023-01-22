@@ -1,2 +1,18 @@
 @import "../helpers/styles";
 
+.card-list-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  @include centered-h;
+  flex-wrap: wrap;
+  margin: 0 0.5rem 0.5rem 0;
+  padding: 1.5rem 0 5rem 0;
+  overflow: auto;
+  @include thin-scroll-bar();
+
+  @include phone-only {
+    @include no-scroll-bar();
+  }
+}
