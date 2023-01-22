@@ -88,4 +88,36 @@ authRouter.post('/login', async ( req, res, next ) => {
 	}
 })
 
+authRouter.post('/login/demo', async ( req, res, next ) => {
+	try {
+		const validateIsUser = await authDB.validateByUsername ({ username: 'demo' })
+		
+		if ( validateIsUser === false ) {
+			res.json({ message: 'Sorry, this username does not seem to be registered.'})
+		} else {
+			const loginUser = await authDB.login({
+				username: 'demo',
+				password: 'demodemo'
+			})
+
+			if ( loginUser === false ) {
+				res.json({ message: 'Sorry, this username and password do not seem to match.'})
+			} else {
+				const token = jwt.sign( loginUser, process.env.SECRET )
+
+				res.json({
+					user: loginUser,
+					token: token
+				})
+			}
+		}
+		return
+	} catch ( err ) {
+		console.error(err)
+		res.sendStatus(500).json({ message: err })
+		next()
+		return
+	}
+})
+
 module.exports = authRouter
