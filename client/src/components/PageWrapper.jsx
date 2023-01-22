@@ -62,7 +62,7 @@ export const PageWrapper = ({
           cornerIcon={cornerIcon}
         />
         <main 
-          className={`main ${!!pageTitle ? pageTitle?.split(" ").join("") : ''}-main`}
+          className={`main ${!!pageTitle ? pageTitle?.split(" ").join("").toLowerCase() : ''}-main`}
         >
           {children}
         </main>

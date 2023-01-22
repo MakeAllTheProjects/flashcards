@@ -51,13 +51,13 @@
     
       @include tablet-portrait-up{
         padding-left: 0;
-        font-size: 4vh;
+        font-size: 2.5rem;
         text-align: center;
       }
 
       @include phone-only {
         margin-top: 4.5vh;
-        font-size: 3.5vh;
+        font-size: 2rem;
       }
     }
   }

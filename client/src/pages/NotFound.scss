@@ -1,1 +1,12 @@
 @import '../helpers/styles';
+
+.ohno-main {
+  h2 {
+    font-size: 15rem;
+    @include font-satisfy;
+  }
+  h3 {
+    font-size: 5rem;
+    @include font-satisfy;
+  }
+}

@@ -10,16 +10,6 @@
   transition: 0.5s all ease;
   z-index: 10;
 
-  @include phone-only {
-    grid-column: 2/4;
-    grid-row: 2;
-    margin: auto;
-    padding: 0 2rem 0.75rem 2rem;
-    height: 3rem;
-    width: 70%;
-    justify-content: space-between;
-  }
-
   a > button, 
   .menu-button {
     @include nakedButton;
