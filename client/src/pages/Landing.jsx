@@ -1,20 +1,31 @@
-'react-router-dom'
-// import { useNavigate } from 'react-router-dom'
-// import { 
-//   useCallback, 
-//   useEffect, 
-//   useMemo 
-// } from 'react'
+import { useState } from 'react'
 
 import './Landing.scss'
-import { PageWrapper } from '../components'
+import { 
+  AuthForm,
+  ForgottenPasswordForm,
+  PageWrapper, 
+} from '../components'
 
 export const Landing = () => {
-  // const navigate = useNavigate()
+  const [passIsForgotten, setPassIsForgotten] = useState(false)
 
   return (
-    <PageWrapper altPath="/user">
-      <p>Landing</p>
+    <PageWrapper 
+      altPath="/user"
+      pageTitle="Welcome to FlashCourse"
+    >
+      {passIsForgotten 
+        ? <ForgottenPasswordForm/>
+        : <AuthForm/>
+      }
+
+      <button
+        className="forgot"
+        onClick={() => setPassIsForgotten(!passIsForgotten)}
+      >
+        {passIsForgotten ? "Back to login" : "Forgot your password?"}
+      </button>
     </PageWrapper>
   )
 }

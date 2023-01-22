@@ -9,7 +9,9 @@
 
 button,
 a {
-  outline: solid $pencil-extra-light 1px;
+  &:hover, &:focus {
+    outline: dashed $pencil-extra-light 1px;
+  }
 }
 
 .page {

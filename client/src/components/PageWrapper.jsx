@@ -8,12 +8,14 @@ import { useNavigate } from 'react-router-dom'
 
 import './PageWrapper.scss'
 import { AppBackground } from './AppBackground'
+import { Header } from './Header'
 
 export const PageWrapper = ({
   children,
   isProtected,
   altPath,
-  // pageTitle,
+  pageTitle,
+  cornerIcon,
 }) => {
   const navigate = useNavigate()
   const [ cookies ] = useCookies(['authToken'])
@@ -54,8 +56,17 @@ export const PageWrapper = ({
 
   return (
     <AppBackground>
-      {/* <Header/> */}
-      {children}
+      <div className="page">
+        <Header
+          pageTitle={pageTitle}
+          cornerIcon={cornerIcon}
+        />
+        <main 
+          className={`main ${!!pageTitle ? pageTitle?.split(" ").join("") : ''}-main`}
+        >
+          {children}
+        </main>
+      </div>
     </AppBackground>
   )
 }

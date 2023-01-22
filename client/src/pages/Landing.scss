@@ -1,1 +1,17 @@
 @import '../helpers/styles';
+
+.forgot {
+  border: none;
+  background: $highlighter-blue;
+  box-shadow: 
+  $highlighter-blue 0.3rem 0.1rem 0.3rem,
+    $highlighter-blue -0.2rem -0.3rem 0.3rem;
+  color: $pencil-medium;
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  &:hover {
+    font-weight: bold;
+    box-shadow: $paperShadowDark 0.1rem 0.1rem 0.5rem;
+  }
+}
