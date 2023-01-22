@@ -1,11 +1,11 @@
 import axios from 'axios'
 import {
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from 'react'
 import { useParams } from 'react-router-dom'
-import Creatable, { useCreatable } from 'react-select/creatable'
 import { useCookies } from 'react-cookie'
 
 import { baseURL } from '../App'
@@ -20,52 +20,59 @@ export const WriteCard = () => {
   const [ cookies ] = useCookies(['authToken'])
   const [answer, setAnswer] = useState('')
 	const [question, setQuestion] = useState('')
-	const [tags, setTags] = useState([])
-	const [selectedTag, setSelectedTag] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
+
+  const axiosUser = useMemo(
+    () => axios.create({
+			headers: {
+				Authorization: `Bearer ${cookies?.authToken?.token}`
+			}
+		}),
+    [cookies?.authToken?.token]
+  )
 
   const cardData = useMemo(
     () => ({
       question,
       answer,
-      tag: {
-        tagId: selectedTag?.id,
-        tagLabel: selectedTag?.label
-      }
     }),
     [
       question,
       answer,
-      selectedTag
     ]
   )
 
   const createCard = useCallback(
     async () => {
       setIsLoading(true)
-      await axios.post(
+      const results = await axiosUser.post(
         `${baseURL}/api/cards/user/${cookies?.authToken?.user?.id || ''}`,
         cardData
       )
+      return results
     },
     [
       cookies?.authToken?.user?.id,
       cardData,
+      axiosUser
     ]
   )
 
   const editCard = useCallback(
     async () => {
-      await axios.put(
+      setIsLoading(true)
+      const results = await axiosUser.put(
         `${baseURL}/api/cards/${cardId}/user/${cookies?.authToken?.user?.id || ''}`,
         cardData
       )
+      return results
     },
     [
       cookies?.authToken?.user?.id,
       cardId,
       cardData,
+      axiosUser
     ]
   )
 
@@ -101,11 +108,6 @@ export const WriteCard = () => {
         })
     },
     [editCard]
-  )
-
-  const handleTagChange = useCallback(
-    () => {},
-    []
   )
 
   return (
