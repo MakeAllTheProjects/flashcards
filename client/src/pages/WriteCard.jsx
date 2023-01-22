@@ -48,9 +48,8 @@ export const WriteCard = () => {
     async () => {
       setIsLoading(true)
       const results = await axiosUser.get(
-        `${baseURL}/api/user/${cookies?.authToken?.user?.id}/card/${cardId}`
+        `${baseURL}/api/cards/user/${cookies?.authToken?.user?.id}/${cardId}`
       )
-      console.log(results)
       return results
     },
     [
@@ -95,10 +94,8 @@ export const WriteCard = () => {
 
   const initiateEditCard = useCallback(
     () => {
-      console.log(cardId)
       fetchCard()
         .then(res => {
-          console.log(res)
           setAnswer(res?.data?.card?.answer || '')
           setQuestion(res?.data?.card?.question || '')
           setIsLoading(false)
@@ -149,19 +146,11 @@ export const WriteCard = () => {
   useEffect(
     () => {
       if (!!cardId) {
-        console.log("hit?")
         initiateEditCard()
       }
     },
     []
   )
-
-  console.log({
-    answer,
-    question,
-    cardId,
-    userId: cookies?.authToken?.user?.id
-  })
 
   return (
     <PageWrapper

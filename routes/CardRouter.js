@@ -7,7 +7,6 @@ const cardRouter = express.Router()
 
 cardRouter.get('/user/:id', async (req, res, next) => {
 	try {
-		console.log(req.params)
 		const cardsData = await cardDB.fetchCardsByUser({ id: req.params.id })
 		if (cardsData?.length === 0) {
 			res.send({
@@ -34,13 +33,9 @@ cardRouter.get('/user/:id', async (req, res, next) => {
 })
 
 //TODO fix this, can't fetch
-cardRouter.get('/user/:userId/card/:cardId', async (req, res, next) => {
+cardRouter.get('/user/:userId/:cardId', async (req, res, next) => {
 	try {
-		console.log(req.params)
-		const cardsData = await cardDB.fetchCard({ 
-			userId: req.params.userId,
-			cardId: req.params.cardId
-		})
+		const cardsData = await cardDB.fetchCard(req.params.userId, req.params.cardId)
 		if (cardsData?.length === 0) {
 			res.send({
 				card: {},
@@ -67,7 +62,6 @@ cardRouter.get('/user/:userId/card/:cardId', async (req, res, next) => {
 
 cardRouter.post('/user/:id', async (req, res, next) => {
 	try {
-		console.log(req.params)
 		let cards = []
 		let tags = []
 
