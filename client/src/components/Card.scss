@@ -30,11 +30,28 @@
       .card-alert-icon {
         position: absolute;
         left: 1.5rem;
-        top: 0.25rem;
+        top: 2rem;
         height: 3rem;
         z-index: 2;
         margin-left: 1rem;
+        filter: drop-shadow($paper 0.1rem 0.1rem 0.1rem);
         transform: rotate(-45deg);
+      }
+
+      .card-control-button {
+        @include nakedButton;
+        z-index: 2;
+        margin-left: 1rem;
+        margin-bottom: -5.5rem;
+        height: 4rem;
+        width: 4rem;
+        border-radius: 5rem;
+        cursor: pointer;
+        display: none;
+
+        img {
+          height: 2rem;
+        }
       }
     }
 
@@ -137,11 +154,11 @@
 .card-container:hover,
 .card:hover {
   .card-control-panel {
-    .card-control-icon {
+    .card-control-button {
       display: inline-block;
     }
 
-    .card-control-icon:hover {
+    .card-control-button:hover {
       filter: drop-shadow($pencil-light 0 0 0.1rem);
     }
   }

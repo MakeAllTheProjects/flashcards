@@ -70,21 +70,21 @@ export const Card = ({
         <menu className='card-control-panel'>
           {card.answer === "" && (
 						<img
-							alt="question only"
+							alt=""
 							className="card-alert-icon"
 							src={alertIcon}
-							title="question only"
+							title="Question needs answered."
 						/>
 					)}
           
-          {/* <button
+          <button
             className="card-control-button"
             onClick={() => setViewCardDetails(!viewCardDetails)}
           >
             <img
               className="card-control-icon view"
               alt=""
-              title="view card details"
+              title="View card details"
               src={viewIcon}
             />
           </button>
@@ -111,7 +111,7 @@ export const Card = ({
               title="delete card"
               src={deleteIcon}
             />
-          </button> */}
+          </button>
         </menu>
 
         <button
