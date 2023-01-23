@@ -65,6 +65,37 @@ export const CardLibrary = () => {
     [ fetchCards ]
   )
 
+  const deleteCard = useCallback(
+    async (cardId) => {
+      setIsLoading(true)
+      const results = await axiosUser.delete(`${baseURL}/${cardId}/user/${cookies?.authToken?.user?.id}`)
+      return results
+    },
+    [
+      axiosUser,
+      cookies?.authToken?.user?.id,
+      setIsLoading,
+    ]
+  )
+
+  const handleDeleteCardConfirmation = useCallback(
+    (cardId, setShowModal) => {
+      deleteCard(cardId)
+        .then(res => {
+          setCards(res?.data?.cards || [])
+        })
+        .then(() => {
+          setShowModal(false)
+          setIsLoading(false)
+        })
+        .catch(err => {
+          console.error(err)
+          setErrorMessage("Unable to delete card.")
+        })
+    },
+    [deleteCard]
+  )
+
   useEffect(() => {
     getCards()
   }, [])
@@ -94,6 +125,9 @@ export const CardLibrary = () => {
             key={`card:${card.id}`}
             card={card}
             index={i}
+            setIsLoading={setIsLoading}
+            setCards={setCards}
+            handleDeleteCardConfirmation={handleDeleteCardConfirmation}
           />
         ))}
       </section>
